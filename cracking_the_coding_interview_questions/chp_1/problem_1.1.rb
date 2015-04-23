@@ -14,6 +14,7 @@ def is_uniq_chars?(string)
   true
 end
 
+puts "Testing:"
 p is_uniq_chars?("Hello") == false
 p is_uniq_chars?('World!') == true
 p is_uniq_chars?("") == true
