@@ -1,4 +1,4 @@
-# Problem: Write a method to decide if two strings are anagrams or not
+# Problem 1.4, 4th edition: Write a method to decide if two strings are anagrams or not
 
 # SOLUTION1:
 # Pseudocode:
