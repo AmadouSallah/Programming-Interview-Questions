@@ -37,8 +37,41 @@ def rotate_2(matrix)
   rotated_matrix
 end
 
-# TEST
+# SOLUTION 3
+# PSEUDOCODE
+# We rotate the matrix by layers starting from the outer layer all the way to layer len / 2 where len is the length of the input matrix
+# len/2 since each layer covers 2 rows and 2 colums. Example the first layer (outer layer) is row 0 (top row), column len-1 (last column), row len-1 (last row), and column 0 (first column).
+# For each layer, we rotate all the elements clockwise
 
+def rotate_3(matrix)
+  len = matrix.length
+  layer = 0
+  while layer < len / 2
+    first_column_layer = layer
+    last_column_layer = len - layer - 1
+
+    # Iterate from first_column_layer to last_column_layer
+    col = first_column_layer
+    while col < last_column_layer
+      offset = col - first_column_layer
+      top = matrix[first_column_layer][col]
+      # move the value from bottom left to top
+      matrix[first_column_layer][col] = matrix[last_column_layer - offset][first_column_layer]
+      #
+      matrix[last_column_layer - offset][first_column_layer] = matrix[last_column_layer][last_column_layer - offset]
+
+      matrix[last_column_layer][last_column_layer - offset] = matrix[col][last_column_layer]
+
+      matrix[col][last_column_layer] = top
+
+      col += 1
+    end
+    layer += 1
+  end
+  matrix
+end
+
+# TEST DRIVE
 matrix = [[1, 2, 3, 4], [5, 6, 7, 8],[9, 0, 1, 2],[3, 4, 5, 6]]
 
 p rotate([]) == []
@@ -51,3 +84,8 @@ p rotate_2([]) == []
 p rotate_2([[1]]) == [[1]]
 p rotate_2([[1, 2], [3, 4]]) == [[3, 1], [4, 2]]
 p rotate_2(matrix) == [[3, 9, 5, 1], [4, 0, 6, 2], [5, 1, 7, 3], [6, 2, 8, 4]]
+
+p rotate_3([]) == []
+p rotate_3([[1]]) == [[1]]
+p rotate_3([[1, 2], [3, 4]]) == [[3, 1], [4, 2]]
+p rotate_3(matrix) == [[3, 9, 5, 1], [4, 0, 6, 2], [5, 1, 7, 3], [6, 2, 8, 4]]
