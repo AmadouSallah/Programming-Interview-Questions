@@ -46,4 +46,26 @@ p generate_primes_upto(0) == []
 p generate_primes_upto(1) == []
 p generate_primes_upto(3) == [2, 3]
 p generate_primes_upto(4) == [2, 3]
+p generate_primes_upto(57) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53]
 p generate_primes_upto(100) == [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+
+
+# From dbc whiteboarding
+# Is Prime?
+# Write the method is_prime? that takes one integer as an argument and returns true if the integer is a prime. Do not use the Ruby method #prime? .
+# Bonus: Can you improve your algorithm by memoizing it?
+
+# @primes = [2, 3]
+# def is_prime_2?(number)
+#   return false if number < 2
+#   return true if @primes.include?(number)
+
+#   i = @primes.last + 2
+#   while i <= number#Math.sqrt(number)
+#     return false if number % i == 0
+#     @primes << i if is_prime?(i)
+#     i += 2
+#   end
+#   # @primes << number
+#   true
+# end
