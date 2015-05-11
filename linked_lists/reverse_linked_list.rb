@@ -15,7 +15,7 @@ require_relative 'implement_linked_list'
 def reverse(head)
   return head if head == nil
 
-  temporal_node = nil
+  temporal_node = nil # we initialize it to nil since the last node of the reversed list will point to it.
   while head
     next_node = head.next_node
     head.next_node = temporal_node
