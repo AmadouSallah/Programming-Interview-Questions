@@ -19,8 +19,7 @@ def reverse(head)
   while head
     next_node = head.next_node
     head.next_node = temporal_node
-    temporal_node = hea
-    .d
+    temporal_node = head
     head = next_node
   end
   temporal_node
