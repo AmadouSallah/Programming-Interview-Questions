@@ -30,6 +30,31 @@ end
 
 # SOLUTION 2: without a temporary buffer
 
+def remove_linked_list_duplicates_2(head)
+  return head if head == nil
+  previous_node = head
+  current_node = head.next_node
+
+  while current_node
+    running_node = head
+    # Let's check for duplicates
+    while running_node != current_node
+      if running_node.value == current_node.value # we found a duplicate
+        # we then remove current_node and we exit the inner loop
+        current_node = current_node.next_node
+        previous_node.next_node = current_node
+        break
+      end
+      running_node = running_node.next_node
+    end
+    # we update current_node and previous_node if running_node is same as current_node
+    if running_node == current_node
+      previous_node = current_node
+      current_node = current_node.next_node
+    end
+  end
+end
+
 # TEST DRIVE
 e = Node.new(1, nil)
 d = Node.new(4, e)
@@ -43,7 +68,7 @@ print "Initially, the values of the list are: "
 list.each {|node| print node.value, " "}
 puts
 
-remove_linked_list_duplicates(a)
+remove_linked_list_duplicates_2(a)
 
 print "\nAfter removing the duplicates, the values of the list are: "
 list.each {|node| print node.value, " "}
