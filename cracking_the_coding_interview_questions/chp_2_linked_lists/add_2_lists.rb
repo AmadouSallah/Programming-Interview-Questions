@@ -49,6 +49,32 @@ def add_2_lists(head1, head2)
   result_head
 end
 
+# RECURSIVE METHOD
+def add_2_lists_2(head1, head2)
+  add_lists_helper(head1, head2, 0)
+end
+
+def add_lists_helper(head1, head2, carry)
+  return nil if head1 == nil && head2 == nil
+
+  # result_head = Node.new(nil, nil)
+  sum = carry
+
+  sum += head1.value if head1
+  sum += head2.value if head2
+
+  value = sum % 10
+  carry = sum / 10
+
+  result_head = Node.new(value, nil)
+
+  remaining_nodes = add_lists_helper(head1 == nil ? nil : head1.next_node, head2 == nil ? nil : head2.next_node, carry)
+
+  result_head.next_node = remaining_nodes
+
+  result_head
+end
+
 # TEST DRIVE
 f = Node.new(2, nil)
 e = Node.new(9, f)
@@ -67,9 +93,13 @@ list1.each {|node| print node.value, " "}
 print "\nlist2 is: "
 list2.each {|node| print node.value, " "}
 
+puts "\n\n----------- Testing recursive method ------"
 r = add_2_lists(a, d) # 8 -> 0 -> 8 (513 + 295 = 808)
 print "\nlist1 + list 2 gives: "
 List.new(r).each {|n| print n.value, " "}
-puts
 
-
+puts "\n\n----------- Testing recursive method ------"
+r2 = add_2_lists_2(a, d) # 8 -> 0 -> 8 (513 + 295 = 808)
+print "\nlist1 + list 2 gives: "
+List.new(r).each {|n| print n.value, " "}
+puts "\n\n"
