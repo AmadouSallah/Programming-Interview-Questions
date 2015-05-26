@@ -13,9 +13,26 @@ def is_palindrome?(string)
   true
 end
 
+def is_palindrome_2?(string)
+  len = string.length
+  return true if len < 2
+  i = 0
+  while i <= len / 2
+    return false if string[i] != string[len - i - 1]
+    i += 1
+  end
+  true
+end
+
 # TEST DRIVE
 p is_palindrome?("") == true
 p is_palindrome?("a") == true
 p is_palindrome?("ab") == false
 p is_palindrome?("madam") == true
 p is_palindrome?("nurses run") == false
+
+p is_palindrome_2?("") == true
+p is_palindrome_2?("a") == true
+p is_palindrome_2?("ab") == false
+p is_palindrome_2?("madam") == true
+p is_palindrome_2?("nurses run") == false
