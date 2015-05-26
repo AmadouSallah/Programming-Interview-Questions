@@ -24,6 +24,10 @@ def is_palindrome_2?(string)
   true
 end
 
+def is_palindrome_3?(string)
+  string == string.split("").reverse.join
+end
+
 # TEST DRIVE
 p is_palindrome?("") == true
 p is_palindrome?("a") == true
@@ -36,3 +40,9 @@ p is_palindrome_2?("a") == true
 p is_palindrome_2?("ab") == false
 p is_palindrome_2?("madam") == true
 p is_palindrome_2?("nurses run") == false
+
+p is_palindrome_3?("") == true
+p is_palindrome_3?("a") == true
+p is_palindrome_3?("ab") == false
+p is_palindrome_3?("madam") == true
+p is_palindrome_3?("nurses run") == false
