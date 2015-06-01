@@ -1,0 +1,1 @@
+# Given an array with n numbers. Give an algorithm to find the cumulative sum of the sum of all pairs of numbers. the algorithm should be O(n) time
