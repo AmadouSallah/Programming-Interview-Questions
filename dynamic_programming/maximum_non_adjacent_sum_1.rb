@@ -34,8 +34,5 @@ end
 p max_non_adjacent_sum([10]) == 10
 p max_non_adjacent_sum([1, -1]) == 1
 p max_non_adjacent_sum([3, 2, 7, 10]) == 13
-<<<<<<< HEAD
 p max_non_adjacent_sum([3, 2, 5, 10, 7]) == 15
-=======
-p max_non_adjacent_sum([3, 2, 5, 10, 7]) == 15
->>>>>>> 49777c8f5e1ad61ec4d9f25f01fc8c8703e4d2f5
+
