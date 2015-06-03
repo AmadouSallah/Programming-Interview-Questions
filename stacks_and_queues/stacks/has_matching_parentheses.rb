@@ -1,0 +1,2 @@
+# Problem: Given a string, write a program to examine whether the pairs and the orders of “{“,”}”,”(“,”)”,”[“,”]” are correct in the string.
+# For example, the program should print true for string = “[()]{}{[()()]()}” and false for string = “[(])”
