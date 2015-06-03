@@ -23,8 +23,9 @@ class Stack
   # Removes the top element from the stack if it is not empty
   def pop
     raise "Stack Underflow - The stack is empty" if self.is_empty?
-    @store.pop
+    top_element = @store.pop
     @top -= 1
+    top_element
   end
 
   # Returns the size of the stack, that is the number of elelments in the stack
