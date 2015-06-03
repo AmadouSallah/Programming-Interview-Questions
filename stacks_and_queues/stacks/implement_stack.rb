@@ -1,6 +1,7 @@
 # Implementing a Stack using an array
 # A stack is an ordered list in which insertion and deletion are done at one end called top.
 # The last element  inserted is the first one to be deleted => Last In first Out (LIFO)
+
 class Stack
   attr_accessor :store, :top
   def initialize
