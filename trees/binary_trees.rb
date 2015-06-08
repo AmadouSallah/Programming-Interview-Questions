@@ -61,35 +61,36 @@ class Binary_Tree
   end
 end
 
-binary_tree = Binary_Tree.new()
-root = Node.new(1)
-a = Node.new(2)
-b = Node.new(3)
-d = Node.new(4)
-e = Node.new(5)
-f = Node.new(6)
-g = Node.new(7)
+# TEST DRIVE
+# binary_tree = Binary_Tree.new()
+# root = Node.new(1)
+# a = Node.new(2)
+# b = Node.new(3)
+# d = Node.new(4)
+# e = Node.new(5)
+# f = Node.new(6)
+# g = Node.new(7)
 
-binary_tree.root = root
+# binary_tree.root = root
 
-binary_tree.root.left_child = a
-binary_tree.root.right_child = b
+# binary_tree.root.left_child = a
+# binary_tree.root.right_child = b
 
-a.left_child = d
-a.right_child = e
+# a.left_child = d
+# a.right_child = e
 
-b.left_child = f
-b.right_child = g
+# b.left_child = f
+# b.right_child = g
 
-print "Results after running Preorder on the binary tree: "
-binary_tree.preorder(root)
+# print "Results after running Preorder on the binary tree: "
+# binary_tree.preorder(root)
 
-print "\n\nResults after running inorder on the binary tree: "
-binary_tree.inorder(root)
+# print "\n\nResults after running inorder on the binary tree: "
+# binary_tree.inorder(root)
 
-print "\n\nResults after running postorder on the binary tree: "
-binary_tree.postorder(root)
+# print "\n\nResults after running postorder on the binary tree: "
+# binary_tree.postorder(root)
 
-print "\n\nResults after running level order on the binary tree: "
-binary_tree.level_order(root)
-puts
+# print "\n\nResults after running level order on the binary tree: "
+# binary_tree.level_order(root)
+# puts
