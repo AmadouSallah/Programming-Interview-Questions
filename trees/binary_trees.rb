@@ -20,7 +20,7 @@ class Binary_Tree
     @root = Node.new(root)
   end
 
-  # I - DEPTH FIRST TRAVERSALS: preorder, inorder, and postorder
+  # I - DEPTH FIRST SEARCH (DFS): preorder, inorder, and postorder
 
   # 1) preorder traversal: each node is processed before (pre) either of its sub-trees: 1 2 4 5 3 6 7
   def preorder(node)
@@ -46,7 +46,7 @@ class Binary_Tree
     print node.value, " "
   end
 
-  # II - BREADTH FIRST TRAVERSAL: level order: 1 2 3 4 5 6 7
+  # II - BREADTH FIRST SEARCH (BFS): level order: 1 2 3 4 5 6 7
   def level_order(node)
     return if !node # return if the node is nil
     queue = Queue.new() # create an empty queue
