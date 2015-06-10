@@ -25,15 +25,13 @@ def print_level_order(root)
   while (!queue.is_empty?) # as long as the queue is not empty
     current_node = queue.dequeue
 
-    # if the current_node is not nil, we print its value and decrement total_nodes_in_current_level by 1. We then add its children (if any) to the queue and increment total_nodes_in_next_level by 2.
-    if current_node
-      print current_node.value, " "
-      total_nodes_in_current_level -= 1
+    # we print current_node's value and decrement total_nodes_in_current_level by 1. We then add its children (if any) to the queue and increment total_nodes_in_next_level by 2.
+    print current_node.value, " "
+    total_nodes_in_current_level -= 1
 
-      queue.enqueue(current_node.left_child) if current_node.left_child
-      queue.enqueue(current_node.right_child) if current_node.right_child
-      total_nodes_in_next_level += 2
-    end
+    queue.enqueue(current_node.left_child) if current_node.left_child
+    queue.enqueue(current_node.right_child) if current_node.right_child
+    total_nodes_in_next_level += 2
 
     if total_nodes_in_current_level == 0 # this means we finished printing the node values in the current node
       print "\n"
