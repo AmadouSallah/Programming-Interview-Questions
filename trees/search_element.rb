@@ -5,16 +5,16 @@ require_relative './../stacks_and_queues/queue/implement_queue'
 # It should return 1 if the element is present in the binary tree, and -1 otherwise.
 
 # SOLUTION 1: DFS (recursion)
-def search_element(root, key)
+def search_element_DFS(root, key)
   return 0 if !root
   return 1 if root.value == key
 
-  left_result = search_element(root.left_child, key) #if root.left_child
+  left_result = search_element_DFS(root.left_child, key) #if root.left_child
 
   if left_result == 1 # key found on left side
     return left_result
   else # search on right side
-    return search_element(root.right_child, key) if root.right_child
+    return search_element_DFS(root.right_child, key) if root.right_child
   end
   -1 # key not found in binary tree
 end
@@ -65,13 +65,13 @@ a.right_child = e
 b.left_child = f
 b.right_child = g
 
-puts "Testing method with Breath First Search"
-p search_element(root, 7) == 1
-p search_element(root, 4) == 1
-p search_element(root, 0) == -1
-p search_element(root, -5) == -1
-
 puts "Testing method with Depth First Search"
+p search_element_DFS(root, 7) == 1
+p search_element_DFS(root, 4) == 1
+p search_element_DFS(root, 0) == -1
+p search_element_DFS(root, -5) == -1
+
+puts "Testing method with Breath First Search"
 p search_element_BFS(root, 7) == 1
 p search_element_BFS(root, 4) == 1
 p search_element_BFS(root, 0) == -1
