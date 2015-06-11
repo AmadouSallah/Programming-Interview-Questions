@@ -1,4 +1,5 @@
 require_relative 'binary_trees'
+require_relative './../stacks_and_queues/queue/implement_queue'
 
 # Problem: Write a program to search for an element in a binary tree.
 # It should return 1 if the element is present in the binary tree, and -1 otherwise.
@@ -16,6 +17,25 @@ def search_element(root, key)
     return search_element(root.right_child, key) if root.right_child
   end
   -1 # key not found in binary tree
+end
+
+
+# SOLUTION 2: BFS
+def search_element_BFS(root, key)
+  return -1 if !root
+  return 1 if root.value == key
+
+  queue = Queue.new()
+  queue.enqueue(root)
+
+  while !queue.is_empty?
+    current_node = queue.dequeue
+    return 1 if current_node.value == key
+
+    queue.enqueue(current_node.left_child) if current_node.left_child
+    queue.enqueue(current_node.right_child) if current_node.right_child
+  end
+  -1
 end
 
 # TEST DRIVE
@@ -45,7 +65,14 @@ a.right_child = e
 b.left_child = f
 b.right_child = g
 
+puts "Testing method with Breath First Search"
 p search_element(root, 7) == 1
 p search_element(root, 4) == 1
 p search_element(root, 0) == -1
 p search_element(root, -5) == -1
+
+puts "Testing method with Depth First Search"
+p search_element_BFS(root, 7) == 1
+p search_element_BFS(root, 4) == 1
+p search_element_BFS(root, 0) == -1
+p search_element_BFS(root, -5) == -1
