@@ -1,1 +1,1 @@
-# Problem: Write a program that returns the number of leaves in a binary tree
+# Problem: Write a program that returns the number of leaves in a binary tree without using recursion
