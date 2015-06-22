@@ -11,6 +11,21 @@ def find(root, data)
   end
 end
 
+# Iterative solution
+def find_iterative(root, data)
+  return nil if !root
+  while root
+    if root.value == data
+      return root
+    elsif data < root.value
+      root = root.left_child
+    else
+      root = root.right_child
+    end
+  end
+  nil
+end
+
 # TEST DRIVE
 #      4
 #    /    \
@@ -33,3 +48,7 @@ root = a
 p find(nil, 2) == nil
 p find(root, 2) == b
 p find(c, 3) == nil
+
+p find_iterative(nil, 2) == nil
+p find_iterative(root, 2) == b
+p find_iterative(c, 3) == nil
