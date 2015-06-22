@@ -13,6 +13,16 @@ def find_min_element_iterative(root)
   root
 end
 
+# Recursive Solution
+def find_min_element_recursive(root)
+  return nil if !root
+  if !root.left_child
+    return root
+  else
+    return find_min_element_recursive(root.left_child)
+  end
+end
+
 # TEST DRIVE
 #      4
 #    /    \
@@ -35,3 +45,7 @@ root = a
 p find_min_element_iterative(nil) == nil
 p find_min_element_iterative(root) == d
 p find_min_element_iterative(c) == f
+
+p find_min_element_recursive(nil) == nil
+p find_min_element_recursive(root) == d
+p find_min_element_recursive(c) == f
