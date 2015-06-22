@@ -1,0 +1,1 @@
+# write a method to insert a node into a binary search tree
