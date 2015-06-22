@@ -13,6 +13,13 @@ def find_max_element_iterative(root)
   root
 end
 
+# Recursive solution
+def find_max_element_recursive(root)
+  return nil if !root
+  return root if !root.right_child
+  return find_max_element_recursive(root.right_child)
+end
+
 # TEST DRIVE
 #      4
 #    /    \
@@ -35,3 +42,7 @@ root = a
 p find_max_element_iterative(nil) == nil
 p find_max_element_iterative(root) == g
 p find_max_element_iterative(b) == e
+
+p find_max_element_recursive(nil) == nil
+p find_max_element_recursive(root) == g
+p find_max_element_recursive(b) == e
