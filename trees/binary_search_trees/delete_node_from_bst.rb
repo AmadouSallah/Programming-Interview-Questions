@@ -1,2 +1,2 @@
-# Problem: Write a program to delete a node from a Binary Search Tree.
+# Problem: Write a program to delete an element from a Binary Search Tree.
 
