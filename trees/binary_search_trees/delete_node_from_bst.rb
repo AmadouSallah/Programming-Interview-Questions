@@ -13,3 +13,11 @@ require_relative 'implement_binary_search_tree'
 # ii) Delete this largest element by replacing it with its child. (case 2)
 
 
+def find_max(root)
+  return nil if !root
+  while root.right_child
+    root = root.right_child
+  end
+  root
+end
+
