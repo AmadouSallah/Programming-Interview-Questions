@@ -71,7 +71,15 @@ class BinaryHeap
     end
   end
 
-
+  # removes and returns the first element of the heap, which is the largest one.
+  def delete_max
+    max_element = self.get_max_element
+    # replace this max element with the last element of the heap
+    heap.heap_array[0] = heap.heap_array[-1]
+    self.size -= 1 # reduce the size before sine the last element is now at top.
+    self.max_heapify(0) # to make sure that the heap property is not violated
+    max_element # returns the largest element
+  end
 
 end
 
@@ -81,3 +89,5 @@ p heap.left_child(1) == -1
 p heap.right_child(3) == -1
 p heap.right_child_key(2) == nil
 p heap.max_heapify(0) == nil
+
+p heap.delete_max
