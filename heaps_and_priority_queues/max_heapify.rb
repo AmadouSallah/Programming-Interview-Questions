@@ -4,10 +4,10 @@ require_relative 'implement_binary_heap'
 def max_heapify(heap, i)
   max_index = i
   left_index = heap.left_child(i)
-  right_index = heap.rigth_child(i)
+  right_index = heap.right_child(i)
 
-  max_index = left_index if heap.heap_array(max_index) < heap.left_child_key(i)
-  max_index = right_index if heap.heap_array(max_index) < heap.rigth_child_key(i)
+  max_index = left_index if heap.heap_array[max_index] < heap.left_child_key(i)
+  max_index = right_index if heap.heap_array[max_index] < heap.rigth_child_key(i)
 
 
   if max_index != i
@@ -28,6 +28,6 @@ def swap(array, i, j)
 end
 
 
-# heap = BinaryHeap.new()
-# p max_heapify(heap, 0)
+heap = BinaryHeap.new()
+p max_heapify(heap, 0)
 
