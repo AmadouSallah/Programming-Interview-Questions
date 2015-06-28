@@ -46,10 +46,16 @@ class BinaryHeap
     heap_array[2 * i + 2]
   end
 
+  # returns the largest element of the heap (element at top)
+  def get_max_element
+    raise "Error: Heap is empty" if @size <= 0
+    heap_array[0]
+  end
+
 end
 
 
-# heap = BinaryHeap.new()
-# p heap.left_child(1) == -1
-# p heap.right_child(3) == -1
-# p heap.right_child_key(2) == nil
+heap = BinaryHeap.new()
+p heap.left_child(1) == -1
+p heap.right_child(3) == -1
+p heap.right_child_key(2) == nil
