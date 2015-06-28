@@ -53,24 +53,25 @@ class BinaryHeap
   end
 
   def max_heapify(i)
-  max_index = i
-  left_index = self.left_child(i)
-  right_index = self.right_child(i)
+    max_index = i
+    left_index = self.left_child(i)
+    right_index = self.right_child(i)
 
-  max_index = left_index if self.heap_array[max_index] && self.left_child_key(i) && (self.heap_array[max_index] < self.left_child_key(i))
-  max_index = right_index if self.heap_array[max_index] && self.rigth_child_key(i) && (self.heap_array[max_index] < self.rigth_child_key(i))
+    max_index = left_index if self.heap_array[max_index] && self.left_child_key(i) && (self.heap_array[max_index] < self.left_child_key(i))
+    max_index = right_index if self.heap_array[max_index] && self.rigth_child_key(i) && (self.heap_array[max_index] < self.rigth_child_key(i))
 
-  if max_index != i
-    # swap elements at index i and at max_index
-    temp = self.heap_array[i]
-    self.heap_array[i] = self.heap_array[max_index]
-    self.heap_array[max_index] = temp
+    if max_index != i
+      # swap elements at index i and at max_index
+      temp = self.heap_array[i]
+      self.heap_array[i] = self.heap_array[max_index]
+      self.heap_array[max_index] = temp
 
-    # call max_heapify at index max_index
-    max_heapify(heap, max_index)
+      # call max_heapify at index max_index
+      max_heapify(heap, max_index)
+    end
   end
 
-end
+
 
 end
 
