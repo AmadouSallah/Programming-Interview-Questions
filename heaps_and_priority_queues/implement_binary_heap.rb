@@ -49,7 +49,7 @@ class BinaryHeap
 end
 
 
-heap = BinaryHeap.new()
-p heap.left_child(1) == -1
-p heap.right_child(3) == -1
-p heap.right_child_key(2) == nil
+# heap = BinaryHeap.new()
+# p heap.left_child(1) == -1
+# p heap.right_child(3) == -1
+# p heap.right_child_key(2) == nil
