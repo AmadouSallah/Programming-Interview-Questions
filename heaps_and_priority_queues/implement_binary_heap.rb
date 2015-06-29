@@ -62,6 +62,7 @@ class BinaryHeap
 
     if max_index != i
       # swap elements at index i and at max_index
+
       temp = self.heap_array[i]
       self.heap_array[i] = self.heap_array[max_index]
       self.heap_array[max_index] = temp
@@ -81,6 +82,12 @@ class BinaryHeap
     max_element # returns the largest element
   end
 
+end
+
+def swap(array, i, j)
+  temp = array[i]
+  array[i] = array[j]
+  array[j] = temp
 end
 
 
