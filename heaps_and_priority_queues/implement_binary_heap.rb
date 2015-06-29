@@ -57,8 +57,8 @@ class BinaryHeap
     left_index = self.left_child(i)
     right_index = self.right_child(i)
 
-    max_index = left_index if self.heap_array[max_index] && self.left_child_key(i) && (self.heap_array[max_index] < self.left_child_key(i))
-    max_index = right_index if self.heap_array[max_index] && self.rigth_child_key(i) && (self.heap_array[max_index] < self.rigth_child_key(i))
+    max_index = left_index if @heap_array[max_index] && self.left_child_key(i) && (@heap_array[max_index] < self.left_child_key(i))
+    max_index = right_index if @heap_array[max_index] && self.rigth_child_key(i) && (@heap_array[max_index] < self.rigth_child_key(i))
 
     if max_index != i
       # swap elements at index i and at max_index
