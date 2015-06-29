@@ -9,31 +9,17 @@ class BinaryHeap
 
   # returns the index of the parent of i if 0 < i < @size; otherwise returns -1
   def parent(i)
-    if i <= 0 || i >= @size
-      return -1
-    else
-      return (i - 1) / 2
-    end
+    (i - 1) / 2
   end
 
   # returns the index of the left child of i if
   def left_child(i)
-    left = (2 * i) + 1
-    if left >= @size
-      return -1
-    else
-      return left
-    end
+    (2 * i) + 1
   end
 
   # returns the index of the right child of i
   def right_child(i)
-    right = 2 * (i + 2)
-    if right >= @size
-      return -1
-    else
-      return right
-    end
+    2 * (i + 1)
   end
 
   # returns the value of the left child of the element at index i
@@ -58,7 +44,7 @@ class BinaryHeap
     right_index = self.right_child(i)
 
     max_index = left_index if @heap_array[max_index] && self.left_child_key(i) && (@heap_array[max_index] < self.left_child_key(i))
-    max_index = right_index if @heap_array[max_index] && self.rigth_child_key(i) && (@heap_array[max_index] < self.rigth_child_key(i))
+    max_index = right_index if @heap_array[max_index] && self.right_child_key(i) && (@heap_array[max_index] < self.right_child_key(i))
 
     if max_index != i
       # swap elements at index i and at max_index
@@ -129,8 +115,8 @@ puts "The heap array is now: #{heap.heap_array}"
 puts "\nThe maximum element in the heap is #{heap.get_max_element}"
 
 
-# puts "The left child of 10 is #{heap.left_child(10)}"
-# p heap.left_child(1) == -1
+puts "The left child of 10 is #{heap.heap_array[heap.left_child(10)]}"
+# p heap.left_child(0)
 # p heap.right_child(3) == -1
 # p heap.right_child_key(2) == nil
 # p heap.max_heapify(0) == nil
