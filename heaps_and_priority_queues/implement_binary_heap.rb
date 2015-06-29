@@ -62,10 +62,7 @@ class BinaryHeap
 
     if max_index != i
       # swap elements at index i and at max_index
-
-      temp = self.heap_array[i]
-      self.heap_array[i] = self.heap_array[max_index]
-      self.heap_array[max_index] = temp
+      swap(@heap_array, i, max_index)
 
       # call max_heapify at index max_index
       max_heapify(heap, max_index)
