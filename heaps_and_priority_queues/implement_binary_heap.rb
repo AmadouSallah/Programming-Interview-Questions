@@ -79,6 +79,26 @@ class BinaryHeap
     max_element # returns the largest element
   end
 
+  # inserts an element inside the heap
+  def insert(element)
+    i = @size
+    @heap_array << element
+    @size += 1
+
+    while i > 0
+      parent = self.parent(i)
+
+      if @heap_array[i] > @heap_array[parent]
+        swap(@heap_array, i, parent)
+      else
+        break
+      end
+
+      i = parent
+    end
+
+  end
+
 end
 
 def swap(array, i, j)
@@ -89,9 +109,28 @@ end
 
 
 heap = BinaryHeap.new()
-p heap.left_child(1) == -1
-p heap.right_child(3) == -1
-p heap.right_child_key(2) == nil
-p heap.max_heapify(0) == nil
 
-p heap.delete_max
+puts "Inserting 5 into the heap:"
+heap.insert(5)
+p heap.heap_array
+puts "Inserting 10 into the heap:"
+heap.insert(10)
+p heap.heap_array
+puts "Inserting 0 into the heap:"
+heap.insert(0)
+p heap.heap_array
+puts "Inserting 20 into the heap:"
+heap.insert(20)
+p heap.heap_array
+puts "Inserting 1 into the heap:"
+heap.insert(1)
+p heap.heap_array
+
+puts "The maximum element in the heap is #{heap.get_max_element}"
+# puts "The left child of 10 is #{heap.left_child(10)}"
+# p heap.left_child(1) == -1
+# p heap.right_child(3) == -1
+# p heap.right_child_key(2) == nil
+# p heap.max_heapify(0) == nil
+
+# p heap.delete_max
