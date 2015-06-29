@@ -110,23 +110,25 @@ end
 
 heap = BinaryHeap.new()
 
-puts "Inserting 5 into the heap:"
+print "Inserting 5 into the heap; "
 heap.insert(5)
-p heap.heap_array
-puts "Inserting 10 into the heap:"
+puts "The heap array is now: #{heap.heap_array}"
+print "\nInserting 10 into the heap; "
 heap.insert(10)
-p heap.heap_array
-puts "Inserting 0 into the heap:"
+puts "The heap array is now: #{heap.heap_array}"
+print "\nInserting 0 into the heap; "
 heap.insert(0)
-p heap.heap_array
-puts "Inserting 20 into the heap:"
+puts "The heap array is now: #{heap.heap_array}"
+print "\nInserting 20 into the heap; "
 heap.insert(20)
-p heap.heap_array
-puts "Inserting 1 into the heap:"
+puts "The heap array is now: #{heap.heap_array}"
+print "\nInserting 1 into the heap; "
 heap.insert(1)
-p heap.heap_array
+puts "The heap array is now: #{heap.heap_array}"
 
-puts "The maximum element in the heap is #{heap.get_max_element}"
+puts "\nThe maximum element in the heap is #{heap.get_max_element}"
+
+
 # puts "The left child of 10 is #{heap.left_child(10)}"
 # p heap.left_child(1) == -1
 # p heap.right_child(3) == -1
