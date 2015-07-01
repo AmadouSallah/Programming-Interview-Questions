@@ -42,6 +42,17 @@ def find_non_duplicate_integer_2(array)
   hash.each {|key, value| return key if value == 1}
 end
 
+# SOLUTION 3: Using XOR - 0(n) running time and 0(1) space
+# We know that if a and b are integers, a^b = 1 if a and b are different, otherwise a^b = 0
+# We initially set result to zero. We then XOR it with every array element and returns the result of xoring.
+# This will gives the non duplicate integer
+# Example 0^1^2^1^3^2 = 0^(1^1)^(2^2)^3 = 0^(0^0)^3 = 0^0^3 = 0^3 = 3 therefore 3 is the non duplicate
+def find_non_duplicate_integer_3(array)
+  result = 0
+  array.each {|element| result ^= element}
+  result
+end
+
 # TEST DRIVE
 
 puts "Testing Solution 1:"
@@ -55,3 +66,9 @@ p find_non_duplicate_integer_2([7]) == 7
 p find_non_duplicate_integer_2([7, 1, 4, 1, 4]) == 7
 p find_non_duplicate_integer_2([1, 4, 3, 1, 4]) == 3
 p find_non_duplicate_integer_2([1, 4, 1, 4, 0]) == 0
+
+puts "\nTesting solution 3:"
+p find_non_duplicate_integer_3([7]) == 7
+p find_non_duplicate_integer_3([7, 1, 4, 1, 4]) == 7
+p find_non_duplicate_integer_3([1, 4, 3, 1, 4]) == 3
+p find_non_duplicate_integer_3([1, 4, 1, 4, 0]) == 0
