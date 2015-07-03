@@ -1,0 +1,3 @@
+# Write a program to generate the nth Fibonacci number
+# Example for n = 6, the program returns 8
+# 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, ...
