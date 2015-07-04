@@ -23,6 +23,23 @@ def fibonacci_dp(n)
   result[n]
 end
 
+# SOLUTION 3: 0(n) time and 0(1) space
+def fibonacci_3(n)
+  a, b, = 0, 1
+  c = a + b
+  return a if n == 0
+
+  i = 2
+  while i <= n
+    c = a + b
+    a = b
+    b = c
+
+    i += 1
+  end
+  c
+end
+
 # TEST CASES
 
 puts "Test case using Recursion:"
@@ -38,3 +55,10 @@ p fibonacci_dp(1) == 1
 p fibonacci_dp(2) == 1
 p fibonacci_dp(10) == 55
 p fibonacci_dp(100) == 354224848179261915075 # this one runs fast whereas in the recursive case, it takes forever
+
+puts "Test case using more efficient solution:"
+p fibonacci_3(0) == 0
+p fibonacci_3(1) == 1
+p fibonacci_3(2) == 1
+p fibonacci_3(10) == 55
+p fibonacci_3(100) == 354224848179261915075
