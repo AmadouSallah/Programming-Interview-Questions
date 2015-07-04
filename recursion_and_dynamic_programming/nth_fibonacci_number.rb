@@ -11,9 +11,30 @@ def fibonacci(n)
   end
 end
 
+# SOLUTION 2: Using Dynamic Programming - 0(n) running time and 0(n) space
+def fibonacci_dp(n)
+  result = [0, 1] # the first 2 elements of the fibonacci sequence are 0, and 1.
+
+  i = 2
+  while i <= n
+    result[i] = result[i-1] + result[i-2]
+    i += 1
+  end
+  result[n]
+end
+
 # TEST CASES
+
+puts "Test case using Recursion:"
 p fibonacci(0) == 0
 p fibonacci(1) == 1
 p fibonacci(2) == 1
 p fibonacci(10) == 55
-# p fibonacci(100) == 2584 # This takes for ever to compute
+# p fibonacci(100) == 354224848179261915075 # This takes for ever to compute
+
+puts "Test case using Dynamic Programming:"
+p fibonacci_dp(0) == 0
+p fibonacci_dp(1) == 1
+p fibonacci_dp(2) == 1
+p fibonacci_dp(10) == 55
+p fibonacci_dp(100) == 354224848179261915075 # this one runs fast whereas in the recursive case, it takes forever
