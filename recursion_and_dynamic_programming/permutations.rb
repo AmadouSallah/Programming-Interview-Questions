@@ -1,6 +1,8 @@
 # Write a program that takes a string as input and prints all the permutations of the input string.
 # For example, for input "abc", the output would be: "abc", "acb", "bac", "bca", "cab", and "cba" (each printed in a line)
 
+# Running time: 0(n!)
+
 def permutations(string)
   permute(string, 0, string.length)
 end
