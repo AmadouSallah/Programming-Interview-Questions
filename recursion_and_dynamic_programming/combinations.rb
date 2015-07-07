@@ -1,0 +1,1 @@
+# Write a program that takes in a string and prints all the possible combinations of the characters in the input string
