@@ -34,6 +34,25 @@ def convert_binary_tree_to_mirror(root)
   return root
 end
 
+
+# SOLUTION 2
+def convert_binary_tree_to_mirror_2(root)
+  return if !root
+
+  # swap the left and right children of root
+  temp = Node.new()
+  temp = root.left_child
+  root.left_child = root.right_child
+  root.right_child = temp
+
+  # recursive call on both the left and rigth children
+  convert_binary_tree_to_mirror_2(root.left_child)
+  convert_binary_tree_to_mirror_2(root.right_child)
+
+  return root
+end
+
+# TEST DRIVE
 h = Node.new(8)
 f = Node.new(6, h)
 e = Node.new(5)
@@ -44,4 +63,6 @@ a = Node.new(1, b, c)
 
 root = a
 
-p convert_binary_tree_to_mirror(root)
+mirror = convert_binary_tree_to_mirror(root)
+
+p convert_binary_tree_to_mirror_2(mirror) == root
