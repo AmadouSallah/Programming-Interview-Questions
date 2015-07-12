@@ -10,3 +10,23 @@
 # Case 2: select the ith element and skip the i-1 th element (array[i] + result[i-2])
 # Case 3: don't select the ith element => solve the problem with i-1 elements
 # result[i] is the maximum of all 3 cases above
+
+def maximum_sum_with_no_3_continuous_numbers(array)
+  len = array.length
+  result = []
+  result[0] = array[0]
+  result[1] = [array[0], array[1]].max
+  result[2] = [array[0], array[1], array[2]].max
+
+  for i in (3...len)
+    two_continuous = array[i] + array[i-1] + result[i-3]
+    non_two_continuous = array[i] + result[i-2]
+    i_not_selected = result[i-1]
+
+    result[i] = [two_continuous, non_two_continuous, i_not_selected].max
+  end
+  result[len-1]
+end
+
+# TEST CASE
+p maximum_sum_with_no_3_continuous_numbers([1,2,3,8,1,5]) == 17
