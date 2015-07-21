@@ -55,7 +55,7 @@ def add_2_lists_2(head1, head2)
 end
 
 def add_lists_helper(head1, head2, carry)
-  return nil if head1 == nil && head2 == nil
+  return nil if head1 == nil && head2 == nil && carry == 0
 
   # result_head = Node.new(nil, nil)
   sum = carry
