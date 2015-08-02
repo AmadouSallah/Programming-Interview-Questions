@@ -24,3 +24,11 @@ combinations("a")
 puts "\nThe combinations of 'abc' are:"
 combinations("abc")
 
+# For each letter from input start position to end of input string
+#   Append the letter to the output string
+#   Print letters in output string.
+# If the current letter isn’t the last in the input string
+#   Generate remaining combinations starting at next position with iteration starting
+#   at next letter beyond the letter just selected
+# Delete the last character of the output string
+
