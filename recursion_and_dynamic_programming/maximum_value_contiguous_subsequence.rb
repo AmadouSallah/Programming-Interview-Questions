@@ -23,20 +23,13 @@ end
 # SOLUTION 2: Using Dynamic Programming - 0(n) running time and 0(n) space complexities
 def maximum_value_contiguous_subsequence_dp(array)
   len = array.length
-  result = []
-  # if the 1st array[0] is positive, put it in the result array, otherwise put 0
-  result[0] = (array[0] > 0) ? array[0] : 0
+  result = [array[0]]
 
-  array.each_with_index do |element, index|
-    result[index] = (result[index-1] + element > 0) ? (result[index-1] + element) : 0
+  for i in (1...len)
+    result[i] = maximum(array[i], array[i] + result[-1])
   end
 
-  max = 0
-  result.each do |element|
-    max = (max > element) ? max : element
-  end
-
-  max
+  result.max
 end
 
 # SOLUTION 3: 0(n) running time and 0(1) space
@@ -58,9 +51,7 @@ end
 
 # Returns true if all the elements of the input array are negative and false otherwise
 def all_negatives?(nums)
-  nums.each do |element|
-    return false if element >= 0
-  end
+  nums.each { |element| return false if element >= 0 }
   true
 end
 
@@ -72,6 +63,7 @@ p maximum_value_contiguous_subsequence([1, -5, 2, -1, 3]) == 4
 p maximum_value_contiguous_subsequence([-2, 11, -4, 13, -5, 2]) == 20
 
 puts "Solution 2 using Dynamic Programming: 0(n) running time and 0(n) space complexities"
+p maximum_value_contiguous_subsequence([-4, -3, -7, -1, -2]) == -1
 p maximum_value_contiguous_subsequence_dp([1, -3, 4, -2, -1, 6]) == 7
 p maximum_value_contiguous_subsequence_dp([1, -5, 2, -1, 3]) == 4
 p maximum_value_contiguous_subsequence_dp([-2, 11, -4, 13, -5, 2]) == 20
