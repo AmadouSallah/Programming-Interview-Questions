@@ -26,8 +26,22 @@ def factorial_dp(n)
   dp_array[n]
 end
 
+# SOLUTION 3: 0(n) running time and 0(1) space complexities
+def factorial(n)
+  return nil if n < 0
+  return n if n < 2
+
+  factorial_value = 1
+  for i in (2..n)
+    factorial_value *= i
+  end
+  factorial_value
+end
+
 # TEST CASES
 p factorial_recursive(10) == 3628800
 # p factorial_recursive(1000000) # Stactk too deep :(
 
 p factorial_dp(10) == 3628800
+
+p factorial(10) == 3628800
