@@ -35,16 +35,16 @@ end
 # SOLUTION 3: 0(n) running time and 0(1) space
 def maximum_value_contiguous_subsequence_3(array)
   len = array.length
-  max_sum, current_sum = 0, 0
+  max, current_sum = array[0], array[0]
 
-  for i in (0...len)
-    current_sum = (current_sum + array[i] > 0) ? current_sum + array[i] : 0
-
-    max_sum =  (current_sum > max_sum) ? current_sum : max_sum
+  for i in (1...len)
+    current_sum = maximum(array[i], array[i] + current_sum)
+    max = maximum(max, current_sum)
   end
-  max_sum
+  max
 end
 
+# Returns the maximum between a and b
 def maximum(a, b)
   a > b ? a : b
 end
@@ -69,6 +69,7 @@ p maximum_value_contiguous_subsequence_dp([1, -5, 2, -1, 3]) == 4
 p maximum_value_contiguous_subsequence_dp([-2, 11, -4, 13, -5, 2]) == 20
 
 puts "Solution 3: 0(n) running time and 0(1) space complexities"
+p maximum_value_contiguous_subsequence([-4, -3, -7, -1, -2]) == -1
 p maximum_value_contiguous_subsequence_3([1, -3, 4, -2, -1, 6]) == 7
 p maximum_value_contiguous_subsequence_3([1, -5, 2, -1, 3]) == 4
 p maximum_value_contiguous_subsequence_3([-2, 11, -4, 13, -5, 2]) == 20
