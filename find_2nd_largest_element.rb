@@ -1,7 +1,7 @@
 # Write a program to find the second largest element in an unsorted array
 # Example, for input [1, -4, 3, 7, 9, 0], the output should be7
 
-# SOLUTION 1: Using the built in sort method - 0(nlogn) running time and 0(1) space
+# SOLUTION 1: Using the built in sort method - 0(nlogn) running time and 0(n) space
 def find_2nd_largest_element(array)
   sorted = array.sort # sorts array in ascending order
   sorted[-2] # returns the 2nd to last element
