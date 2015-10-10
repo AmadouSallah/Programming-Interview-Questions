@@ -28,5 +28,30 @@ def maximum_sum_with_no_3_continuous_numbers(array)
   result[len-1]
 end
 
+# SOLUTION 2: 0(n) running time and 0(1) space complexities
+def maximum_sum_with_no_3_continuous_numbers_2(nums)
+  len = nums.length
+  x = nums[0]
+  y = maximum(x, nums[1])
+  z = maximum(x, maximum(y, nums[2]) )
+
+  for i in (3...len)
+    a = nums[i] + nums[i-1] + x
+    b = nums[i] + y
+    c = z
+
+    temp = maximum(a, maximum(b, c))
+    x = y
+    y = z
+    z = temp
+  end
+  z
+end
+
+def maximum(a, b)
+  a > b ? a : b
+end
 # TEST CASE
 p maximum_sum_with_no_3_continuous_numbers([1,2,3,8,1,5]) == 17
+
+p maximum_sum_with_no_3_continuous_numbers_2([1,2,3,8,1,5]) == 17
