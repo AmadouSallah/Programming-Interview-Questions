@@ -14,3 +14,28 @@ In the output, the order of numbers can be changed
 4) We swap the array elements at left_index and right_index if left_index < right_index
 
 =end
+
+def separate_even_odd(nums)
+  left_index, right_index = 0, nums.length - 1
+  while left_index < right_index
+    # increment left_index until we encounter an odd number
+    while (left_index < right_index) && (nums[left_index] % 2 == 0)
+      left_index += 1
+    end
+
+    # decrement right_index until we encounter an even number
+    while (left_index < right_index) && (nums[right_index] % 2 == 1)
+      right_index -= 1
+    end
+
+    swap(nums, left_index, right_index) if left_index < right_index
+  end
+
+  nums
+end
+
+def swap(array, i, j)
+  temp = array[i]
+  array[i] = array[j]
+  array[j] = temp
+end
