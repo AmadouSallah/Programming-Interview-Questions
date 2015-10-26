@@ -39,3 +39,9 @@ def swap(array, i, j)
   array[i] = array[j]
   array[j] = temp
 end
+
+# TEST CASES
+p separate_even_odd([]) == []
+p separate_even_odd([1]) == [1]
+p separate_even_odd([1, 2]) == [2, 1]
+p separate_even_odd([12, 34, 45, 9, 8, 90, 3]) == [12, 34, 90, 8, 9, 45, 3]
