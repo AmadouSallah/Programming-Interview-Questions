@@ -14,3 +14,12 @@ def can_be_made_palindrome?(string)
   true
 end
 
+# TEST CASES
+p can_be_made_palindrome?("") == true
+p can_be_made_palindrome?("a") == true
+p can_be_made_palindrome?("mmo") == true
+p can_be_made_palindrome?("yakak") == true
+p can_be_made_palindrome?("civic") == true
+p can_be_made_palindrome?("ivicc") == true
+p can_be_made_palindrome?("ab") == false
+p can_be_made_palindrome?("travel") == false
