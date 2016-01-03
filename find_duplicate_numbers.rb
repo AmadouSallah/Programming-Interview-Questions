@@ -1,7 +1,7 @@
 # Write a program to return all the duplicate numbers from an array of non negative numbers.
 # Example, for array = [1,3,2,1,2,9,7,9], the output is [1,2,9]
 
-# SOLUTION 1: Brute force - 0(n^2) running time and 0(1) space
+# SOLUTION 1: Brute force - 0(n^2) running time and 0(n) space
 def find_duplicate_numbers(array)
   result = []
   len = array.length
