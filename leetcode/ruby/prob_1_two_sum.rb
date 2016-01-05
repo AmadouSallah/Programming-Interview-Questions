@@ -13,6 +13,13 @@ Output: index1=1, index2=2
 =end
 
 # SOLUTION 1: 0(n^2) running time and 0(1) space
+
+# Pseudocode:
+# We go through the input array from the begining. For each array element, we go through the
+# rest of the array elements to see if there is an element whose sum with the current element
+# adds up to the target. If so, these 2 elements are the ones we are looking for.
+# We then print each of their indexes + 1 (since it's not zero based, we add 1 to each index).
+
 def two_sum1(numbers, target)
   len = numbers.length
 
