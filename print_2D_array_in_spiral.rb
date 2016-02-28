@@ -69,3 +69,59 @@ matrix2 = [[1,2,3,4,5,6], [7,8,9,10,11,12], [13,14,15,16,17,18]]
 
 print_2d_array_in_spiral(matrix1)
 print_2d_array_in_spiral(matrix2)
+
+##################### 2nd SOLUTION ##########################
+def print_2d_array_in_spiral_2(matrix)
+    top_row, bottom_row = 0, matrix.length-1
+    left_column, right_column = 0, matrix[0].length-1
+    direction = 0
+    # if direction = 0, we print the top row from left to right,
+    # if direction = 1, we print the right column from top to bottom,
+    # if direction = 2, we print the bottom row from right to left
+    # if direction = 3, we print the left column from bottom to top
+
+    while (top_row <= bottom_row && left_column <= right_column)
+
+      case direction
+
+        when 0 # Print the top row
+          col = left_column
+          while col <= right_column
+            print matrix[top_row][col], " "
+            col += 1
+          end
+          top_row += 1 # moving the top row down by 1
+
+        when 1 # Print the right column
+          row = top_row
+          while row <= bottom_row
+            print matrix[row][right_column], " "
+            row += 1
+          end
+          right_column -= 1 # Decrementing the right column by 1
+
+        when 2  # Print the bottow row
+          col = right_column
+          while col >= left_column
+            print matrix[bottom_row][col], " "
+            col -= 1
+          end
+          bottom_row -= 1 # Moving the bottom_row up by 1
+
+        when 3  # Print the left column
+          row = bottom_row
+          while row >= top_row
+            print matrix[row][left_column], " "
+            row -= 1
+          end
+          left_column += 1 # Moving the left column to the right by 1
+
+      end # end of case
+
+      direction = (direction + 1) % 4
+    end # end of outer while loop
+    puts
+end
+
+print_2d_array_in_spiral_2(matrix1)
+print_2d_array_in_spiral_2(matrix2)
