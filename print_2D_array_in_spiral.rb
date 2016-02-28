@@ -64,13 +64,8 @@ def print_2d_array_in_spiral(matrix)
   puts
 end
 
-matrix1 = [[1,2,3], [4,5,6], [7,8,9]]
-matrix2 = [[1,2,3,4,5,6], [7,8,9,10,11,12], [13,14,15,16,17,18]]
-
-print_2d_array_in_spiral(matrix1)
-print_2d_array_in_spiral(matrix2)
-
 ##################### 2nd SOLUTION ##########################
+
 def print_2d_array_in_spiral_2(matrix)
     top_row, bottom_row = 0, matrix.length-1
     left_column, right_column = 0, matrix[0].length-1
@@ -122,6 +117,14 @@ def print_2d_array_in_spiral_2(matrix)
     end # end of outer while loop
     puts
 end
+
+######## TEST CASES ########
+
+matrix1 = [[1,2,3], [4,5,6], [7,8,9]]
+matrix2 = [[1,2,3,4,5,6], [7,8,9,10,11,12], [13,14,15,16,17,18]]
+
+print_2d_array_in_spiral(matrix1)
+print_2d_array_in_spiral(matrix2)
 
 print_2d_array_in_spiral_2(matrix1)
 print_2d_array_in_spiral_2(matrix2)
