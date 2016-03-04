@@ -19,6 +19,9 @@ Output: 1 2 3 4 5 6 12 18 17 16 15 14 13 7 8 9 10 11
 =end
 
 def print_2d_array_in_spiral(matrix)
+
+  return if matrix == nil || matrix.length == 0 || matrix[0].length == 0
+
   first_row, last_row = 0, matrix.length
   first_column, last_column = 0, matrix[0].length
 
@@ -67,6 +70,9 @@ end
 ##################### 2nd SOLUTION ##########################
 
 def print_2d_array_in_spiral_2(matrix)
+
+    return if matrix == nil || matrix.length == 0 || matrix[0].length == 0
+
     top_row, bottom_row = 0, matrix.length-1
     left_column, right_column = 0, matrix[0].length-1
     direction = 0
@@ -122,9 +128,15 @@ end
 
 matrix1 = [[1,2,3], [4,5,6], [7,8,9]]
 matrix2 = [[1,2,3,4,5,6], [7,8,9,10,11,12], [13,14,15,16,17,18]]
+matrix3 = [[]]
+matrix4 = nil
 
 print_2d_array_in_spiral(matrix1)
 print_2d_array_in_spiral(matrix2)
+print_2d_array_in_spiral(matrix3)
+print_2d_array_in_spiral(matrix4)
 
 print_2d_array_in_spiral_2(matrix1)
 print_2d_array_in_spiral_2(matrix2)
+print_2d_array_in_spiral_2(matrix3)
+print_2d_array_in_spiral_2(matrix4)
