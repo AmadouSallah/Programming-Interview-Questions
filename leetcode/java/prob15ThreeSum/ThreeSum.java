@@ -14,3 +14,59 @@ The solution set must not contain duplicate triplets.
     (-1, 0, 1)
     (-1, -1, 2)
 */
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class ThreeSum {
+  public static List<List<Integer>> threeSum(int[] nums) {
+
+    List<List<Integer>> result = new ArrayList<List<Integer>>();
+
+    if ((nums == null) || (nums.length < 3)) {
+      return result;
+    }
+
+    Arrays.sort(nums);
+
+    int n = nums.length;
+
+    for (int i = 0; i < n-2; i++) {
+
+      /* Skip identical elements to avoid duplicate */
+      if ((i > 0) && (nums[i] == nums[i-1]))
+        continue;
+
+      for (int left = i+1, right = n-1; left < right;) {
+
+        int sum = nums[i] + nums[left] + nums[right];
+
+        if (sum == 0) {
+          result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+          left++;
+          right--;
+
+          /* Move the left cursor to the right to skip identical elements */
+          while ( (left < right) && (nums[left-1] == nums[left]) )
+            left++;
+
+          /* Move the right cursor to the left to skip identical elements */
+          while ( (left < right) && (nums[right] == nums[right+1]))
+            right--;
+
+        } else if (sum < 0) {
+          left++;
+        } else {
+          right--;
+        }
+
+      }
+
+      return result;
+    }
+
+    return result;
+  }
+
+}
