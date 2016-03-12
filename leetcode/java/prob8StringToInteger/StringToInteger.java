@@ -44,7 +44,7 @@ public class StringToInteger {
       int currentDigit = currentChar - '0';
       result = result * 10 + currentDigit;
 
-      /* if result is outside of the range of int values, return 0 */
+      /* if result is outside of the range of int values, return */
       if ( (result > largestInteger) && (sign == 1) ) {
         return largestInteger;
       }
