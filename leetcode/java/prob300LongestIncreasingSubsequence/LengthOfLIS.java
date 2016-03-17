@@ -32,7 +32,7 @@ public class LengthOfLIS {
     for (int i = 1; i < len; i++) {
       for(int j = 0; j < i; j++) {
         if (nums[i] > nums[j])
-              tempArray[i] = Math.max(tempArray[i], tempArray[j]+1);
+          tempArray[i] = Math.max(tempArray[i], tempArray[j]+1);
       }
     }
 
