@@ -18,6 +18,7 @@ import java.util.Arrays;
 
 public class LengthOfLIS {
 
+  // 0(n^2) time complexity
   public static int lengthOfLIS(int[] nums) {
 
     if (nums == null || nums.length == 0) return 0;
@@ -43,6 +44,54 @@ public class LengthOfLIS {
     return max;
   }
 
+  // 0(n) time complexity
+  public static int lengthOfLIS2(int[] nums) {
+
+    if (nums == null || nums.length == 0) return 0;
+
+    int n = nums.length;
+    int[] result = new int[n];
+    result[0] = nums[0];
+    int len = 1;
+
+    for (int i = 1; i < n; i++) {
+      int currentElement = nums[i];
+
+      if (currentElement <= result[0]) {
+        result[0] = currentElement;
+      } else if (currentElement > result[len-1]) {
+        result[len++] = currentElement;
+      } else {
+        int position = binarySearch(result, currentElement, 0, len-1);
+        result[position] = currentElement;
+      }
+    }
+
+    printArray(result, 0, len-1);
+
+    return len;
+  }
+
+  public static int binarySearch(int[] arr, int target, int start, int end) {
+
+    int leftIndex = start, rightIndex = end;
+
+    while (rightIndex - leftIndex > 1 ) {
+      int middleIndex = (leftIndex + rightIndex) / 2;
+      int middleElement = arr[middleIndex];
+
+      if (middleElement == target) {
+        return middleIndex;
+      } else if (middleElement < target) {
+        leftIndex = middleIndex;
+      } else {
+        rightIndex = middleIndex;
+      }
+    }
+    return rightIndex;
+  }
+
+
   public static void printArray(int[] arr) {
     String result = "[";
     int len = arr.length;
@@ -53,15 +102,40 @@ public class LengthOfLIS {
     }
     result += "]";
     System.out.println(result);
+  }
+
+  // Prints part of an array, from index 'from' to index 'to'
+  public static void printArray(int[] arr, int from, int to) {
+    String result = "[";
+    int len = arr.length;
+    for (int i = from; i <= to; i++) {
+      result += arr[i];
+      if (i < to)
+        result += ", ";
     }
+    result += "]";
+    System.out.println(result);
+  }
 
   public static void main(String[] args) {
-    int[] arr = {10, 9, 2, 5, 3, 7, 101, 18};
-    printArray(arr);
-    System.out.println(lengthOfLIS(arr));
+    int[] arr1 = {10, 9, 2, 5, 3, 7, 101, 18};
+    int[] arr2 = {-2, -1};
 
-    int[] arr1 = {-2, -1};
+    //Testing lengthOfLIS
+    System.out.println("#####Testing the first solution with 0(n^2) running time.#####\n");
+    System.out.print("Array1 = ");
     printArray(arr1);
+    System.out.print("The lenght of the Longest Increasing Subsequence for Array1 is: ");
     System.out.println(lengthOfLIS(arr1));
+    System.out.print("The actual Longest Increasing Subsequence for Array1 is: ");
+    lengthOfLIS2(arr1);
+
+    System.out.print("\nArray2 = ");
+    printArray(arr2);
+    System.out.print("The lenght of the Longest Increasing Subsequence for Array2 is: ");
+    System.out.println(lengthOfLIS(arr2));
+    System.out.print("The actual Longest Increasing Subsequence for Array2 is: ");
+    lengthOfLIS2(arr2);
+
   }
 }
