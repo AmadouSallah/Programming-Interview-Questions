@@ -8,6 +8,8 @@ exists one unique longest palindromic substring.
 */
 
 public class LongestPalindrome {
+
+  // 0(n^2) running time and 0(n) space complexities
   public static String longestPalindrome(String s) {
 
     if (s == null || s.length() == 0) return "";
@@ -45,7 +47,39 @@ public class LongestPalindrome {
     return s.substring(left+1, right);
   }
 
+  // 0(n^3) running time and 0(1) space complexities
+  public static String longestPalindrome2(String s) {
+    if (s == null || s.length() == 0) return "";
+
+    String result = s.substring(0, 1);
+    int n = s.length();
+
+    if (n == 1) return result;
+
+    for (int i = 0; i < n; i++) {
+      for (int j = i+1; j < n; j++) {
+        String currentSubstring = s.substring(i, j+1);
+        if (isPalindrome(currentSubstring) && currentSubstring.length() > result.length())
+          result = currentSubstring;
+      }
+    }
+
+    return result;
+  }
+
+  public static boolean isPalindrome(String s) {
+    int left = 0, right = s.length()-1;
+    while (left <= right) {
+      if (s.charAt(left) != s.charAt(right))
+        return false;
+      left++;
+      right--;
+    }
+    return true;
+  }
+
   public static void main(String[] args) {
+    System.out.println("Using longestPalindrome method: 0(n^2) running time and 0(n) space complexities.");
     System.out.println("longestPalindrome(null) = " + longestPalindrome(null));
     System.out.println("longestPalindrome(\"\") = " + longestPalindrome(""));
     System.out.println("longestPalindrome(\"a\") = " + longestPalindrome("a"));
@@ -55,5 +89,16 @@ public class LongestPalindrome {
     System.out.println("longestPalindrome(\"abccbad\") = " + longestPalindrome("abccbad"));
     System.out.println("longestPalindrome(\"banana\") = " + longestPalindrome("banana"));
     System.out.println("longestPalindrome(\"bananas\") = " + longestPalindrome("bananas"));
+
+    System.out.println("\nUsing longestPalindrome2 method: 0(n^3) running time and 0(1) space complexities.");
+    System.out.println("longestPalindrome2(null) = " + longestPalindrome2(null));
+    System.out.println("longestPalindrome2(\"\") = " + longestPalindrome2(""));
+    System.out.println("longestPalindrome2(\"a\") = " + longestPalindrome2("a"));
+    System.out.println("longestPalindrome2(\"ab\") = " + longestPalindrome2("ab"));
+    System.out.println("longestPalindrome2(\"abcba\") = " + longestPalindrome2("abcba"));
+    System.out.println("longestPalindrome2(\"abccba\") = " + longestPalindrome2("abccba"));
+    System.out.println("longestPalindrome2(\"abccbad\") = " + longestPalindrome2("abccbad"));
+    System.out.println("longestPalindrome2(\"banana\") = " + longestPalindrome2("banana"));
+    System.out.println("longestPalindrome2(\"bananas\") = " + longestPalindrome2("bananas"));
   }
 }
