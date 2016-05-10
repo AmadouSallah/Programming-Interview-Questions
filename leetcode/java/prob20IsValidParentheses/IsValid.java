@@ -70,6 +70,33 @@ public class IsValid {
     return stack.isEmpty();
   }
 
+  public static boolean isValid2(String s) {
+
+    if (s == null || s.length() == 0) return true;
+
+    Map<Character, Character> openingsClosings = new HashMap<Character, Character>();
+    openingsClosings.put('(', ')');
+    openingsClosings.put('[', ']');
+    openingsClosings.put('{', '}');
+
+    Stack<Character> stack = new Stack<Character>();
+
+    int len = s.length();
+
+    for (int i = 0; i < len; i++) {
+      char c = s.charAt(i);
+      if (c == '(' || c == '[' || c == '{') {
+        stack.push(c);
+      } else if (c == ')' || c == ']' || c == '}') {
+        if (stack.isEmpty() || c != openingsClosings.get(stack.pop())) {
+          return false;
+        }
+      }
+    }
+
+    return stack.isEmpty();
+  }
+
   public static void main(String[] args) {
     System.out.println("isValid(null) = " + isValid(null));
     System.out.println("isValid(\"\") = " + isValid(""));
@@ -78,5 +105,14 @@ public class IsValid {
     System.out.println("isValid(\"a(b)cd[e]f{g}hij\") = " + isValid("a(b)cd[e]f{g}hij"));
     System.out.println("isValid(\"(]\") = " + isValid("(]"));
     System.out.println("isValid(\"([)]\") = " + isValid("([)]"));
+
+    System.out.println("\nTesting second solution:\n");
+    System.out.println("isValid2(null) = " + isValid2(null));
+    System.out.println("isValid2(\"\") = " + isValid2(""));
+    System.out.println("isValid2(\"()\") = " + isValid2("()"));
+    System.out.println("isValid2(\"()[]{}\") = " + isValid2("()[]{}"));
+    System.out.println("isValid2(\"a(b)cd[e]f{g}hij\") = " + isValid2("a(b)cd[e]f{g}hij"));
+    System.out.println("isValid2(\"(]\") = " + isValid2("(]"));
+    System.out.println("isValid2(\"([)]\") = " + isValid2("([)]"));
     }
 }
