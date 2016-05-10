@@ -26,7 +26,7 @@ We iterate through the input string s.
     If it is in the closings set, that is, it is either ), [, or },
     we return false if any of the followings 2 is valid:
       1) If the stack is empty, meaning that the current closing has no corresponding opening.
-      2) If the hashmap value of the last element of the stack is not the same as the current value:
+      2) If the hashmap value of the last element of the stack is not the same as the current character:
 
 Once we are done iterating through the input string s, we check if the stack is empty or not.
 If it is empty (meaning all openings has been matched), we return true; otherwise we return false.
