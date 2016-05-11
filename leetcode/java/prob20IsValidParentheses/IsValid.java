@@ -52,7 +52,7 @@ public class IsValid {
     Set<Character> openings = new HashSet<Character>(openingsClosings.keySet());
     Set<Character> closings = new HashSet<Character>(openingsClosings.values());
 
-    Stack<Character> stack = new Stack<Character>();
+    Stack<Character> stack = new Stack<>();
 
     int len = s.length();
 
@@ -79,7 +79,7 @@ public class IsValid {
     openingsClosings.put('[', ']');
     openingsClosings.put('{', '}');
 
-    Stack<Character> stack = new Stack<Character>();
+    Stack<Character> stack = new Stack<>();
 
     int len = s.length();
 
