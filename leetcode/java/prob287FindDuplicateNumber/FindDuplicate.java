@@ -14,3 +14,41 @@ There is only one duplicate number in the array, but it could be
 repeated more than once.
 
 */
+
+// Resources: http://keithschwarz.com/interesting/code/find-duplicate/FindDuplicate.python.html
+
+public class FindDuplicate {
+
+  public static int findDuplicate(int[] nums) {
+
+    if (nums == null || nums.length < 2) {
+      return -1;
+    }
+
+    int len = nums.length, slow = nums[0], fast = nums[nums[0]];
+
+    // each time, fast moves twice the speed of slow until they meet
+    while (slow != fast) {
+      slow = nums[slow];
+      fast = nums[nums[fast]];
+    }
+
+    // At this point, slow = fast.
+
+    slow = 0;
+    while (slow != fast) {
+      slow = nums[slow];
+      fast = nums[fast];
+    }
+
+    return slow;
+  }
+
+  public static void main(String[] args) {
+    System.out.println("findDuplicate(new int[] {1, 1}) = " +findDuplicate(new int[] {1, 1}));
+    System.out.println("findDuplicate(new int[] {2, 5, 3, 1, 4, 3}) = " + findDuplicate(new int[] {2, 5, 3, 1, 4, 3}));
+    System.out.println("findDuplicate(new int[] {2, 5, 2, 1, 4, 3}) = " + findDuplicate(new int[] {2, 5, 2, 1, 4, 3}));
+
+  }
+
+}
