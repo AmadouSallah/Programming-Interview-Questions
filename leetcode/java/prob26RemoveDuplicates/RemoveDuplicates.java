@@ -15,3 +15,28 @@ of nums being 1 and 2 respectively. It doesn't matter what you leave
 beyond the new length.
 
 */
+
+public class RemoveDuplicates {
+
+  public static int removeDuplicates(int[] nums) {
+
+    if (nums == null || nums.length == 0) return 0;
+
+    int j = 0, len = nums.length;
+
+    for (int i = 1; i < len; i++) {
+      if (nums[i] != nums[j]) {
+        nums[++j] = nums[i];
+      }
+    }
+
+    return j+1;
+  }
+
+  public static void main(String[] args) {
+    System.out.println("removeDuplicates(null) = " + removeDuplicates(null));
+    System.out.println("removeDuplicates(new int[] {}) = " + removeDuplicates(new int[] {}));
+    System.out.println("removeDuplicates(new int[] {1,1,2}) = " + removeDuplicates(new int[] {1,1,2}));
+    System.out.println("removeDuplicates(new int[] {1,1,1,1}) = " + removeDuplicates(new int[] {1,1,1,1}));
+    }
+}
