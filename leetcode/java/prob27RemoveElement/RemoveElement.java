@@ -13,4 +13,10 @@ Given input array nums = [3,2,2,3], val = 3
 
 Your function should return length = 2, with the first two elements of nums being 2.
 
+Hints
+
+Try two pointers.
+Did you use the property of "the order of elements can be changed"?
+What happens when the elements to remove are rare?
+
 */
