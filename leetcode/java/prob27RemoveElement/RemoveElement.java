@@ -38,6 +38,23 @@ public class RemoveElement {
     return i;
   }
 
+  // Solution 2: when elements to be removed are rare
+  public static int removeElement2(int[] nums, int val) {
+
+    if (nums == null || nums.length == 0) return 0;
+
+    int left = 0, right = nums.length;
+    while (left < right) {
+      if (nums[left] == val) {
+        nums[left] = nums[right-1];
+        right--; // reduce array size by 1
+      } else
+        left++;
+    }
+
+    return right;
+  }
+
   public static void main(String[] args) {
     System.out.println("removeElement(null, 0) = " + removeElement(null, 0));
     System.out.println("removeElement(new int[]{}, 1) = " + removeElement(new int[]{}, 1));
@@ -45,6 +62,14 @@ public class RemoveElement {
     System.out.println("removeElement(new int[]{1}, 3) = " + removeElement(new int[]{1}, 3));
     System.out.println("removeElement(new int[]{3,2,2,3}, 3) = " + removeElement(new int[]{3,2,2,3}, 3));
     System.out.println("removeElement(new int[]{0,1,2,3,4,5}, 5) = " + removeElement(new int[]{0,1,2,3,4,5}, 5));
+
+    System.out.println("\nUsing Solution 2:");
+    System.out.println("removeElement2(null, 0) = " + removeElement2(null, 0));
+    System.out.println("removeElement2(new int[]{}, 1) = " + removeElement2(new int[]{}, 1));
+    System.out.println("removeElement2(new int[]{1}, 1) = " + removeElement2(new int[]{1}, 1));
+    System.out.println("removeElement2(new int[]{1}, 3) = " + removeElement2(new int[]{1}, 3));
+    System.out.println("removeElement2(new int[]{3,2,2,3}, 3) = " + removeElement2(new int[]{3,2,2,3}, 3));
+    System.out.println("removeElement2(new int[]{0,1,2,3,4,5}, 5) = " + removeElement2(new int[]{0,1,2,3,4,5}, 5));
 
   }
 }
