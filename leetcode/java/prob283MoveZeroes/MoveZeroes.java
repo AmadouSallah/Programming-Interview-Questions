@@ -13,3 +13,29 @@ You must do this in-place without making a copy of the array.
 Minimize the total number of operations.
 
 */
+
+public class MoveZeroes {
+  public static void moveZeroes(int[] nums) {
+
+    if (nums == null || nums.length == 0) return;
+
+    int i = 0, len = nums.length;
+    for (int j = 0; j < len; j++) {
+      if (nums[j] != 0)
+        nums[i++] = nums[j];
+    }
+
+    while (i < len)
+      nums[i++] = 0;
+
+  }
+
+  public static void main(String[] args) {
+    moveZeroes(null);
+    moveZeroes(new int[]{});
+    moveZeroes(new int[]{1});
+    moveZeroes(new int[]{0, 1, 0, 3, 12});
+    moveZeroes(new int[]{0});
+  }
+
+}
