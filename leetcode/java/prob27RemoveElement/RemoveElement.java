@@ -20,3 +20,31 @@ Did you use the property of "the order of elements can be changed"?
 What happens when the elements to remove are rare?
 
 */
+
+
+
+public class RemoveElement {
+
+  // Solution 1
+  public static int removeElement(int[] nums, int val) {
+
+    if (nums == null || nums.length == 0) return 0;
+
+    int i = 0, len = nums.length;
+    for (int j = 0; j < len; j++) {
+      if (nums[j] != val)
+        nums[i++] = nums[j];
+    }
+    return i;
+  }
+
+  public static void main(String[] args) {
+    System.out.println("removeElement(null, 0) = " + removeElement(null, 0));
+    System.out.println("removeElement(new int[]{}, 1) = " + removeElement(new int[]{}, 1));
+    System.out.println("removeElement(new int[]{1}, 1) = " + removeElement(new int[]{1}, 1));
+    System.out.println("removeElement(new int[]{1}, 3) = " + removeElement(new int[]{1}, 3));
+    System.out.println("removeElement(new int[]{3,2,2,3}, 3) = " + removeElement(new int[]{3,2,2,3}, 3));
+    System.out.println("removeElement(new int[]{0,1,2,3,4,5}, 5) = " + removeElement(new int[]{0,1,2,3,4,5}, 5));
+
+  }
+}
