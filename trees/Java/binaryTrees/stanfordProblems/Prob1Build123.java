@@ -27,7 +27,12 @@ public class Prob1Build123 {
     root.setRightChild(right);
   }
 
-
+  // Build 123 using only one pointer variable.
+  public void build123_2() {
+    Node root = new Node(2);
+    root.setLeftChild(new Node(1));
+    root.setRightChild(new Node(3));
+  }
 }
 
 
