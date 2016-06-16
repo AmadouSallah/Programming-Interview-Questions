@@ -23,7 +23,12 @@ public class Prob1Build123 {
     Node left = new Node(1);
     Node right = new Node(3);
 
-    root.leftChild = left;
-    root.rightChild = right;
+    root.setLeftChild(left);
+    root.setRightChild(right);
   }
+
+
 }
+
+
+
