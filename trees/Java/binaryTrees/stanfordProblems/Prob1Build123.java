@@ -18,7 +18,7 @@ package stanfordPackage;
 public class Prob1Build123 {
 
   // Build 123 using three pointer variables.
-  public void build123() {
+  public void build123a() {
     Node root = new Node(2);
     Node left = new Node(1);
     Node right = new Node(3);
@@ -28,12 +28,14 @@ public class Prob1Build123 {
   }
 
   // Build 123 using only one pointer variable.
-  public void build123_2() {
+  public void build123b() {
     Node root = new Node(2);
     root.setLeftChild(new Node(1));
     root.setRightChild(new Node(3));
   }
+
 }
+
 
 
 
