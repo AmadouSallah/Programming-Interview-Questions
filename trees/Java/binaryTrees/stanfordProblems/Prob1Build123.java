@@ -12,3 +12,18 @@ Write the code in three different ways...
   b: by calling newNode() three times, and using only one pointer variable
   c: by calling insert() three times passing it the root pointer to build up the tree
 */
+
+package stanfordPackage;
+
+public class Prob1Build123 {
+
+  // Build 123 using three pointer variables.
+  public void build123() {
+    Node root = new Node(2);
+    Node left = new Node(1);
+    Node right = new Node(3);
+
+    root.leftChild = left;
+    root.rightChild = right;
+  }
+}
