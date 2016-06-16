@@ -34,6 +34,17 @@ public class Prob1Build123 {
     root.setRightChild(new Node(3));
   }
 
+  // Build 123 by calling insert() three times.
+  // Note that the '2' must be inserted first.
+  /*
+  public void build123c() {
+    // Node root = null;
+    // root = insert(root, 2);
+    // root = insert(root, 1);
+    // root = insert(root, 3);
+  }
+  */
+
 }
 
 
