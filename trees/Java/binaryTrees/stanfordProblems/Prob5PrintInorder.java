@@ -1,5 +1,5 @@
 /*
- printTree()
+ printInorder()
 
 Given a binary search tree (aka an "ordered binary tree"), iterate over the nodes
 to print them out in increasing order. So the tree...
