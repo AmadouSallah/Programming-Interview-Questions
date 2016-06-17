@@ -1,4 +1,4 @@
-package stanfordPackage;
+package treesPackage;
 
 public class BinaryTree {
 

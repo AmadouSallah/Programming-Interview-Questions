@@ -12,7 +12,7 @@ The maxDepth of the empty tree is 0, the maxDepth of the tree below is 3.
 
 */
 
-package stanfordPackage;
+package treesPackage;
 
 public class Prob3MaxDepth {
 

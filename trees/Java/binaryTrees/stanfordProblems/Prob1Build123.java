@@ -13,7 +13,7 @@ Write the code in three different ways...
   c: by calling insert() three times passing it the root pointer to build up the tree
 */
 
-package stanfordPackage;
+package treesPackage;
 
 public class Prob1Build123 {
 
