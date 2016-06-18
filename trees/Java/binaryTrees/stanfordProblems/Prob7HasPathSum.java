@@ -35,11 +35,15 @@ public class Prob7HasPathSum {
 
   public static boolean hasPathSum(Node root, int sum) {
 
-    if (root == null)
-      return (sum == 0);
+    if (root == null) {
+      return false;
+    } else if (root.getLeftChild() == null && root.getRightChild() == null) {
+      return (root.getData() == sum);
+    } else {
+      int newSum = sum - root.getData();
+      return ( hasPathSum(root.getLeftChild(), newSum) || hasPathSum(root.getRightChild(), newSum) );
+    }
 
-    int newSum = sum - root.getData();
-    return hasPathSum(root.getLeftChild(), newSum) || hasPathSum(root.getRightChild(), newSum);
   }
 
   public static void main(String[] args) {
@@ -76,11 +80,14 @@ public class Prob7HasPathSum {
 
     node6.setRightChild(node9);
 
+    System.out.println("hasPathSum(null, 0) = " + hasPathSum(null, 0));
+    System.out.println("hasPathSum(null, 1) = " + hasPathSum(null, 1));
     System.out.println("hasPathSum(node1, 27) = " + hasPathSum(node1, 27));
     System.out.println("hasPathSum(node1, 22) = " + hasPathSum(node1, 22));
     System.out.println("hasPathSum(node1, 26) = " + hasPathSum(node1, 26));
     System.out.println("hasPathSum(node1, 18) = " + hasPathSum(node1, 18));
-    System.out.println("hasPathSum(node9, 1) = " + hasPathSum(node9, 1));
     System.out.println("hasPathSum(node1, 0) = " + hasPathSum(node1, 0));
+    System.out.println("hasPathSum(node9, 1) = " + hasPathSum(node9, 1));
+    System.out.println("hasPathSum(node9, 2) = " + hasPathSum(node9, 2));
   }
 }
