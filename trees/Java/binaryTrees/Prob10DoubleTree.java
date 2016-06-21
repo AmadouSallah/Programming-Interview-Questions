@@ -2,7 +2,9 @@
 From: http://cslibrary.stanford.edu/110/BinaryTrees.pdf
 
 doubleTree()
-For each node in a binary search tree, create a new duplicate node,
+
+Write a program that converts a given tree to its Double tree.
+That is, for each node in a binary search tree, create a new duplicate node,
 and insert the duplicate as the left child of the original node.
 The resulting tree should still be a binary search tree.
 
@@ -20,3 +22,4 @@ The resulting tree should still be a binary search tree.
    1
 
 */
+
