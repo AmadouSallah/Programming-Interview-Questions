@@ -24,3 +24,28 @@ function isBSTRecur(struct node* node, int min, int max) that traverses down the
 keeping track of the narrowing min and max allowed values as it goes, looking at each node
 only once. The initial values for min and max should be INT_MIN and INT_MAX -- they narrow from there.
 */
+
+package treesPackage;
+
+public class Prob12IsBST {
+
+  // Version 1
+  public static boolean isBst1(Node root) {
+    if (root == null) return true;
+
+    // In a BST, the left subtree of a node contains only nodes with keys less than the node’s key.
+    // So if the max of the left subtree is greater than the current node's value, we return false
+    if (root.getLeftChild() != null && root.getData() < maxValue(root.getLeftChild()))
+      return false;
+
+    // In a BST, the right subtree of a node contains only nodes with keys greater than the node’s key.
+    // So if the max of the right subtree is less than the current node's value, we return false
+    if (root.getRightChild() != null && root.getData() > minValue(root.getRightChild()))
+      return false;
+
+    // in a BST, both the left and right subtrees must also be binary search trees.
+    // So we check that the subtrees themselves are ok by making a recursive call on them
+    return (isBst1(root.getLeftChild()) && isBst1(root.getRightChild()));
+  }
+
+}
