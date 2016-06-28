@@ -29,8 +29,9 @@ package treesPackage;
 
 public class Prob12IsBST {
 
+
   // Version 1
-  public static boolean isBst1(Node root) {
+  public static boolean isBST1(Node root) {
     if (root == null) return true;
 
     // In a BST, the left subtree of a node contains only nodes with keys less than the node’s key.
@@ -46,6 +47,33 @@ public class Prob12IsBST {
     // in a BST, both the left and right subtrees must also be binary search trees.
     // So we check that the subtrees themselves are ok by making a recursive call on them
     return (isBst1(root.getLeftChild()) && isBst1(root.getRightChild()));
+  }
+
+
+  /*
+  Version 1 above runs slowly since it traverses over some parts of the tree many times.
+  A better solution looks at each node only once. The trick is to write a utility helper
+  function isBST2(Node root, int min, int max) that traverses down the tree
+  keeping track of the narrowing min and max allowed values as it goes, looking at each
+  node only once. The initial values for min and max should be Integer.MIN_VALUE and
+  int Integer.MAX_VALUE -- they narrow from there.
+  */
+
+  // Version 2:
+  public static boolean isBST2(Node root) {
+    return isBST2(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+  }
+
+  public static boolean isBST2(Node node, int min, int max) {
+    // an empty tree is a BST
+    if (node == null) return true;
+
+    // if node violates the min/max constraints, we return false
+    if (node.getData() < min || node.getData() > max) return false;
+
+    // left subtree should be in the range of min...node.getData()
+    // and right subtree in the range of node.getData+1...max
+    return isBST2(node.getLeftChild(), min, node.getData()) && isBST2(node.getRightChild(), node.getData()+1, max);
   }
 
 }
