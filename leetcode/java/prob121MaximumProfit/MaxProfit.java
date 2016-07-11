@@ -17,3 +17,20 @@ Output: 0
 
 In this case, no transaction is done, i.e. max profit = 0.
 */
+
+public class MaxProfit {
+  public static int maxProfit(int[] prices) {
+    int n = prices.length, minPrice = Integer.MAX_VALUE, maxProfit = 0;
+    for (int i = 0; i < n; i++) {
+      int elt = prices[i];
+      minPrice = Math.min(minPrice, elt);
+      maxProfit = Math.max(maxProfit, elt-minPrice);
+    }
+    return maxProfit;
+  }
+
+  public static void main(String[] args) {
+    System.out.println("maxProfit(new int[] {7,1,5,3,6,4) = " + maxProfit(new int[] {7,1,5,3,6,4}));
+    System.out.println("maxProfit(new int[] {7, 6, 4, 3, 1) = " + maxProfit(new int[] {7, 6, 4, 3, 1}));
+  }
+}
