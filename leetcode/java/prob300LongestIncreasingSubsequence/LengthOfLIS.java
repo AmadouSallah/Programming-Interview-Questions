@@ -44,7 +44,8 @@ public class LengthOfLIS {
     return max;
   }
 
-  // 0(n) time complexity
+  // 0(nlogn) time complexity
+  // Resources: http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
   public static int lengthOfLIS2(int[] nums) {
 
     if (nums == null || nums.length == 0) return 0;
