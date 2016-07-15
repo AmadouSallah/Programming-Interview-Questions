@@ -20,7 +20,7 @@ public class FindMin {
                                     // Example, nums =[4,5,6,7,0,1,2], left = 0, right = 6, nums[mid] = 7
         left = mid + 1;
 
-      else
+      else if (nums[mid] < nums[right]) // No duplicates allowed, therefore nums[mid] cannot equals to nums[right]
         // nums[mid] could be the min value, so we set right to mid. Example, nums = [6,7,0,1,2], left = 0,  right = 4;
         //  therefore nums[mid] <= nums[right] and 0 is the min; thus we include it in next iteration
         right = mid;
