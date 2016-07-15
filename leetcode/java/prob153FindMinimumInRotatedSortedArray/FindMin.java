@@ -9,15 +9,17 @@ Find the minimum element.
 You may assume no duplicate exists in the array.
 */
 
+// Resources: https://www.youtube.com/watch?v=lwvtvNIFvwA
+
 public class FindMin {
   public static int findMin(int[] nums) {
     int left = 0, right = nums.length-1;
     while ( (left < right) && (nums[left] >= nums[right]) ) { // if nums[left] <= nums[right], then the array is sorted
-                                                              // and we just return nums[left], the smallest element
+      // and we just return nums[left], the smallest element
       int mid = left + (right - left) / 2; // same as (left + right)/2, but we want to avoid overflow
 
       if ( nums[mid] > nums[right]) // the min value has to be to the right of nums[mid], so we set left to mid+1
-                                    // Example, nums =[4,5,6,7,0,1,2], left = 0, right = 6, nums[mid] = 7
+        // Example, nums =[4,5,6,7,0,1,2], left = 0, right = 6, nums[mid] = 7
         left = mid + 1;
 
       else if (nums[mid] < nums[right]) // No duplicates allowed, therefore nums[mid] cannot equals to nums[right]
