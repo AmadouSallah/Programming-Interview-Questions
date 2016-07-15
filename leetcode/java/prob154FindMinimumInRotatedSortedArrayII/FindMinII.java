@@ -14,6 +14,8 @@ Find the minimum element.
 The array may contain duplicates.
 */
 
+// Resource: https://www.youtube.com/watch?v=PtdsoaRUuXw
+
 public class FindMinII {
 
   public static int findMin(int nums[]) {
