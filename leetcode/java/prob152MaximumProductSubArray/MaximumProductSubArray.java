@@ -8,6 +8,8 @@ the contiguous subarray [2,3] has the largest product = 6.
 
 */
 
+// Resources: https://www.youtube.com/watch?v=LkvLkmM8hT0
+
 public class MaximumProductSubArray {
 
   public static int maxProduct(int[] nums) {
