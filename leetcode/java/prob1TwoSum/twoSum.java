@@ -8,13 +8,15 @@ Given nums = [2, 7, 11, 15], target = 9,
 
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
+
+Follow up: What if the input array is sorted in ascending order?
 */
 
 import java.util.HashMap;
 
 public class twoSum {
 
-  public static int[] towSum(int[] nums, int target) {
+  public static int[] twoSum(int[] nums, int target) {
 
     if ( (nums == null) || (nums.length == 0) ) {
       return new int[0];
@@ -43,40 +45,50 @@ public class twoSum {
     return result;
   }
 
-  public static String printArray(int[] arr) {
-    if ((arr == null) || (arr.length == 0)) {
-      return "[]";
-    }
+  public static int[] twoSumII(int[] nums, int target) {
+    // We assume nums is sorted in ascending order:
+    int len = nums.length, left = 0, right = len - 1;
+    int[] result = new int[2];
 
-    String result = "[";
-    int n = arr.length;
-    for (int i = 0; i < n; i++) {
-      result += arr[i];
-      if (i < n-1) {
-        result += ", ";
+    while (left < right) {
+      int sum = nums[left] + nums[right];
+      if (sum < target)
+        // Decreasing right will not help since it will make sum even smaller. So we increment left
+        left++;
+      else if (sum > target)
+        // Increasing left will not help since it will make sum even bigger. So we decrement right
+        right--;
+      else { // sum = target
+        // We have found the answer
+        result[0] = left;
+        result[1] = right;
+        break;
       }
     }
-    result += "]";
-
     return result;
   }
 
+  public static String printArray(int[] arr) {
+        String s = "[";
+        int n = arr.length;
+        for (int i = 0; i < n-1; i++)
+            s += arr[i] + ", ";
+        s += (n > 0) ? (arr[n-1] + "]") : "]";
+        return s;
+    }
+
   public static void main(String[] args) {
-    int[] arr1 = {};
-    int[] arr2 = {1};
-    int[] arr3 = {2, 7};
-    int[] arr4 = {2, 15, 11, 7};
-    int target = 9;
 
-    int[] r1 = towSum(arr1, target);
-    int[] r2 = towSum(arr2, target);
-    int[] r3 = towSum(arr3, target);
-    int[] r4 = towSum(arr4, target);
+    System.out.println("twoSum(new int[] {}, 9): " + printArray(twoSum(new int[] {}, 9)));
+    System.out.println("twoSum(new int[] {1}, 9): " + printArray(twoSum(new int[] {1}, 9)));
+    System.out.println("twoSum(new int[] {2, 7}, 9): " + printArray(twoSum(new int[] {2, 7}, 9)));
+    System.out.println("twoSum(new int[] {2, 15, 11, 7}, 9): " + printArray(twoSum(new int[] {2, 15, 11, 7}, 9)));
 
-    System.out.println(printArray(r1));
-    System.out.println(printArray(r2));
-    System.out.println(printArray(r3));
-    System.out.println(printArray(r4));
+    System.out.println("\nCases where the input array is sorted:");
+    System.out.println("twoSumII(new int[] {}, 9): " + printArray(twoSumII(new int[] {}, 9)));
+    System.out.println("twoSumII(new int[] {1}, 9): " + printArray(twoSumII(new int[] {1}, 9)));
+    System.out.println("twoSumII(new int[] {2, 7}, 9): " + printArray(twoSumII(new int[] {2, 7}, 9)));
+    System.out.println("twoSumII(new int[] {2, 7, 9, 11}, 9): " + printArray(twoSumII(new int[] {2, 15, 11, 7}, 9)));
   }
 
 }
