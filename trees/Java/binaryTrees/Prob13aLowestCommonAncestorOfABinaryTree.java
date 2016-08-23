@@ -18,3 +18,23 @@ For example, the lowest common ancestor (LCA) of nodes 5 and 1 is 3.
 Another example is LCA of nodes 5 and 4 is 5, since a node can be a descendant of
 itself according to the LCA definition.
 */
+
+package treesPackage;
+
+public class Prob13aLowestCommonAncestorOfABinaryTree {
+  public static Node lowestCommonAncestor(Node root, Node p, Node q) {
+
+    if (root == null || root == p || root == q)
+      return root;
+
+
+    Node left = lowestCommonAncestor(root.getLeftChild(), p, q);
+    Node right = lowestCommonAncestor(root.getRightChild(), p, q);
+
+    if (left != null && right != null)
+      return root;
+
+    return (left == null) ? right : left;
+
+  }
+}
