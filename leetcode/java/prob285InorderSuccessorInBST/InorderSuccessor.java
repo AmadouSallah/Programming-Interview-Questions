@@ -6,15 +6,15 @@ Given a binary search tree and a node in it, find the in-order successor of that
 Note: If the given node has no in-order successor in the tree, return null.
 
 
-        15
-     /      \
-    10       20
-   /  \      / \
-  8   12    17  25
- /    /     /     \
-6    11    16     27
+        6
+     /     \
+    3       9
+   / \      / \
+  2   5    8  10
+ /   /    /     \
+1   4    7      11
 
-For the tree above, the inorder traversal is 6, 8, 10, 11, 12, 15, 16, 17, 20, 25, 27
-So, inorder successor of 10 (node has a right child), is 11;
-inorder successor of 12 (node has no right child) is 15
+For the tree above, the inorder traversal is 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+So, inorder successor of 3 (node has a right child), is 4;
+inorder successor of 5 (node has no right child) is 6
 */
