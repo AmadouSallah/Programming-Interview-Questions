@@ -59,3 +59,88 @@ In this case, as you keep going up the ancestor chain, you encounter smaller val
 going left, but larger values if you are going right. The successor node will be the first node up
 the ancestor chain that you encounter on the right chain.
 */
+
+
+public class InorderSuccessor {
+
+  public class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
+  }
+
+  public static TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+    TreeNode result = null;
+    while (root != null) {
+      if (root.val > p.val) { // root is a possible successor, so we store it to result and move left
+        // to see if there is any more node whose value is greater than that of p
+        result = root;
+        root = root.left;
+      } else { // root.val <= p.val therefore, neither root, nor any node to its left, can be a successor.
+        // So we move to the right
+          root = root.right;
+      }
+    }
+    return result;
+  }
+
+  /*
+  // Similarly, for predecessor, we do:
+
+  public TreeNode inorderPredeccessor(TreeNode root, TreeNode p) {
+    TreeNode result = null;
+    while (root != null) {
+      if (root.val < p.val) {
+        result = root;
+        root = root.right;
+      } else {
+        root = root.left;
+      }
+
+    }
+  }
+  */
+
+  /*
+  // The solution below doesn't work for a tree with only 1 node; will revisit later
+
+  // Resources: https://www.youtube.com/watch?v=5cPbNCrdotA
+  // O(h), where h is height of tree => O(log n)
+  public static TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+
+    if (root == null) return root;
+
+    TreeNode current = p;
+
+    // Case 1: Node p has a right subtree
+    if (current.right != null)
+      return findMin(current.right);
+
+    // Case 2: Node p has no right subtree
+    else { // current.right == null
+      TreeNode successor = null;
+      TreeNode ancestor = root;
+
+      while (ancestor != current) {
+        if (current.val < ancestor.val) {
+          successor = ancestor; // so far, this is the deepest node for which current is in left
+          ancestor = ancestor.left;
+        } else {
+          ancestor = ancestor.right;
+        }
+      }
+      return ancestor;
+    }
+
+  }
+
+  public static TreeNode findMin(TreeNode root) {
+    if (root == null) return null;
+    while (root.left != null)
+      root = root.left;
+    return root;
+  }
+
+  */
+}
