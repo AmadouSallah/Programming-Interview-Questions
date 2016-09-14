@@ -13,6 +13,7 @@ Follow up: What if the input array is sorted in ascending order?
 */
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class twoSum {
 
@@ -24,7 +25,7 @@ public class twoSum {
 
     int n = nums.length;
     int[] result = new int[2];
-    HashMap<Integer, Integer> hashmap = new HashMap<Integer, Integer>();
+    Map<Integer, Integer> hashmap = new HashMap<Integer, Integer>();
 
     for (int i = 0; i < n; i++) {
 
@@ -45,6 +46,7 @@ public class twoSum {
     return result;
   }
 
+  // Follow up: What if input array is sorted in ascending order (Problem 167)
   public static int[] twoSumII(int[] nums, int target) {
     // We assume nums is sorted in ascending order:
     int len = nums.length, left = 0, right = len - 1;
