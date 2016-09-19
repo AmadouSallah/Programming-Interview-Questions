@@ -20,9 +20,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ThreeSum {
+
   public static List<List<Integer>> threeSum(int[] nums) {
 
-    List<List<Integer>> result = new ArrayList<List<Integer>>();
+    List<List<Integer>> result = new ArrayList<>();
 
     if ((nums == null) || (nums.length < 3)) {
       return result;
@@ -34,11 +35,12 @@ public class ThreeSum {
 
     for (int i = 0; i < n-2; i++) {
 
-      /* Skip identical elements to avoid duplicate */
+      // Skip identical elements to avoid duplicate
       if ((i > 0) && (nums[i] == nums[i-1]))
         continue;
 
-      for (int left = i+1, right = n-1; left < right;) {
+      int left = i+1, right = n-1;
+      while (left < right) {
 
         int sum = nums[i] + nums[left] + nums[right];
 
@@ -47,11 +49,11 @@ public class ThreeSum {
           left++;
           right--;
 
-          /* Move the left cursor to the right to skip identical elements */
+          // Move the left cursor to the right to skip identical elements
           while ( (left < right) && (nums[left-1] == nums[left]) )
             left++;
 
-          /* Move the right cursor to the left to skip identical elements */
+          // Move the right cursor to the left to skip identical elements
           while ( (left < right) && (nums[right] == nums[right+1]))
             right--;
 
@@ -63,10 +65,17 @@ public class ThreeSum {
 
       }
 
-      return result;
     }
 
     return result;
+  }
+
+  public static void main(String[] args) {
+    System.out.println("threeSum(null) = " + threeSum(null));
+    System.out.println("threeSum(new int[] {-1}) = " + threeSum(new int[] {-1}));
+    System.out.println("threeSum(new int[] {-1, 0}) = " + threeSum(new int[] {-1, 0}));
+    System.out.println("threeSum(new int[] {-1, 0, 1, 2, -1, -4}) = " + threeSum(new int[] {-1, 0, 1, 2, -1, -4}));
+
   }
 
 }
