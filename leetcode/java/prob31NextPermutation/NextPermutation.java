@@ -65,3 +65,42 @@ d) Now we reverse the elements to the right of nums[k] = nums[2] = 6. But before
 
     After reversing, nums becomes [2, 4, 6, 1, 3, 5, 7] and this is our answer.
 */
+
+public class NextPermutation {
+
+  public static void nextPermutation(int[] nums) {
+    int n = nums.length, k = n-2;
+
+    // 1) Find the largest index k such that nums[k] < nums[k + 1]
+    while (k >= 0 && nums[k] >= nums[k+1]) k--;
+
+    if (k >=0) { // if k < 0, that means that the sequence is decreasing therefore we are done.
+
+      // 2) Find the largest index l (l > k) such that nums[k] < nums[l].
+      int l = n-1;
+      while (l >=0 && nums[k] >= nums[l]) l--;
+
+      /* 3) We  swap the value of a[k] with that of a[l]. */
+      swap(nums, k, l);
+    }
+
+    /* 4) We reverse nums from k + 1 to the last element of nums */
+    reverse(nums, k+1);
+  }
+
+  private static void swap(int[] nums, int i, int j) {
+    int temp = nums[i];
+    nums[i] = nums[j];
+    nums[j] = temp;
+  }
+
+  private static void reverse(int[] nums, int i) {
+    int left = i, right = nums.length-1;
+    while (left < right) {
+      swap(nums, left, right);
+      left++;
+      right--;
+    }
+  }
+
+}
