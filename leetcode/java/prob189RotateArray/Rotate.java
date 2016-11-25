@@ -33,6 +33,29 @@ public class Rotate {
       nums[i] = tempArray[i];
   }
 
+  /*
+  Solution 2: O(n) runtime and O(1) space
+  We first reverse all the array elements. We then reverse the first k elements;
+  Finally we reverse the last n-k elements where n is the length of the array
+  */
+  public static void rotate2(int[] nums, int k) {
+    int n = nums.length;
+    reverse(nums, 0, n-1);
+    reverse(nums, 0, k-1);
+    reverse(nums, k, n-1);
+  }
+
+  public static void reverse(int[] nums, int left, int right) {
+    while (left < right) {
+      int temp = nums[left];
+      nums[left] = nums[right];
+      nums[right] = temp;
+
+      left++;
+      right--;
+    }
+  }
+
   public static String print(int[] arr) {
     String s = "[";
     int n = arr.length;
@@ -47,5 +70,11 @@ public class Rotate {
     System.out.println("Initially, arr = " + print(arr));
     rotate(arr, 3);
     System.out.println("After rotating by 3, arr = " + print(arr));
+
+    System.out.println("Using Solution 2:");
+    int[] arr2 = new int[] {1,2,3,4,5,6};
+    System.out.println("Initially, arr2 = " + print(arr2));
+    rotate2(arr2, 2);
+    System.out.println("After rotating by 2, arr2 = " + print(arr2));
   }
 }
