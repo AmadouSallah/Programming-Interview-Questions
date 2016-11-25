@@ -12,3 +12,40 @@ Hint:
 Could you do it in-place with O(1) extra space?
 Related problem: Reverse Words in a String II
 */
+
+
+public class Rotate {
+  /*
+  Solution 1: O(n) runtime and O(n) space.
+  We use an extra array whose element at index (i+k)%n will be nums[i].
+  We then copy this array back to the original array nums.
+  */
+  public static void rotate(int[] nums, int k) {
+    int n = nums.length;
+    int[] tempArray = new int[n];
+
+    for (int i = 0; i < n; i++) {
+      int j = (i + k) % n;
+      tempArray[j] = nums[i];
+    }
+
+    for (int i = 0; i < n; i++)
+      nums[i] = tempArray[i];
+  }
+
+  public static String print(int[] arr) {
+    String s = "[";
+    int n = arr.length;
+    for (int i = 0; i < n-1; i++)
+      s += arr[i] + ", ";
+    s += (n > 0) ? (arr[n-1] + "]") : "]";
+    return s;
+  }
+
+  public static void main(String[] args) {
+    int[] arr = new int[] {1,2,3,4,5,6,7};
+    System.out.println("Initially, arr = " + print(arr));
+    rotate(arr, 3);
+    System.out.println("After rotating by 3, arr = " + print(arr));
+  }
+}
