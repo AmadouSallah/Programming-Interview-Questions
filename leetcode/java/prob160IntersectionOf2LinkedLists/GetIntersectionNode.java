@@ -60,3 +60,39 @@ Your code should preferably run in O(n) time and use only O(1) memory.
  We continue the iteration, which corresponds to the 2nd iteration of node1 and 2nd iteration of node2.
  After 2 more steps, both node1 and node2 will meet at c1. We then return this node, which is the point of intersection :)
  */
+
+ public class GetIntersectionNode {
+
+  public static class ListNode {
+    int val;
+    ListNode next;
+
+    public ListNode(int x) {
+      val = x;
+      next = null;
+    }
+  }
+
+  public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    if (headA == null || headB == null) return null;
+
+    ListNode node1 = headA, node2 = headB;
+
+    while (node1 != node2) {
+
+      if (node1 == null) { // end of 1st iteration of node1, so we reset it to poiint to headB
+        node1 = headB;
+      } else {
+        node1 = node1.next; // otherwise, we increment it by 1 step
+      }
+
+      if (node2 == null) { // end of 1st iteration of node2, so we reset it to poiint to headA
+        node2 = headA;
+      } else {
+        node2 = node2.next;  // otherwise, we increment it by 1 step
+      }
+    }
+
+    return node1;
+  }
+}
