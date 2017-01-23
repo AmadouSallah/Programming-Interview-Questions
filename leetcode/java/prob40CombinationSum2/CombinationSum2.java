@@ -40,7 +40,7 @@ public class CombinationSum2 {
         tempList.add(candidates[i]);
         combinatonSum2Helper(candidates, target - candidates[i], result, tempList, i+1);
         // i+1 instead of i since we don't want to reuse same elements
-        tempList.remove(tempList.size() - 1);
+        tempList.remove(tempList.size() - 1); // remove last element before going to next iteration
       }
     }
   }
