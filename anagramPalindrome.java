@@ -10,4 +10,33 @@ s = "icvic", anagram "civic" is a palindrome, so return true
 s = "civil", none of its anagrams is a palindrome, so return false
 */
 
+import java.util.Set;
+import java.util.HashSet;
+
+public class AnagramPalindrome {
+    public static boolean anagramPalindrome(String s) {
+        if (s == null || s.length() == 0) return true;
+
+        Set<Character> set = new HashSet<Character>();
+        int n = s.length();
+
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            // if c is in the set, we remove it. Otherwise we add it to the set.
+            if (set.contains(c))
+                set.remove(c);
+            else
+                set.add(c);
+        }
+        // At this point, the set should contain at most 1 element if s is a palindrome
+        return set.size() <= 1;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("anagramPalindrome(\"carrace\") = " + anagramPalindrome("carrace"));
+        System.out.println("anagramPalindrome(\"civic\") = " + anagramPalindrome("civic"));
+        System.out.println("anagramPalindrome(\"civil\") = " + anagramPalindrome("civil"));
+        System.out.println("anagramPalindrome(\"baa\") = " + anagramPalindrome("baa"));
+    }
+}
 
