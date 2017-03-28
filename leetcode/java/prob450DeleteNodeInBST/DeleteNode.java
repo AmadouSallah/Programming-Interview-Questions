@@ -39,3 +39,47 @@ Another valid answer is [5,2,6,null,4,null,7].
    \   \
     4   7
 */
+
+public class DeleteNode {
+
+  public static class TreeNode {
+    public int val;
+    public TreeNode left, right;
+
+    public TreeNode(int x) {
+      val = x;
+    }
+  }
+
+  // Recursive Solution: O(h) runtime and O(h) space complexities, where h = height of tree = log(n); n = number of tree elements
+  public TreeNode deleteNode(TreeNode root, int key) {
+
+    if (root == null) return root;
+
+    if (key < root.val) {
+      root.left = deleteNode(root.left, key);
+    } else if (key > root.val) {
+      root.right = deleteNode(root.right, key);
+    } else { // key = root.val
+      if (root.left == null) return root.right;
+      else if (root.right == null) return root.left;
+      else { // Both left and rigth children are non null; so we first find the successor node,
+        // which is the node with the minimum value in the right subtree
+        TreeNode successorNode = findMinNode(root.right);
+        // We then replace the current node value with that of the successor node.
+        root.val = successorNode.val;
+        // Finally, we remove the successor node
+        root.right = deleteNode(root.right, successorNode.val); // remove the successor node
+      }
+    }
+    return root;
+  }
+
+  private TreeNode findMinNode(TreeNode node) {
+    while (node.left != null) {
+      node = node.left;
+    }
+    return node;
+  }
+  
+}
