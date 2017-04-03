@@ -1,3 +1,0 @@
-/*
-Writhe a program that takes an input string and returns the most frequently occuring character in the string
-*/
