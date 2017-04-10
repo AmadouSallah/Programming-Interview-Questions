@@ -25,4 +25,18 @@ public class ReverseLinkedList {
 
     return head;
   }
+
+  // Iterative solution: O(n) runtime and O(1) space complexities
+  public ListNode reverseListIterative(ListNode head) {
+    ListNode previous = null, current = head;
+
+    while (current != null) {
+      ListNode temp = current.next;
+      current.next = previous;
+      previous = current;
+      current = temp;
+    }
+
+    return previous;
+  }
 }
