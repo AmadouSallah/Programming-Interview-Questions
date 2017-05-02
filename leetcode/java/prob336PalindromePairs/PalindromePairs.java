@@ -41,9 +41,73 @@ We iterate through the words in the input array of strings.
     If s1Rev is in the hash, then word + s1Rev = s1 + s2 + s1Rev = "abcdcba" is a palindrome.
     Therefore, we add [index-of-word, index-of-s1Rev] to the result
 
-We return the result at the end     
+We return the result at the end
 
 */
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class PalindromePairs {
+
+  public static List<List<Integer>> palindromePairs(String[] words) {
+
+    List<List<Integer>> result = new ArrayList<>();
+    if (words == null || words.length < 2) {
+      return result;
+    }
+
+    int n = words.length;
+    Map<String, Integer> hmap = new HashMap<>();
+
+    for (int i = 0; i < n; i++) {
+      hmap.put(words[i], i);
+    }
+
+    for (int i = 0; i < n; i++) {
+      String word = words[i];
+      int m = word.length();
+
+      for (int j = 0; j <= m; j++) {
+        String s1 = word.substring(0, j), s2 = word.substring(j);
+
+        // Case 1: s1 is a palindrome
+        if (isPalindrome(s1)) {
+          String s2Rev = new StringBuilder(s2).reverse().toString();
+          if (hmap.containsKey(s2Rev) && hmap.get(s2Rev) != i) { // making sure s2Rev is not the same as word
+            result.add(Arrays.asList(hmap.get(s2Rev), i));
+          }
+        }
+
+        // Case 2: s2 is a palindrome
+        if (s2.length() != 0 && isPalindrome(s2)) { // make sure s2 is not empty to avoid duplicates from case 1
+          String s1Rev = new StringBuilder(s1).reverse().toString();
+          if (hmap.containsKey(s1Rev) && hmap.get(s1Rev) != i) {
+            result.add(Arrays.asList(i, hmap.get(s1Rev)));
+          }
+        }
+      }
+    }
+    return result;
+  }
+
+  public static boolean isPalindrome(String s) {
+    if (s == null || s.length() < 2) return true;
+    int l = 0, r = s.length()-1;
+    while (l < r) {
+      if (s.charAt(l) != s.charAt(r)) return false;
+      l++;
+      r--;
+    }
+    return true;
+  }
+
+  public static void main(String[] args) {
+    System.out.println("palindromePairs([\"bat\", \"tab\", \"cat\"]) = " + palindromePairs(new String[] {"bat", "tab", "cat"}));
+    System.out.println("palindromePairs([\"abcd\", \"dcba\", \"lls\", \"s\", \"sssll\"]) = " + palindromePairs(new String[] {"abcd", "dcba", "lls", "s", "sssll"}));
+  }
 
 }
