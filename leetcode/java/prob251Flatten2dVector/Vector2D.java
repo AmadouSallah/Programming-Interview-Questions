@@ -14,3 +14,56 @@ Follow up:
 As an added challenge, try to code it using only iterators in C++ or iterators in Java.
 
 */
+
+/**
+ * Your Vector2D object will be instantiated and called as such:
+ * Vector2D i = new Vector2D(vec2d);
+ * while (i.hasNext()) v[f()] = i.next();
+ */
+
+import java.util.Iterator;
+import java.util.List;
+
+public class Vector2D implements Iterator<Integer> {
+
+  private int row, col;
+  private List<List<Integer>> vec2d;
+
+  public Vector2D(List<List<Integer>> vec2d) {
+    this.vec2d = vec2d;
+    this.row = 0;
+    this.col = 0;
+  }
+
+  @Override
+  public Integer next() {
+    List<Integer> currentRowList = vec2d.get(row);
+    int elt = currentRowList.get(col);
+    col++;
+
+    return elt;
+  }
+
+  @Override
+  public boolean hasNext() {
+    while (row < vec2d.size()) {
+      List<Integer> currentRowList = vec2d.get(row);
+      int currentRowSize = currentRowList.size();
+
+      if (col < currentRowSize) {
+        return true;
+      }
+      else {
+        row++;
+        col = 0;
+      }
+    }
+    return false;
+  }
+}
+
+/**
+ * Your Vector2D object will be instantiated and called as such:
+ * Vector2D i = new Vector2D(vec2d);
+ * while (i.hasNext()) v[f()] = i.next();
+ */
