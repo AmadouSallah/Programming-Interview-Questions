@@ -29,11 +29,30 @@ public class ShortestWordDistance {
     return minDistance;
   }
 
+  // O(n) runtime and O(1) space
+    public static int shortestDistance2(String[] words, String word1, String word2) {
+      int n = words.length, minDistance = n, index1 = -1, index2 = -1;
+      for (int i = 0; i < n; i++) {
+        if (words[i].equals(word1)) {
+          index1 = i;
+        } else if (words[i].equals(word2)) {
+          index2 = i;
+        }
+        if (index1 != -1 && index2 != -1) {
+          minDistance = Math.min(minDistance, Math.abs(index1-index2));
+        }
+      }
+      return minDistance;
+    }
+
   public static void main(String[] args) {
     String[] arr = {"practice", "makes", "perfect", "coding", "makes"};
     String word1 = "coding", word2 = "practice", word3 = "makes";
     System.out.println("shortestDistance([\"practice\", \"makes\", \"perfect\", \"coding\", \"makes\"]), \"coding\", \"practice\") = " + shortestDistance(arr, word1, word2));
     System.out.println("shortestDistance([\"practice\", \"makes\", \"perfect\", \"coding\", \"makes\"]), \"makes\", \"coding\") = " + shortestDistance(arr, word3, word1));
+
+    System.out.println("shortestDistance2([\"practice\", \"makes\", \"perfect\", \"coding\", \"makes\"]), \"coding\", \"practice\") = " + shortestDistance2(arr, word1, word2));
+    System.out.println("shortestDistance2([\"practice\", \"makes\", \"perfect\", \"coding\", \"makes\"]), \"makes\", \"coding\") = " + shortestDistance2(arr, word3, word1));
   }
 
 }
