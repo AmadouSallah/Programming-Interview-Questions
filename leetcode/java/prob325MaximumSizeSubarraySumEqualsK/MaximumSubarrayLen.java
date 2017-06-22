@@ -19,3 +19,61 @@ Follow Up:
 Can you do it in O(n) time?
 
 */
+
+/*
+    PSEUDOCODE
+We initialize sum, max, and diff to 0.
+We also initialize a hashmap, hmap, whose keys are the sum of array elements from index 0 to the current index and
+whose corresponding values will be the current index.
+
+We loop through the input array nums. For each index i:
+    1) We add the current element, nums[i], to sum and we set diff to sum-k
+    2) If sum == k, then max is set to i+1 since the elements from index 0 to i add up to k,
+    and it will be the largest subarray so far;
+    If hmap contains diff, then that means the current sum has already been seen. Let prevSumIndex be the index where the sum was seen. Then prevSumIndex = map.get(diff).
+        This means that the elements from prevSumIndex + 1 to i add up to k.
+        sum = (sum + nums[prevSumIndex+1] + nums[prevSumIndex+2] + ... + nums[i]) - k
+        therefore nums[prevSumIndex+1] + nums[prevSumIndex+2] + ... + nums[i] = k (there are i-prevSumIndex elemesuratnts here)
+        Thus max becomes the maximum between max and (i-prevSumIndex)
+    If the hashmap doesn't contain sum, we add it with corresponding value the current index, i
+
+At the end of the iteration, we return max
+*/
+
+import java.util.Map;
+import java.util.HashMap;
+
+public class MaximumSubarrayLen {
+  public static int maxSubArrayLen(int[] nums, int k) {
+
+    if (nums == null || nums.length == 0) return 0;
+
+    int sum = 0, max = 0, n = nums.length, diff;
+    Map<Integer, Integer> hmap = new HashMap<>();
+
+    for (int i = 0; i < n; i++) {
+      sum += nums[i];
+      diff = sum - k;
+
+      if (sum == k) {
+        max = i+1;
+      } else if (hmap.containsKey(diff)) { // then sum has already been seen at index hmap.get(diff)
+        int prevSumIndex = hmap.get(diff);
+        max = Math.max(max, i - prevSumIndex); // elements from (prevSumIndex + 1) to i add up to k, so update max
+      }
+
+      if (!hmap.containsKey(sum)) {
+        hmap.put(sum, i);
+      }
+    }
+    return max;
+  }
+
+  public static void main(String[] args) {
+    int[] arr1 = {1, -1, 5, -2, 3};
+    int[] arr2 = {-2, -1, 2, 1};
+
+    System.out.println("maxSubArrayLen([1, -1, 5, -2, 3], 3) = " + maxSubArrayLen(arr1, 3)); // returns 4
+    System.out.println("maxSubArrayLen([-2, -1, 2, 1], 1) = " + maxSubArrayLen(arr2, 1)); // returns 2
+  }
+}
