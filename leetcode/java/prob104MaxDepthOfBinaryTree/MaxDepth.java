@@ -11,6 +11,7 @@ down to the farthest leaf node.
 
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class MaxDepth {
 
@@ -50,6 +51,36 @@ public class MaxDepth {
         if (node.right != null) queue.add(node.right);
       }
       count++;
+    }
+    return count;
+  }
+
+  // Iterative solution: DFS
+  public int maxDepthDFS(TreeNode root) {
+
+    if (root == null) return 0;
+
+    int count = 0;
+    Stack<TreeNode> nodeStack = new Stack<TreeNode>();
+    Stack<Integer> heightStack = new Stack<Integer>();
+    nodeStack.push(root);
+    heightStack.push(1); // height of root is 1
+
+    while (!nodeStack.isEmpty()) {
+
+      TreeNode node = nodeStack.pop();
+      int height = heightStack.pop();
+      count = Math.max(count, height);
+      int nextLevelHeight = height+1;
+
+      if (node.left != null) {
+        nodeStack.push(node.left);
+        heightStack.push(nextLevelHeight);;
+      }
+      if (node.right != null) {
+        nodeStack.push(node.right);
+        heightStack.push(nextLevelHeight);;
+      }
     }
     return count;
   }
