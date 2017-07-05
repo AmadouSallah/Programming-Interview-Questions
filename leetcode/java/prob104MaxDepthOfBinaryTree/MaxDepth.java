@@ -9,6 +9,9 @@ down to the farthest leaf node.
 
 */
 
+import java.util.Queue;
+import java.util.LinkedList;
+
 public class MaxDepth {
 
   public class TreeNode {
@@ -20,6 +23,7 @@ public class MaxDepth {
     }
   }
 
+  // Recursive solution:
   public int maxDepth(TreeNode root) {
 
     if (root == null) return 0;
@@ -28,5 +32,25 @@ public class MaxDepth {
     int right = maxDepth(root.right);
 
     return 1 + Math.max(left, right);
+  }
+
+  // Iterative solution: BFS
+  public int maxDepthBFS(TreeNode root) {
+    if (root == null) return 0;
+
+    int count = 0;
+    Queue<TreeNode> queue = new LinkedList<TreeNode>();
+    queue.add(root);
+
+    while (!queue.isEmpty()) {
+      int n = queue.size();
+      for (int i = 0; i < n; i++) {
+        TreeNode node = queue.poll();
+        if (node.left != null) queue.add(node.left);
+        if (node.right != null) queue.add(node.right);
+      }
+      count++;
+    }
+    return count;
   }
 }
