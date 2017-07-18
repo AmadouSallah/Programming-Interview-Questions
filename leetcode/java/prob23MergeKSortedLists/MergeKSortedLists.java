@@ -7,6 +7,7 @@ Merge k sorted linked lists and return it as one sorted list. Analyze and descri
 */
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class MergeKSortedLists {
 
@@ -61,5 +62,31 @@ public class MergeKSortedLists {
     if (l2 != null) curr.next = l2;
 
     return node.next;
+  }
+
+  // SOLUTION 2: Using a min heap
+  public ListNode mergeKLists2(ListNode[] lists) {
+    if (lists == null || lists.length == 0) return null;
+
+    int n = lists.length;
+    // we use a heap with initial size of n
+    PriorityQueue<ListNode> heap = new PriorityQueue<ListNode>(n, (l1, l2) -> Integer.compare(l1.val, l2.val) );
+
+    // add all non null lists elements to heap
+    for (ListNode node : lists) {
+      if (node != null) heap.add(node);
+    }
+
+    ListNode head = new ListNode(0), curr = head;
+    while (!heap.isEmpty()) {
+      ListNode node = heap.poll();
+      curr.next = node;
+      curr = curr.next;
+
+      if (node.next != null) {
+        heap.add(node.next);
+      }
+    }
+    return head.next;
   }
 }
