@@ -19,6 +19,8 @@ public class MergeKSortedLists {
     }
   }
 
+  // Runtime: O(m * log n), where n is the length of lists and
+  // m is that of the longest linked list from lists
   public ListNode mergeKLists(ListNode[] lists) {
     if (lists == null || lists.length == 0) return null;
 
