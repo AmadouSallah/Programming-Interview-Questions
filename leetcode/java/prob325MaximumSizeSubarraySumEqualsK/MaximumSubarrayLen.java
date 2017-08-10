@@ -27,15 +27,27 @@ We also initialize a hashmap, hmap, whose keys are the sum of array elements fro
 whose corresponding values will be the current index.
 
 We loop through the input array nums. For each index i:
-    1) We add the current element, nums[i], to sum and we set diff to sum-k
+    1) We add nums[i] to sum and we set diff to sum-k
     2) If sum == k, then max is set to i+1 since the elements from index 0 to i add up to k,
-    and it will be the largest subarray so far;
-    If hmap contains diff, then that means the current sum has already been seen. Let prevSumIndex be the index where the sum was seen. Then prevSumIndex = map.get(diff).
+        and it will be the largest subarray so far;
+    3) If hmap contains diff, then that means the current sum has already been seen. In order words, at some index j before
+        this current index i, sum at j is same as diff (sum - k).
+        Let prevSumIndex be the index where the sum was seen, i.e. prevSumIndex = j. Then prevSumIndex = map.get(diff).
         This means that the elements from prevSumIndex + 1 to i add up to k.
-        sum = (sum + nums[prevSumIndex+1] + nums[prevSumIndex+2] + ... + nums[i]) - k
-        therefore nums[prevSumIndex+1] + nums[prevSumIndex+2] + ... + nums[i] = k (there are i-prevSumIndex elemesuratnts here)
+
+        Proof:
+            Assume there is a method, sum, that takes 2 integers i and j and returns the sum of array elements
+            from i to j. Then we have:
+
+            diff = sum - k = sum(0, i) - k
+            Since the current sum (sum) has already been seen at index prevIndex, we have
+            sum(0, i) - k = sum(0, prevIndex). But sum(0, i) = sum(0, prevIndex) + sum(prevIndex+1, i), thus we get:
+            sum(0, prevIndex) + sum(prevIndex+1, i) - k = sum(0, prevIndex) => sum(prevIndex+1, i) - k = 0 =>
+            sum(prevIndex+1, i) = k
+            Therefore the elements from prevIndex+1 to i add up to k
+
         Thus max becomes the maximum between max and (i-prevSumIndex)
-    If the hashmap doesn't contain sum, we add it with corresponding value the current index, i
+    4) If hmap doesn't contain sum, we add it with corresponding value the current index, i
 
 At the end of the iteration, we return max
 */
