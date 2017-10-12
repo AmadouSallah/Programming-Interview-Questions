@@ -56,7 +56,7 @@ public class LengthOfLongestSubstring {
   We loop through the characters of input string s.
     Remember i points to the beginning of the current substring in consideration.
 
-    If the current character has already been seen, that is if it is the same as the character that i points to,
+    If the current character has already been seen, meaning charMap[c] >= i,
     we make i point to the next character since we don't want repeating characters.
     Remeber that charMap[c] represents the position of character c in s. Therefore, setting i to
     charMap[c] + 1 will make i point to the next character in s.
@@ -73,10 +73,11 @@ public class LengthOfLongestSubstring {
     Arrays.fill(charMap, -1);
 
     for (int j = 0; j < n; j++) {
-      if (charMap[s.charAt(j)] >= i) // if the current character has already been seen
-        i = charMap[s.charAt(j)] + 1; // we point i to the next character in s
+      char c = s.charAt(j);
+      if (charMap[c] >= i) // if character c has already been seen
+        i = charMap[c] + 1; // then move i to the right of c
 
-      charMap[s.charAt(j)] = j;
+      charMap[c] = j;
       maxLen = Math.max(maxLen, j-i+1);
     }
     return maxLen;
