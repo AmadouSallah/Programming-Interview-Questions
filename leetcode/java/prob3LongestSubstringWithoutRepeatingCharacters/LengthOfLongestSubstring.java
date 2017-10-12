@@ -6,6 +6,8 @@ whith the length of 3. For "bbbbb" the longest substring is "b", with the length
 */
 import java.util.HashSet;
 import java.util.Arrays;
+import java.util.Map;
+import java.util.HashMap;
 
 public class LengthOfLongestSubstring {
 
@@ -56,8 +58,8 @@ public class LengthOfLongestSubstring {
   We loop through the characters of input string s.
     Remember i points to the beginning of the current substring in consideration.
 
-    If the current character has already been seen, meaning charMap[c] >= i,
-    we make i point to the next character since we don't want repeating characters.
+    If the current character has already been seen, we update i to the maximub between i
+    and the index of the next character
     Remeber that charMap[c] represents the position of character c in s. Therefore, setting i to
     charMap[c] + 1 will make i point to the next character in s.
 
@@ -74,8 +76,12 @@ public class LengthOfLongestSubstring {
 
     for (int j = 0; j < n; j++) {
       char c = s.charAt(j);
+      /*
       if (charMap[c] >= i) // if character c has already been seen
         i = charMap[c] + 1; // then move i to the right of c
+      */
+      // same as above commented if statement:
+      i = Math.max(i, charMap[c]+1); // update i to the max between i and the next character's index
 
       charMap[c] = j;
       maxLen = Math.max(maxLen, j-i+1);
@@ -83,9 +89,28 @@ public class LengthOfLongestSubstring {
     return maxLen;
   }
 
+  // Solution 3 using Hashmap: O(n) runtime and O(n) space complexities
+  public static int lengthOfLongestSubstring3(String s) {
+    if (s == null || s.length() == 0) return 0;
+    int n = s.length(), left = 0, right, max = 0;
+    Map<Character, Integer> map = new HashMap<>();
+
+    for (right = 0; right < n; right++) {
+      char c = s.charAt(right);
+
+      if (map.containsKey(c)) {
+        left = Math.max(left, map.get(c)+1);
+      }
+
+      map.put(c, right);
+      max = Math.max(max, right-left+1);
+    }
+    return max;
+}
+
   public static void main(String[] args) {
 
-    System.out.println("Testing solution with O(n) runtime and O(n) space:");
+    System.out.println("Testing solution1 with O(n) runtime and O(n) space:");
     System.out.println("lengthOfLongestSubstring(\"null\") = " + lengthOfLongestSubstring(null)); // 0
     System.out.println("lengthOfLongestSubstring(\"\") = " + lengthOfLongestSubstring("")); // 0
     System.out.println("lengthOfLongestSubstring(\"a\") = " + lengthOfLongestSubstring("a")); // 1
@@ -94,7 +119,7 @@ public class LengthOfLongestSubstring {
     System.out.println("lengthOfLongestSubstring(\"ab\") = " + lengthOfLongestSubstring("ab")); // 2
     System.out.println("lengthOfLongestSubstring(\"pwwkew\") = " + lengthOfLongestSubstring2("pwwkew")); // 3
 
-    System.out.println("\nTesting solution with O(n) runtime and O(1) space:");
+    System.out.println("\nTesting solution2 with O(n) runtime and O(1) space:");
     System.out.println("lengthOfLongestSubstring2(\"null\") = " + lengthOfLongestSubstring2(null)); // 0
     System.out.println("lengthOfLongestSubstring2(\"\") = " + lengthOfLongestSubstring2("")); // 0
     System.out.println("lengthOfLongestSubstring2(\"a\") = " + lengthOfLongestSubstring2("a")); // 1
@@ -102,5 +127,14 @@ public class LengthOfLongestSubstring {
     System.out.println("lengthOfLongestSubstring2(\"bbbbb\") = " + lengthOfLongestSubstring2("bbbbb")); // 1
     System.out.println("lengthOfLongestSubstring2(\"ab\") = " + lengthOfLongestSubstring2("ab")); // 2
     System.out.println("lengthOfLongestSubstring2(\"pwwkew\") = " + lengthOfLongestSubstring2("pwwkew")); // 3
+
+    System.out.println("\nTesting solution3 with O(n) runtime and O(n) space:");
+    System.out.println("lengthOfLongestSubstring3(\"null\") = " + lengthOfLongestSubstring3(null)); // 0
+    System.out.println("lengthOfLongestSubstring3(\"\") = " + lengthOfLongestSubstring3("")); // 0
+    System.out.println("lengthOfLongestSubstring3(\"a\") = " + lengthOfLongestSubstring3("a")); // 1
+    System.out.println("lengthOfLongestSubstring3(\"abcabcbb\") = " + lengthOfLongestSubstring3("abcabcbb")); // 3
+    System.out.println("lengthOfLongestSubstring3(\"bbbbb\") = " + lengthOfLongestSubstring3("bbbbb")); // 1
+    System.out.println("lengthOfLongestSubstring3(\"ab\") = " + lengthOfLongestSubstring3("ab")); // 2
+    System.out.println("lengthOfLongestSubstring3(\"pwwkew\") = " + lengthOfLongestSubstring3("pwwkew")); // 3
   }
 }
