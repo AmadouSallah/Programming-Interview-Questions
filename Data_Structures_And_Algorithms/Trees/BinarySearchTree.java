@@ -55,20 +55,53 @@ public class BinarySearchTree {
     }
   }
 
-  public static int getMin(Node node) {
+  public static Node getMin(Node node) {
     Node current = node;
     while (current.left != null) {
       current = current.left;
     }
-    return current.data;
+    return current;
   }
 
-  public static int getMax(Node node) {
+  public static Node getMax(Node node) {
     Node current = node;
     while (current.right != null) {
       current = current.right;
     }
-    return current.data;
+    return current;
+  }
+
+  public static void delete(int key) {
+    root = deleteNode(root, key);
+  }
+
+  private static Node deleteNode(Node root, int key) {
+    if (root == null) {
+      return root;
+    }
+
+    if (key < root.data) {
+      root.left = deleteNode(root.left, key);
+    } else if (key > root.data) {
+      root.right = deleteNode(root.right, key);
+    } else { // key = root.data
+      // case 1 & 2: node to be deleted has 0 or 1 child
+      if (root.left == null) {
+        return root.right;
+      } else if (root.right == null) {
+        return root.left;
+      } else { // case 3: node to be deleted has 2 children. We then replace it by
+        // the successor node, which is the node with the minimum value to the right
+        // (or by the node with the largest value to the left)
+        Node successorNode = getMin(root.right);
+
+        // replace the value of root with that of its successor
+        root.data = successorNode.data;
+        // delete the successor node
+        root.right = deleteNode(root.right, successorNode.data);
+      }
+    }
+    return root;
   }
 
   public static void main(String[] args) {
@@ -79,12 +112,28 @@ public class BinarySearchTree {
     bst.insert(6);
     bst.insert(2);
     bst.insert(0);
+    bst.insert(-1);
 
     printInorderTraversal(bst.root);
     System.out.println();
 
-    System.out.println("minimum value = " + bst.getMin(bst.root));
-    System.out.println("maximum value = " + bst.getMax(bst.root));
+    System.out.println("minimum value = " + bst.getMin(bst.root).data);
+    System.out.println("maximum value = " + bst.getMax(bst.root).data);
+
+    System.out.println("Deleting node with value -1 (has no children):");
+    bst.delete(-1);
+    printInorderTraversal(bst.root);
+    System.out.println();
+
+    System.out.println("Deleting node with value 5 (has only 1 child):");
+    bst.delete(5);
+    printInorderTraversal(bst.root);
+    System.out.println();
+
+    System.out.println("Deleting node with value 1 (has 2 children):");
+    bst.delete(1);
+    printInorderTraversal(bst.root);
+    System.out.println();
   }
 
 }
