@@ -16,12 +16,9 @@ public class IsSameTree {
   }
 
   public static boolean isSameTree(TreeNode p, TreeNode q) {
-    if (p == null && q == null) {
-      return true;
-    } else if (p != null && q != null) {
-      return ( (p.val == q.val) && isSameTree(p.left, q.left) && isSameTree(p.right, q.right) );
-    } else { // one of them is null and the other one is not.
-      return false;
-    }
+    if (p == null && q == null) return true;
+    if (p == null || q == null) return false; // only 1 of them is null
+    if (p.val != q.val) return false; // none of them is null
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
   }
 }
