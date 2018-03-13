@@ -52,11 +52,11 @@ public class FindAnagrams {
     int sLen = s.length(), pLen = p.length();
     // pArray stores count of all characters of p whereas
     // sArray stores count of current window of s
-    char[] sArray = new char[256], pArray = new char[256];
+    char[] sArray = new char[26], pArray = new char[26];
 
     for (int i = 0; i < pLen; i++) {
-      sArray[s.charAt(i)]++;
-      pArray[p.charAt(i)]++;
+      sArray[s.charAt(i) - 'a']++;
+      pArray[p.charAt(i) - 'a']++;
     }
 
     //  Traverse through remaining characters of s
@@ -68,8 +68,8 @@ public class FindAnagrams {
 
       // Move window to the right by 1 character by removing the 1st
       // character of window (in sArray) and adding current character
-      sArray[s.charAt(i-pLen)]--;
-      sArray[s.charAt(i)]++;
+      sArray[s.charAt(i-pLen) - 'a']--;
+      sArray[s.charAt(i) - 'a']++;
     }
 
     // check for the last window
