@@ -62,8 +62,8 @@ public class FindAnagrams {
     //  Traverse through remaining characters of s
     for (int i = pLen; i < sLen; i++) {
 
-      // compare counts of current window of s with counts of pArray
-      if (compare(sArray, pArray))
+      // compares counts of current window of s with that of pArray
+      if (isSame(sArray, pArray))
           result.add((i-pLen));
 
       // Move window to the right by 1 character by removing the 1st
@@ -73,13 +73,13 @@ public class FindAnagrams {
     }
 
     // check for the last window
-    if (compare(sArray, pArray))
+    if (isSame(sArray, pArray))
       result.add(sLen-pLen);
 
     return result;
   }
 
-  public static boolean compare(char[] arr1, char[] arr2) {
+  public static boolean isSame(char[] arr1, char[] arr2) {
     if (arr1.length != arr2.length) return false;
     for (int i = 0; i < arr1.length; i++) {
       if (arr1[i] != arr2[i])
