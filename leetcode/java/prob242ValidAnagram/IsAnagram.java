@@ -18,6 +18,9 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class IsAnagram {
+
+  // Using HashMap: O(n) runtime, and O(n) space complexities,
+  // where n is the length of the longest string between s and t
   public static boolean isAnagram(String s, String t) {
     int sLen = s.length(), tLen = t.length();
     if (sLen != tLen) return false;
@@ -38,7 +41,11 @@ public class IsAnagram {
     return true;
   }
 
+  // Using HashMap: O(n) runtime, and O(n) space complexities,
+  // where n is the length of the longest string between s and t
   public static boolean isAnagram2(String s, String t) {
+
+    if (s.length() != t.length()) return false;
 
       Map<Character, Integer> map = new HashMap<>();
 
