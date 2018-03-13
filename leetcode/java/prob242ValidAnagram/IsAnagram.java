@@ -74,7 +74,28 @@ public class IsAnagram {
       return map.isEmpty();
   }
 
+  // Using HashMap: O(n) runtime, and O(1) space complexities,
+  // where n is the length of the longest string between s and t
+  public static boolean isAnagram3(String s, String t) {
+      if (s.length() != t.length()) {
+        return false;
+      }
+
+      int[] counter = new int[26];
+      for (int i = 0; i < s.length(); i++) {
+        counter[s.charAt(i) - 'a']++;
+        counter[t.charAt(i) - 'a']--;
+      }
+
+      for (int count : counter) {
+        if (count != 0) return false;
+      }
+
+      return true;
+  }
+
   public static void main(String[] args) {
+    System.out.println("\nTesting with solution 1: O(n) runtime and O(1) space complexities");
     System.out.println("isAnagram(\"\", \"\") = " + isAnagram("", ""));
     System.out.println("isAnagram(\"a\", \"\") = " + isAnagram("a", ""));
     System.out.println("isAnagram(\"\", \"b\") = " + isAnagram("", "b"));
@@ -83,7 +104,7 @@ public class IsAnagram {
     System.out.println("isAnagram(\"rat\", \"car\") = " + isAnagram("rat", "car"));
     System.out.println("isAnagram(\"hello\", \"hi\") = " + isAnagram("hello", "hi"));
 
-    System.out.println("\nTesting with solutio using HashMap:");
+    System.out.println("\nTesting with solution 2 using HashMap: O(n) runtime and O(1) space complexities");
     System.out.println("isAnagram2(\"\", \"\") = " + isAnagram2("", ""));
     System.out.println("isAnagram2(\"a\", \"\") = " + isAnagram2("a", ""));
     System.out.println("isAnagram2(\"\", \"b\") = " + isAnagram2("", "b"));
@@ -91,5 +112,14 @@ public class IsAnagram {
     System.out.println("isAnagram2(\"anagram\", \"nagaram\") = " + isAnagram2("anagram", "nagaram"));
     System.out.println("isAnagram2(\"rat\", \"car\") = " + isAnagram2("rat", "car"));
     System.out.println("isAnagram2(\"hello\", \"hi\") = " + isAnagram2("hello", "hi"));
+
+    System.out.println("\nTesting with solution 3: O(n) runtime and O(1) space complexities");
+    System.out.println("isAnagram3(\"\", \"\") = " + isAnagram3("", ""));
+    System.out.println("isAnagram3(\"a\", \"\") = " + isAnagram3("a", ""));
+    System.out.println("isAnagram3(\"\", \"b\") = " + isAnagram3("", "b"));
+    System.out.println("isAnagram3(\"a\", \"b\") = " + isAnagram3("a", "b"));
+    System.out.println("isAnagram3(\"anagram\", \"nagaram\") = " + isAnagram3("anagram", "nagaram"));
+    System.out.println("isAnagram3(\"rat\", \"car\") = " + isAnagram3("rat", "car"));
+    System.out.println("isAnagram3(\"hello\", \"hi\") = " + isAnagram3("hello", "hi"));
     }
 }
