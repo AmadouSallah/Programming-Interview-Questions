@@ -24,8 +24,7 @@ public class IsAnagram {
   public static boolean isAnagram(String s, String t) {
     int sLen = s.length(), tLen = t.length();
     if (sLen != tLen) return false;
-    if (sLen == 0 && tLen == 0) return true;
-    if (sLen == 0 || tLen == 0) return false; // this means that only one of them is 0
+    if (sLen == 0) return true;
 
     char[] sArray = s.toCharArray();
     char[] tArray = t.toCharArray();
