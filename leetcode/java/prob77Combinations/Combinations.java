@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 public class Combinations {
 
+  // Backtracking solution 
   public static List<List<Integer>> combine(int n, int k) {
     List<List<Integer>> result = new ArrayList<>();
     List<Integer> tempList = new ArrayList<>();
@@ -31,6 +32,27 @@ public class Combinations {
   }
 
   public static void combineHelper(int n, int k, List<List<Integer>> result, List<Integer> tempList, int start) {
+    if (k == 0) {
+      result.add(new ArrayList<>(tempList));
+      return;
+    }
+
+    for (int i = start; i <= n; i++) {
+      tempList.add(i);
+      combineHelper(n, k-1, result, tempList, i+1);
+      tempList.remove(tempList.size() - 1);
+    }
+  }
+
+  // Very slow, exponential solution
+  public static List<List<Integer>> combine2(int n, int k) {
+    List<List<Integer>> result = new ArrayList<>();
+    List<Integer> tempList = new ArrayList<>();
+    combineHelper2(n, k, result, tempList, 1);
+    return result;
+  }
+
+  public static void combineHelper2(int n, int k, List<List<Integer>> result, List<Integer> tempList, int start) {
 
     if (tempList.size() == k) {
       result.add(new ArrayList<>(tempList));
@@ -40,12 +62,13 @@ public class Combinations {
       return;
     }
 
-    combineHelper(n, k, result, new ArrayList<>(tempList), start + 1);
+    combineHelper2(n, k, result, new ArrayList<>(tempList), start + 1);
     tempList.add(start);
-    combineHelper(n, k, result, new ArrayList<>(tempList), start + 1);
+    combineHelper2(n, k, result, new ArrayList<>(tempList), start + 1);
   }
 
   public static void main(String[] args) {
     System.out.println("combine(4, 2) = " + combine(4, 2));
+    System.out.println("combine2(4, 2) = " + combine2(4, 2));
   }
 }
