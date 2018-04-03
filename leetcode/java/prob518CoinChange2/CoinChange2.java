@@ -32,3 +32,24 @@ Example 3:
 Input: amount = 10, coins = [10]
 Output: 1
 */
+
+public class CoinChange2 {
+  public static int change(int amount, int[] coins) {
+    int[] dp = new int[amount+1];
+    // dp[i] will store the number of solutions for amount i
+    dp[0] = 1; // for amount = 0, only 1 possible solution, i.e. not choose any value
+    for (int i = 0; i < coins.length; i++) {
+      int coin = coins[i];
+      for (int j = coin; j <= amount; j++) {
+        dp[j] += dp[j-coin];
+      }
+    }
+    return dp[amount];
+  }
+
+  public static void main(String[] args) {
+    System.out.println("change(5, [1,2,5]) = " + change(5, new int[] {1,2,5}));
+    System.out.println("change(3, [2]) = " + change(3, new int[] {2}));
+    System.out.println("change(10, [10]) = " + change(10, new int[] {10}));
+  }
+}
