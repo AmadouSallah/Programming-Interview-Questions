@@ -23,6 +23,9 @@ public class TrapRainWater {
 
   // Solution 1, Brute force: O(n2) runtime and O(1) space complexities
   public static int trap(int[] height) {
+    
+    if (height == null || height.length == 0) return 0;
+
     int n = height.length, ans = 0, maxLeft, maxRight;
     for (int i = 1; i < n-1; i++) { // we don't include the 1st and last elements
       maxLeft = 0;
@@ -41,6 +44,6 @@ public class TrapRainWater {
 
   public static void main(String[] args) {
     int[] heights = new int[] {0,1,0,2,1,0,1,3,2,1,2,1};
-    System.out.println("trap([0,1,0,2,1,0,1,3,2,1,2,1]) = " + trap(heights));    
+    System.out.println("trap([0,1,0,2,1,0,1,3,2,1,2,1]) = " + trap(heights));
   }
 }
