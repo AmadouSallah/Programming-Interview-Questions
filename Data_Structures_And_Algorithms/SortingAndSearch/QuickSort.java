@@ -14,7 +14,7 @@ public class QuickSort {
     quickSort(arr, pivotIndex + 1, end);
   }
 
-  public static int partition(int[] arr, int start, int end) {
+  private static int partition(int[] arr, int start, int end) {
     int pivotElement = arr[end], i = start - 1;
     for (int j = start; j < end; j++) {
       if (arr[j] < pivotElement) {
@@ -27,7 +27,7 @@ public class QuickSort {
     return i;
   }
 
-  public static void swap(int[] arr, int i, int j) {
+  private static void swap(int[] arr, int i, int j) {
     if (i == j) {
       return;
     }
@@ -36,7 +36,7 @@ public class QuickSort {
     arr[j] = temp;
   }
 
-  public static String print(int[] arr) {
+  private static String print(int[] arr) {
     String result = "[";
     int n = arr.length;
     for (int i = 0; i < n-1; i++) {
