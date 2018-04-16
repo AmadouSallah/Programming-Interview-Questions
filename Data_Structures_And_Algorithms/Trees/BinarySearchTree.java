@@ -36,6 +36,20 @@ public class BinarySearchTree {
       size++;
     }
 
+    public static boolean search(int value) {
+
+      Node current = root;
+      while (current != null) {
+        if (current.data == value) {
+          return true;
+        } else if (value < current.data) {
+          current = current.left;
+        } else {
+          current = current.right;
+        }
+      }
+      return false;
+    }
 
     public static void printInorderTraversal(Node node) {
       if (node == null) {
@@ -119,6 +133,9 @@ public class BinarySearchTree {
 
     System.out.println("minimum value = " + bst.getMin(bst.root).data);
     System.out.println("maximum value = " + bst.getMax(bst.root).data);
+
+    System.out.println("\nsearch(3): " + search(3));
+    System.out.println("search(10): " + search(10) + "\n");
 
     System.out.println("Deleting node with value -1 (has no children):");
     bst.delete(-1);
