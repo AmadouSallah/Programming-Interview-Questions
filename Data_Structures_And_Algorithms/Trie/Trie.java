@@ -26,7 +26,15 @@ public class Trie {
     current.isEnd = true;
   }
 
-  // searches a prefix or a whole key in trie and returns the node where the search ends
+  /** search returns true if the input word is in the trie, and false otherwise.
+    Complexity: O(n) runtime and O(1) space, where n is length of input word. */
+  public static boolean search(String word) {
+    TrieNode node = searchPrefix(word);
+    return node != null && node.isEnd;
+  }
+
+  // Searches a prefix or a whole key in trie and returns the node where the search ends
+  // Complexity: O(n) runtime and O(1) space, where n is  the length of input prefix
   private static TrieNode searchPrefix(String prefix) {
     TrieNode current = root;
     int n = prefix.length();
@@ -39,7 +47,7 @@ public class Trie {
     }
     return current;
   }
-  
+
   private static class TrieNode {
     Map<Character, TrieNode> children;
     boolean isEnd;
