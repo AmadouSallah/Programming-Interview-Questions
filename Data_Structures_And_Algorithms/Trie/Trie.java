@@ -1,7 +1,9 @@
-// Implementation of a Trie with insert, search, startsWith, and delete
+// Implementation of a Trie with insert, search, startsWith, wordsStartingWith, and delete
 
 import java.util.Map;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Trie {
 
@@ -40,6 +42,29 @@ public class Trie {
     return node != null;
   }
 
+  // wordsStartingWith: returns a list of all words that starts with input prefix
+  public static List<String> wordsStartingWith(String prefix) {
+    List<String> result = new ArrayList<>();
+    TrieNode node = searchPrefix(prefix);
+    wordsStartingWithHelper(prefix, result, node);
+    return result;
+  }
+
+  private static void wordsStartingWithHelper(String prefix, List<String> result, TrieNode node) {
+    if (node == null) {
+      return;
+    }
+    if (node.isEnd) {
+      result.add(prefix);
+      return;
+    }
+
+    for (char c : node.children.keySet()) {
+      TrieNode newNode = node.children.get(c);
+      wordsStartingWithHelper(prefix + c, result, newNode);
+    }
+  }
+
   // searchPrefix: Searches a prefix or a whole key in trie and returns the node where the search ends
   // Complexity: O(n) runtime and O(1) space, where n is  the length of input prefix
   private static TrieNode searchPrefix(String prefix) {
@@ -63,5 +88,17 @@ public class Trie {
       children = new HashMap<>();
       isEnd = false;
     }
+  }
+
+  public static void main(String[] args) {
+    Trie trie = new Trie();
+    System.out.println("Inserting \"abc\" in trie");
+    trie.insert("abc");
+    System.out.println("Inserting \"abd\" in trie");
+    trie.insert("abd");
+    System.out.println("Inserting \"cdef\" in trie");
+    trie.insert("cdef");
+
+    System.out.println("wordsStartingWith(\"ab\") = " + wordsStartingWith("ab"));
   }
 }
