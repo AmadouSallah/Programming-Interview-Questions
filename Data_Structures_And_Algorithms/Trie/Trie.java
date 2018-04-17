@@ -5,6 +5,12 @@ import java.util.HashMap;
 
 public class Trie {
 
+  public static TrieNode root;
+
+  public Trie() {
+    root = new TrieNode();
+  }
+
   public static class TrieNode {
     Map<Character, TrieNode> children;
     boolean isEnd;
