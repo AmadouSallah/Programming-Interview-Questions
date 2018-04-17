@@ -39,6 +39,8 @@ public class MergeTwoBinaryTrees {
       val = x;
     }
   }
+
+  // O(n) Runtime and O(n) space complexities where n is the minimum number of nodes from the 2 input trees
   public TreeNode mergeTrees(TreeNode t1, TreeNode t2) {
     if (t1 == null) return t2;
     if (t2 == null) return t1;
