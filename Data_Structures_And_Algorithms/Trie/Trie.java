@@ -26,7 +26,21 @@ public class Trie {
     current.isEnd = true;
   }
 
-  public static class TrieNode {
+  // searches a prefix or a whole key in trie and returns the node where the search ends
+  private static TrieNode searchPrefix(String prefix) {
+    TrieNode current = root;
+    int n = prefix.length();
+    for (int i = 0; i < n; i++) {
+      char c = prefix.charAt(i);
+      if (!current.children.containsKey(c)) {
+        return null;
+      }
+      current = current.children.get(c);
+    }
+    return current;
+  }
+  
+  private static class TrieNode {
     Map<Character, TrieNode> children;
     boolean isEnd;
 
