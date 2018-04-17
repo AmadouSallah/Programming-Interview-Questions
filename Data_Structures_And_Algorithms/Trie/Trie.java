@@ -26,14 +26,21 @@ public class Trie {
     current.isEnd = true;
   }
 
-  /** search returns true if the input word is in the trie, and false otherwise.
+  /* search: returns true if the input word is in the trie, and false otherwise.
     Complexity: O(n) runtime and O(1) space, where n is length of input word. */
   public static boolean search(String word) {
     TrieNode node = searchPrefix(word);
     return node != null && node.isEnd;
   }
 
-  // Searches a prefix or a whole key in trie and returns the node where the search ends
+  /* startsWith: Returns true if there is any word in the trie that starts with the given prefix, false otherwise
+    Complexity: O(n) runtime and O(1) space, where n is length of input prefix. */
+  public static boolean startsWith(String prefix) {
+    TrieNode node = searchPrefix(prefix);
+    return node != null;
+  }
+
+  // searchPrefix: Searches a prefix or a whole key in trie and returns the node where the search ends
   // Complexity: O(n) runtime and O(1) space, where n is  the length of input prefix
   private static TrieNode searchPrefix(String prefix) {
     TrieNode current = root;
