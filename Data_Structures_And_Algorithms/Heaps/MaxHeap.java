@@ -23,6 +23,6 @@ public class MaxHeap {
   }
 
   public int size() {
-    return array.length;
+    return size;
   }
 }
