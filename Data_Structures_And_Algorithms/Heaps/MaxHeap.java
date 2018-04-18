@@ -1,9 +1,9 @@
 public class MaxHeap {
   private static int size;
-  private static int[] array;
+  private static int[] heapArray;
 
   public MaxHeap(int capacity) {
-    array = new int[capacity];
+    heapArray = new int[capacity];
   }
 
   public static int getLeftChild(int index) {
@@ -19,7 +19,7 @@ public class MaxHeap {
   }
 
   public static boolean isFull() {
-    return size == array.length;
+    return size == heapArray.length;
   }
 
   public static int size() {
@@ -30,10 +30,10 @@ public class MaxHeap {
     String result = "[";
 
     for (int i = 0; i < size; i++) {
-      result += array[i] + ", ";
+      result += heapArray[i] + ", ";
     }
     if (size > 0) {
-      result += array[size-1];
+      result += heapArray[size-1];
     }
     result += "]";
     return result;
