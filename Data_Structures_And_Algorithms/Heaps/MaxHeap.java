@@ -21,4 +21,8 @@ public class MaxHeap {
   public boolean isFull() {
     return size == array.length;
   }
+
+  public int size() {
+    return array.length;
+  }
 }
