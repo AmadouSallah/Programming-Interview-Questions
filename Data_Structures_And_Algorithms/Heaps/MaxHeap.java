@@ -6,6 +6,27 @@ public class MaxHeap {
     heapArray = new int[capacity];
   }
 
+  public static void insert(int value) {
+    if (isFull()) {
+      throw new IndexOutOfBoundsException("The heap is full!");
+    }
+    heapArray[size] = value;
+    bubbleUp(size);
+    size++;
+  }
+
+  private static void bubbleUp(int index) {
+    int newValue = heapArray[index], parentIndex = getParent(index);
+
+    while(index > 0 && newValue > heapArray[parentIndex]) {
+      heapArray[index] = heapArray[parentIndex];
+      index = parentIndex;
+      parentIndex = getParent(index);
+    }
+
+    heapArray[index] = newValue;
+  }
+
   public static int getLeftChild(int index) {
     return 2 * index + 1;
   }
@@ -29,7 +50,7 @@ public class MaxHeap {
   public static String printHeap() {
     String result = "[";
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size-1; i++) {
       result += heapArray[i] + ", ";
     }
     if (size > 0) {
@@ -40,6 +61,9 @@ public class MaxHeap {
   }
 
   public static void main(String[] args) {
+    MaxHeap maxHeap = new MaxHeap(10);
+    maxHeap.insert(5);
+    maxHeap.insert(10);
     System.out.println(printHeap());
   }
 
