@@ -17,4 +17,8 @@ public class MaxHeap {
   public int getParent(int index) {
     return (index - 1) / 2;
   }
+
+  public boolean isFull() {
+    return size == array.length;
+  }
 }
