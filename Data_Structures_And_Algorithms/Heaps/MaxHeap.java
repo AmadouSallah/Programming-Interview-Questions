@@ -13,4 +13,8 @@ public class MaxHeap {
   public int getRightChild(int index) {
     return 2 * index + 2;
   }
+
+  public int getParent(int index) {
+    return (index - 1) / 2;
+  }
 }
