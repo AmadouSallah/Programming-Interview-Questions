@@ -1,28 +1,46 @@
 public class MaxHeap {
-  private int size;
-  private int[] array;
+  private static int size;
+  private static int[] array;
 
   public MaxHeap(int capacity) {
     array = new int[capacity];
   }
 
-  public int getLeftChild(int index) {
+  public static int getLeftChild(int index) {
     return 2 * index + 1;
   }
 
-  public int getRightChild(int index) {
+  public static int getRightChild(int index) {
     return 2 * index + 2;
   }
 
-  public int getParent(int index) {
+  public static int getParent(int index) {
     return (index - 1) / 2;
   }
 
-  public boolean isFull() {
+  public static boolean isFull() {
     return size == array.length;
   }
 
-  public int size() {
+  public static int size() {
     return size;
   }
+
+  public static String printHeap() {
+    String result = "[";
+
+    for (int i = 0; i < size; i++) {
+      result += array[i] + ", ";
+    }
+    if (size > 0) {
+      result += array[size-1];
+    }
+    result += "]";
+    return result;
+  }
+
+  public static void main(String[] args) {
+    System.out.println(printHeap());
+  }
+
 }
