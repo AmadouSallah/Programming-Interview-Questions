@@ -43,6 +43,10 @@ public class MaxHeap {
     return size == heapArray.length;
   }
 
+  public static boolean isEmpty() {
+    return size == 0;
+  }
+
   public static int size() {
     return size;
   }
@@ -64,6 +68,9 @@ public class MaxHeap {
     MaxHeap maxHeap = new MaxHeap(10);
     maxHeap.insert(5);
     maxHeap.insert(10);
+    maxHeap.insert(1);
+    maxHeap.insert(25);
+    maxHeap.insert(-1);
     System.out.println(printHeap());
   }
 
