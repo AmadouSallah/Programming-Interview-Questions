@@ -15,6 +15,24 @@ public class MaxHeap {
     size++;
   }
 
+  public static void delete(int index) {
+    if (isEmpty()) {
+      throw new IndexOutOfBoundsException("The heap is empty!");
+    }
+
+    int parentIndex = getParent(index);
+
+    heapArray[index] = heapArray[size-1];
+
+    if (index == 0 || heapArray[index] < heapArray[parentIndex]) {
+      bubbleDown(index);
+    } else {
+      bubbleUp(index);
+    }
+
+    size--;
+  }
+
   private static void bubbleUp(int index) {
     int newValue = heapArray[index], parentIndex = getParent(index);
 
@@ -23,8 +41,43 @@ public class MaxHeap {
       index = parentIndex;
       parentIndex = getParent(index);
     }
-
     heapArray[index] = newValue;
+  }
+
+  private static void bubbleDown(int index) {
+    int childToSwap;
+
+    while (index < size) {
+      int leftChild = getLeftChild(index), rightChild = getRightChild(index);
+
+      if (leftChild < size) { // leftChild is valid
+        if (rightChild >= size) { // rightChild is invalid
+          childToSwap = leftChild; // since leftChild exists and rightChild doesn't exist
+        } else { // rightchild exists
+          // since both leftChild and rightChild exists, childToSwap is the larger of the 2
+          childToSwap = (heapArray[leftChild] > heapArray[rightChild]) ? leftChild : rightChild;
+        }
+
+        if (heapArray[index] < heapArray[childToSwap]) {
+          swap(heapArray, index, childToSwap);
+        } else {
+          break;
+        }
+
+        index = childToSwap;
+      }
+
+      else { // leftChild >= size, so it doesn't exists, therefore rightChild cannot exist also
+        break;
+      }
+    }
+  }
+
+  private static void swap(int[] array, int i, int j) {
+    if (i == j) return;
+    int temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
   }
 
   public static int getLeftChild(int index) {
@@ -71,6 +124,21 @@ public class MaxHeap {
     maxHeap.insert(1);
     maxHeap.insert(25);
     maxHeap.insert(-1);
+    maxHeap.insert(30);
+    maxHeap.insert(2);
+
+    System.out.println(printHeap());
+
+    System.out.println("\nDeleting the top element (at index 0):");
+    maxHeap.delete(0);
+    System.out.println(printHeap());
+
+    System.out.println("\nDeleting the last element at index " + (size-1));
+    maxHeap.delete(size-1);
+    System.out.println(printHeap());
+
+    System.out.println("\nDeleting the middle element at index " + size/2);
+    maxHeap.delete(size/2);
     System.out.println(printHeap());
   }
 
