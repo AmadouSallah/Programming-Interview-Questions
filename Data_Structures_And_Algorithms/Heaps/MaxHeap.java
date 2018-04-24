@@ -33,6 +33,14 @@ public class MaxHeap {
     size--;
   }
 
+  public static void heapSort() {
+    int lastIndex = size-1;
+    for (int i = 0; i < lastIndex; i++) {
+      swap(heapArray, 0, lastIndex-i);
+      bubbleDown(0, lastIndex-i-1);
+    }
+  }
+
   private static void bubbleUp(int index) {
     int newValue = heapArray[index], parentIndex = getParent(index);
 
@@ -140,6 +148,10 @@ public class MaxHeap {
 
     System.out.println("\nDeleting the middle element at index " + size/2);
     maxHeap.delete(size/2);
+    System.out.println(printHeap());
+
+    System.out.println("\nSorting the heap array using heapSort()");
+    maxHeap.heapSort();
     System.out.println(printHeap());
   }
 
