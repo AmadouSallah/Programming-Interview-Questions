@@ -25,7 +25,7 @@ public class MaxHeap {
     heapArray[index] = heapArray[size-1];
 
     if (index == 0 || heapArray[index] < heapArray[parentIndex]) {
-      bubbleDown(index);
+      bubbleDown(index, size-1);
     } else {
       bubbleUp(index);
     }
@@ -44,14 +44,15 @@ public class MaxHeap {
     heapArray[index] = newValue;
   }
 
-  private static void bubbleDown(int index) {
+
+  private static void bubbleDown(int index, int lastIndex) { // need lastIndex for heapSort() method
     int childToSwap;
 
-    while (index < size) {
+    while (index <= lastIndex) {
       int leftChild = getLeftChild(index), rightChild = getRightChild(index);
 
-      if (leftChild < size) { // leftChild is valid
-        if (rightChild >= size) { // rightChild is invalid
+      if (leftChild <= lastIndex) { // leftChild is valid
+        if (rightChild > lastIndex) { // rightChild is invalid
           childToSwap = leftChild; // since leftChild exists and rightChild doesn't exist
         } else { // rightchild exists
           // since both leftChild and rightChild exists, childToSwap is the larger of the 2
