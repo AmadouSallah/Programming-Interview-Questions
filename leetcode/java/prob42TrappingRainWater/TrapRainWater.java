@@ -23,6 +23,15 @@ Instate of iterating over and over both the left and right sides of each array e
 find the highest bar size up to that element, we store them in leftMax and rightMax arrays.
 For each array element at index i, leftMax[i] (respectively, rightMax[i]) is the largest bar to its
 left (respectively, right)
+
+Solution 3, Using 2 pointers: O(n) runtime and O(1) space complexities
+Instead of using 2 arrays as in the Dynamic Programming solution to store the left and right maximums,
+we can just use 2 pointers leftMax and rightMax to store the maximum until that point.
+We initialize left to 0 and right to height.length-1 and iterate as long as left < right.
+
+Since water trapped at any bar depends on the smaller between maxLeft and maxRight
+(min(maxLeft, maxRight)-height[i]), we can say that if there is a larger bar at one end, say to
+the right (rightMax), then water trapped depends on the other end, leftMax for this case.
 */
 
 public class TrapRainWater {
@@ -75,9 +84,34 @@ public class TrapRainWater {
     return ans;
   }
 
+  // Solution 3, Using 2 pointers: O(n) runtime and O(1) space complexities
+  public static int trap3(int[] height) {
+    int leftMax = 0, rightMax = 0, left = 0, right = height.length-1, result = 0;
+
+    while(left <= right) {
+        if (height[left] < height[right]) {
+          if (height[left] > leftMax) {
+            leftMax = height[left];
+          } else {
+            result += leftMax - height[left];
+            left++;
+          }
+        } else { // height[right] <= height[left]
+          if (height[right] > rightMax) {
+            rightMax = height[right];
+          } else {
+            result += rightMax - height[right];
+            right--;
+          }
+        }
+    }
+    return result;
+}
+
   public static void main(String[] args) {
     int[] heights = new int[] {0,1,0,2,1,0,1,3,2,1,2,1};
     System.out.println("trap([0,1,0,2,1,0,1,3,2,1,2,1]) = " + trap(heights));
     System.out.println("trap2([0,1,0,2,1,0,1,3,2,1,2,1]) = " + trap2(heights));
+    System.out.println("trap3([0,1,0,2,1,0,1,3,2,1,2,1]) = " + trap3(heights));
   }
 }
