@@ -24,7 +24,7 @@ public class MergeSort {
     int[] result = new int[n];
     int i = 0, j = 0;
 
-    for (int k = 0; k < n; k++) {
+    /*for (int k = 0; k < n; k++) {
       if (i >= n1) {
         result[k] = arr2[j++];
       } else if (j >= n2) {
@@ -34,7 +34,16 @@ public class MergeSort {
       } else {
         result[k] = arr2[j++];
       }
-    }
+    } */
+
+      while (i+j < n) {
+        if (j >= n2 || (i < n1 && arr1[i] < arr2[j])) {
+          result[i+j] = arr1[i++];
+        } else {
+          result[i+j] = arr2[j++];
+        }
+      }
+      
     return result;
   }
 
