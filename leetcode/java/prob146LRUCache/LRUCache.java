@@ -80,12 +80,11 @@ public class LRUCache {
       if (count < capacity) { // there is still room, so we increment counter and add newNode next to head
         count++;
         insertAtHead(newNode);
-      } else { // we reached capacity, so we evict the least recently used item before inserting the new item
-        // the remove the least recently used item located just before the tail
-        DLinkedNode oldNode = tail.prevNode; // this is the least recently used node
+      } else { // we reached capacity, so we evict the least recently used (oldest) item before inserting the new item
+        DLinkedNode oldNode = tail.prevNode; // this is the oldest used node
         map.remove(oldNode.key); // remove it from hash map
-        deleteNode(oldNode); // remove the least recently used item
-        insertAtHead(newNode); //
+        deleteNode(oldNode); // remove it from doubly linked list
+        insertAtHead(newNode); // insert the new node at head
       }
     }
 
