@@ -21,7 +21,7 @@ You may assume that you have an infinite number of each kind of coin.
 import java.util.Arrays;
 
 public class CoinChange {
-  // O(nm), where n = coins.length and m = amount
+  // O(nm) runtime and O(m) space complexities, where n = coins.length and m = amount 
   public static int coinChange(int[] coins, int amount) {
     int max = amount + 1;
     int[] dp = new int[amount + 1];
