@@ -56,6 +56,34 @@ public class MinDistance {
     return 1 + min(insert, delete, replace);
   }
 
+  // Dynamic programming solution: O(n1 * n2) runtime and O(n1 * n2) space complexities
+  public static int minDistance2(String word1, String word2) {
+    int n1 = word1.length(), n2 = word2.length();
+    int[][] dp = new int[n1+1][n2+1];
+
+    for (int i = 0; i <= n1; i++) {
+      for (int j = 0; j <= n2; j++) {
+
+        // if 1st string s1 is empty, the only option is to insert all characters of s2 into s1
+        if (i == 0) dp[i][j] = j;
+
+        // if s2 is empty, the only option is to remove all characters of s1
+        else if (j == 0) dp[i][j] = i;
+
+        // if last 2 characters are the same, no operation is needed; we just take the previous result
+        else if (word1.charAt(i-1) == word2.charAt(j-1)) dp[i][j] = dp[i-1][j-1];
+
+        // if last 2 chars are not the same, we consider all 3 possibilities (insert, delete, and replace)
+        // and take the minimuk of all 3
+        else {
+          dp[i][j] = 1 + min(dp[i][j-1], dp[i-1][j], dp[i-1][j-1]);
+        }
+      }
+    }
+
+    return dp[n1][n2];
+  }
+
   public static int min(int a, int b, int c) {
     return Math.min(a, Math.min(b, c));
   }
@@ -65,5 +93,10 @@ public class MinDistance {
     System.out.println("minDistance(\"sunday\", \"saturday\") = " + minDistance("sunday", "saturday"));
     System.out.println("minDistance(\"horse\", \"ros\") = " + minDistance("horse", "ros"));
     System.out.println("minDistance(\"intention\", \"execution\") = " + minDistance("intention", "execution"));
+
+        System.out.println("\nUsing Dynamic Programming:");
+        System.out.println("minDistance2(\"sunday\", \"saturday\") = " + minDistance2("sunday", "saturday"));
+        System.out.println("minDistance2(\"horse\", \"ros\") = " + minDistance2("horse", "ros"));
+        System.out.println("minDistance2(\"intention\", \"execution\") = " + minDistance2("intention", "execution"));
   }
 }
