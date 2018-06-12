@@ -100,3 +100,10 @@ public class MinDistance {
         System.out.println("minDistance2(\"intention\", \"execution\") = " + minDistance2("intention", "execution"));
   }
 }
+/*
+Resources:
+https://leetcode.com/problems/edit-distance/discuss/25846/20ms-Detailed-Explained-C++-Solutions-(O(n)-Space)
+https://www.geeksforgeeks.org/dynamic-programming-set-5-edit-distance/
+https://www.youtube.com/watch?v=XJ6e4BQYJ24
+https://www.youtube.com/watch?v=b6AGUjqIPsA
+*/
