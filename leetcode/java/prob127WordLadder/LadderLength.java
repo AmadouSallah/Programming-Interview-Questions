@@ -117,10 +117,10 @@ public class LadderLength {
   public static void main(String[] args) {
     List<String> list = new ArrayList<>(Arrays.asList("hot","dot","dog","lot","log","cog"));
 
-    System.out.println("ladderLength(\"hit\", \"cog\", [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]) = " + ladderLength("hit", "cog", list));
-    System.out.println("ladderLength(\"hit\", \"pen\", [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]) = " + ladderLength("hit", "pen", list));
-    System.out.println("ladderLength(\"hit\", \"hit\", [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]) = " + ladderLength("hit", "hit", list));
-    System.out.println("ladderLength(\"hit\", \"hot\", [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]) = " + ladderLength("hit", "hot", list));
+    System.out.println("ladderLength(\"hit\", \"cog\", [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]) = " + ladderLength("hit", "cog", list)); // 5
+    System.out.println("ladderLength(\"hit\", \"pen\", [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]) = " + ladderLength("hit", "pen", list)); // 0
+    System.out.println("ladderLength(\"hit\", \"hit\", [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]) = " + ladderLength("hit", "hit", list)); // 1
+    System.out.println("ladderLength(\"hit\", \"hot\", [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]) = " + ladderLength("hit", "hot", list)); // 2
 
   }
 }
