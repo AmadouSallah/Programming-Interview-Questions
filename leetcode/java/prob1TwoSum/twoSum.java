@@ -17,57 +17,58 @@ import java.util.Map;
 
 public class twoSum {
 
+  // O(n^2) runtime and O(n) space complexities
   public static int[] twoSum(int[] nums, int target) {
 
-    if ( (nums == null) || (nums.length == 0) ) {
-      return new int[0];
-    }
+    if (nums == null || nums.length < 2) return new int[0];
 
     int n = nums.length;
-    int[] result = new int[2];
-    Map<Integer, Integer> hashmap = new HashMap<Integer, Integer>();
 
     for (int i = 0; i < n; i++) {
-
-      int currentElement = nums[i];
-      int difference = target - currentElement;
-
-      if (hashmap.containsKey(difference)) {
-
-        result[0] = hashmap.get(difference);
-        result[1] = i;
-        break;
-
-      } else {
-        hashmap.put(currentElement, i);
+      for (int j = i+1; j < n; j++) {
+        if (nums[i] + nums[j] == target)
+          return new int[] {i, j};
       }
     }
-
-    return result;
+    return new int[0];
   }
 
-  // Follow up: What if input array is sorted in ascending order (Problem 167)
+  // O(n) runtime and O(n) space complexities
   public static int[] twoSumII(int[] nums, int target) {
-    // We assume nums is sorted in ascending order:
-    int len = nums.length, left = 0, right = len - 1;
-    int[] result = new int[2];
+    if (nums == null || nums.length < 2) return new int[0];
 
-    while (left < right) {
-      int sum = nums[left] + nums[right];
-      if (sum < target)
-        // Decreasing right will not help since it will make sum even smaller. So we increment left
-        left++;
-      else if (sum > target)
-        // Increasing left will not help since it will make sum even bigger. So we decrement right
-        right--;
-      else { // sum = target
-        // We have found the answer
-        result[0] = left;
-        result[1] = right;
-        break;
-      }
+    int n = nums.length;
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      int complement = target - nums[i];
+      if (map.containsKey(complement))
+        return new int[] {map.get(complement), i};
+      else
+        map.put(nums[i], i);
     }
-    return result;
+    return new int[0];
+  }
+
+
+  // Follow up: What if input array is sorted in ascending order (Leetcode Problem 167)
+  // O(n*long(n)) runtime and O(1) space complexities
+  public static int[] twoSumIII(int[] nums, int target) {
+
+    if (nums == null || nums.length < 2) return new int[0];
+
+      int n = nums.length, left = 0, right = n-1, sum = 0;
+
+      while (left < right) {
+        sum = nums[left] + nums[right];
+        if (sum == target) {
+          return new int[] {left, right};
+        } else if (sum < target) { // Decreasing right will not help since it will make sum even smaller. So we increment left
+          left++;
+        } else { // Increasing left will not help since it will make sum even bigger. So we decrement right
+          right--;
+        }
+      }
+      return new int[0];
   }
 
   public static String printArray(int[] arr) {
@@ -80,17 +81,23 @@ public class twoSum {
     }
 
   public static void main(String[] args) {
-
+    System.out.println("\nSolution 1: O(n^2) runtime and O(1) space complexities");
     System.out.println("twoSum(new int[] {}, 9): " + printArray(twoSum(new int[] {}, 9)));
     System.out.println("twoSum(new int[] {1}, 9): " + printArray(twoSum(new int[] {1}, 9)));
     System.out.println("twoSum(new int[] {2, 7}, 9): " + printArray(twoSum(new int[] {2, 7}, 9)));
     System.out.println("twoSum(new int[] {2, 15, 11, 7}, 9): " + printArray(twoSum(new int[] {2, 15, 11, 7}, 9)));
 
-    System.out.println("\nCases where the input array is sorted:");
+    System.out.println("\nSolution 2: O(n) runtime and O(n) space complexities");
     System.out.println("twoSumII(new int[] {}, 9): " + printArray(twoSumII(new int[] {}, 9)));
     System.out.println("twoSumII(new int[] {1}, 9): " + printArray(twoSumII(new int[] {1}, 9)));
     System.out.println("twoSumII(new int[] {2, 7}, 9): " + printArray(twoSumII(new int[] {2, 7}, 9)));
     System.out.println("twoSumII(new int[] {2, 7, 9, 11}, 9): " + printArray(twoSumII(new int[] {2, 15, 11, 7}, 9)));
+
+    System.out.println("\nSolution 3: Assuming that the input array is sorted in increasing order:");
+    System.out.println("twoSumIII(new int[] {}, 9): " + printArray(twoSumIII(new int[] {}, 9)));
+    System.out.println("twoSumIII(new int[] {1}, 9): " + printArray(twoSumIII(new int[] {1}, 9)));
+    System.out.println("twoSumIII(new int[] {2, 7}, 9): " + printArray(twoSumIII(new int[] {2, 7}, 9)));
+    System.out.println("twoSumIII(new int[] {2, 7, 9, 11}, 9): " + printArray(twoSumIII(new int[] {2, 15, 11, 7}, 9)));
   }
 
 }
@@ -169,4 +176,3 @@ class TwoSum {
   }
 }
 */
-
