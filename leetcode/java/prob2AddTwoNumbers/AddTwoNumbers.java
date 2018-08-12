@@ -43,48 +43,36 @@ public class AddTwoNumbers {
       carry = sum / 10;
       node.next = new ListNode(sum % 10);
       node = node.next;
-
     }
-
+    
     return head.next;
   }
 
-  public static void printList(ListNode ln) {
-    ListNode node = ln;
-    while (node != null) {
-      System.out.print(node.val + " -> ");
-      node = node.next;
+  public static String printList(ListNode head) {
+    ListNode current = head;
+    String result = "";
+
+    while (current != null) {
+      result += current.val + " -> ";
+      current = current.next;
     }
 
-    System.out.println("null");
+    result += "null";
+    return result;
   }
-
 
   public static void main(String[] args) {
 
-    ListNode p1 = new ListNode(2);
-    ListNode p2 = new ListNode(4);
-    ListNode p3 = new ListNode(3);
-    ListNode p4 = new ListNode(5);
-    ListNode p5 = new ListNode(6);
-    ListNode p6 = new ListNode(4);
-    p1.next = p2;
-    p2.next = p3;
-    p4.next = p5;
-    p5.next = p6;
-    ListNode ln1 = p1, ln2 = p4;
+    ListNode node1 = new ListNode(2);;
+    node1.next = new ListNode(4);
+    node1.next.next = new ListNode(3);
 
-    System.out.print("ln1: ");
-    printList(ln1);
-    System.out.print("ln2: ");
-    printList(ln2);
-    System.out.print("ln1 + ln2: ");
-    printList(addTwoNumbers(ln1, ln2));
-    // printList(addTwoNumbers(l1, l2)); // 0 => null
-    // printList(addTwoNumbers(l3, l4)); // 0 => 1 => null
-    // printList(addTwoNumbers(l1, l3)); // 5 => null
-    // printList(addTwoNumbers(l3, l5)); // 2 => 1 => null
-    //
-    // printList(addTwoNumbers(ln1, ln2)); // 7 => 0 => 8 => null
+    ListNode node2 = new ListNode(5);;
+    node2.next = new ListNode(6);
+    node2.next.next = new ListNode(4);
+
+    System.out.println("node1: " + printList(node1));
+    System.out.println("node2: " + printList(node2));
+    System.out.println("node1 + node2: " + printList(addTwoNumbers(node1, node2)));
   }
 }
