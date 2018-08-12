@@ -1,5 +1,7 @@
 /*
-Add Two Numbers:
+Leetcode Problem 2: Add Two Numbers:
+
+https://leetcode.com/problems/add-two-numbers/discuss/159284/Adding-my-Java-solution
 
 You are given two linked lists representing two non-negative numbers.
 The digits are stored in reverse order and each of their nodes contain a single digit.
@@ -17,6 +19,8 @@ class ListNode {
 
 public class AddTwoNumbers {
 
+  /* O(max(n1, n2) runtime and O(max(n1, n2) space complexities, where
+  n1 and n2 are the respective lengths of l1 and l2 */
   public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 
     int carry = 0, sum;
@@ -48,7 +52,7 @@ public class AddTwoNumbers {
   public static void printList(ListNode ln) {
     ListNode node = ln;
     while (node != null) {
-      System.out.print(node.val + " => ");
+      System.out.print(node.val + " -> ");
       node = node.next;
     }
 
@@ -57,11 +61,6 @@ public class AddTwoNumbers {
 
 
   public static void main(String[] args) {
-    // ListNode l1 = new ListNode(0);
-    // ListNode l2 = new ListNode(0);
-    // ListNode l3 = new ListNode(5);
-    // ListNode l4 = new ListNode(5);
-    // ListNode l5 = new ListNode(7);
 
     ListNode p1 = new ListNode(2);
     ListNode p2 = new ListNode(4);
