@@ -19,3 +19,53 @@ Return the following binary tree:
    15   7
 
 */
+
+public class BuildTreeFromPreorderAndInorder {
+
+  public static class TreeNode {
+    int val;
+    TreeNode left, right;
+    public TreeNode(int val) {
+      this.val = val;
+    }
+  }
+
+  public static TreeNode buildTree(int[] preorder, int[] inorder) {
+    return traverse(preorder, inorder, 0, 0, inorder.length - 1);
+  }
+
+  public static TreeNode traverse(int[] preorder, int[] inorder, int preStart, int inStart, int inEnd) {
+    if (preStart >= preorder.length || inStart > inEnd) return null;
+
+    int rootVal = preorder[preStart], i = 0;
+    TreeNode root = new TreeNode(rootVal);
+
+    while (i < inorder.length) {
+      if (inorder[i] == rootVal) break;
+      i++;
+    }
+
+    root.left = traverse(preorder, inorder, preStart+1, inStart, i-1);
+    root.right = traverse(preorder, inorder, preStart+1+i-inStart, i+1, inEnd);
+
+    return root;
+  }
+
+  public static void printInorder(TreeNode root) {
+    if (root == null) return;
+    printInorder(root.left);
+    System.out.print(root.val + " ");
+    printInorder(root.right);
+  }
+
+  public static void main(String[] args) {
+    int[] preorder = new int[] {3,9,20,15,7};
+    int[] inorder = new int[] {9,3,15,20,7};
+
+    TreeNode root = buildTree(preorder, inorder);
+    System.out.println("Given preorder = [3,9,20,15,7] and inorder = [9,3,15,20,7], the inorder of the built tree is:");
+
+    printInorder(root);
+    System.out.println();
+  }
+}
