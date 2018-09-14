@@ -48,3 +48,44 @@ Output: "MCMXCIV"
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
 */
+
+public class IntToRoman {
+
+  public static String intToRoman(int num) {
+    int[] values = new int[] {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    String[] romans = new String[] {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+    StringBuilder sb = new StringBuilder();
+    int i = 0;
+
+    while (num > 0) {
+      if (num - values[i] >=0) {
+        sb.append(romans[i]);
+        num -= values[i];
+      } else {
+        i++;
+      }
+    }
+    return sb.toString();
+  }
+
+  public static String printArray(int[] arr) {
+    String s = "[";
+    int n = arr.length;
+    for (int i = 0; i < n-1; i++)
+
+      s += arr[i] + ", ";
+    s += (n > 0) ? (arr[n-1] + "]") : "]";
+    return s;
+  }
+
+  public static void main(String[] args) {
+    System.out.println("intToRoman(3) = " + intToRoman(3)); // "III"
+    System.out.println("intToRoman(4) = " + intToRoman(4)); // "IV"
+    System.out.println("intToRoman(9) = " + intToRoman(9)); // "IX"
+    System.out.println("intToRoman(58) = " + intToRoman(58)); // "LVIII"
+    System.out.println("intToRoman(1994) = " + intToRoman(1994)); // "MCMXCIV"
+  }
+}
+
+// Resources: https://www.youtube.com/watch?v=LBsvAwQbVdw
