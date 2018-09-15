@@ -46,3 +46,41 @@ Input: "MCMXCIV"
 Output: 1994
 Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 */
+
+import java.util.Map;
+import java.util.HashMap;
+
+public class RomanToInt {
+
+  public static int romanToInt(String s) {
+    if (s == null || s.length() == 0) return 0;
+
+    Map<Character, Integer> map = new HashMap<>();
+    map.put('I', 1);
+    map.put('V', 5);
+    map.put('X', 10);
+    map.put('L', 50);
+    map.put('C', 100);
+    map.put('D', 500);
+    map.put('M', 1000);
+
+    int n = s.length(), res = map.get(s.charAt(n-1));
+    for (int i = n-2; i >=0; i--) {
+      int curr = map.get(s.charAt(i)), next = map.get(s.charAt(i+1));
+      if (curr >= next) {
+        res += curr;
+      } else {
+        res -= curr;
+      }
+    }
+    return res;
+  }
+
+  public static void main(String[] args) {
+    System.out.println("romanToInt(\"III\") = " + romanToInt("III")); // 3
+    System.out.println("romanToInt(\"IV\") = " + romanToInt("IV")); // 4
+    System.out.println("romanToInt(\"IX\") = " + romanToInt("IX")); // 9
+    System.out.println("romanToInt(\"LVIII\") = " + romanToInt("LVIII")); // 58
+    System.out.println("romanToInt(\"MCMXCIV\") = " + romanToInt("MCMXCIV")); // 1994
+  }
+}
