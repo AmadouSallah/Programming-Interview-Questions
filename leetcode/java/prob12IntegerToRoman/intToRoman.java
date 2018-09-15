@@ -69,16 +69,6 @@ public class IntToRoman {
     return sb.toString();
   }
 
-  public static String printArray(int[] arr) {
-    String s = "[";
-    int n = arr.length;
-    for (int i = 0; i < n-1; i++)
-
-      s += arr[i] + ", ";
-    s += (n > 0) ? (arr[n-1] + "]") : "]";
-    return s;
-  }
-
   public static void main(String[] args) {
     System.out.println("intToRoman(3) = " + intToRoman(3)); // "III"
     System.out.println("intToRoman(4) = " + intToRoman(4)); // "IV"
