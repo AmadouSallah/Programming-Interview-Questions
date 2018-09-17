@@ -19,6 +19,8 @@ Return the following binary tree:
    15   7
 
 */
+import java.util.Map;
+import java.util.HashMap;
 
 public class BuildTreeFromPreorderAndInorder {
 
@@ -51,6 +53,28 @@ public class BuildTreeFromPreorderAndInorder {
     return root;
   }
 
+  public static TreeNode buildTree2(int[] preorder, int[] inorder) {
+    Map<Integer, Integer> map = new HashMap<>();
+
+    for (int i = 0; i < inorder.length; i++) {
+      map.put(inorder[i], i);
+    }
+    return traverse2(preorder, inorder, map, 0, 0, inorder.length - 1);
+  }
+
+  public static TreeNode traverse2(int[] preorder, int[] inorder, Map<Integer, Integer> map, int preStart, int inStart, int inEnd) {
+    if (preStart >= preorder.length || inStart > inEnd) return null;
+
+    int rootVal = preorder[preStart];
+    int i = map.get(rootVal);
+    TreeNode root = new TreeNode(rootVal);
+
+    root.left = traverse2(preorder, inorder, map, preStart+1, inStart, i-1);
+    root.right = traverse2(preorder, inorder, map, preStart+1+i-inStart, i+1, inEnd);
+
+    return root;
+  }
+
   public static void printInorder(TreeNode root) {
     if (root == null) return;
     printInorder(root.left);
@@ -66,6 +90,12 @@ public class BuildTreeFromPreorderAndInorder {
     System.out.println("Given preorder = [3,9,20,15,7] and inorder = [9,3,15,20,7], the inorder of the built tree is:");
 
     printInorder(root);
+    System.out.println("\n\nSolution 2: Using a hashmap:");
+
+    TreeNode root2 = buildTree2(preorder, inorder);
+    System.out.println("Given preorder = [3,9,20,15,7] and inorder = [9,3,15,20,7], the inorder of the built tree is:");
+
+    printInorder(root2);
     System.out.println();
   }
 }
