@@ -87,6 +87,20 @@ public class LengthOfLongestSubstring {
       return res;
     }
 
+    // Solution 4: O(n) runtime and O(1) space complexities
+    public static int lengthOfLongestSubstring4(String s) {
+      if (s == null || s.length() == 0) return 0;
+      int n = s.length(), res = 0, left = 0;
+      int[] indexArray = new int[256]; // 256 ASCII characters
+      for (int right = 0; right < n; right++) {
+        char c = s.charAt(right);
+        left = Math.max(left, indexArray[c]);
+        res = Math.max(res, right - left + 1);
+        indexArray[c] = right + 1;
+      }
+      return res;
+    }
+
 
   public static void main(String[] args) {
     System.out.println("\nSolution 1: Brute force - O(n^3) runtime, O(min(n, m)) space");
@@ -103,6 +117,11 @@ public class LengthOfLongestSubstring {
     System.out.println("lengthOfLongestSubstring3(\"abcabcbb\") = " + lengthOfLongestSubstring3("abcabcbb")); // 3, "abc"
     System.out.println("lengthOfLongestSubstring3(\"bbbbb\") = " + lengthOfLongestSubstring3("bbbbb")); // 1. "b"
     System.out.println("lengthOfLongestSubstring3(\"pwwkew\") = " + lengthOfLongestSubstring3("pwwkew")); // 3, "pwke"
+
+    System.out.println("\nSolution 4: O(n) runtime and O(1) space");
+    System.out.println("lengthOfLongestSubstring4(\"abcabcbb\") = " + lengthOfLongestSubstring4("abcabcbb")); // 3, "abc"
+    System.out.println("lengthOfLongestSubstring4(\"bbbbb\") = " + lengthOfLongestSubstring4("bbbbb")); // 1. "b"
+    System.out.println("lengthOfLongestSubstring4(\"pwwkew\") = " + lengthOfLongestSubstring4("pwwkew")); // 3, "pwke"
 
   }
 
