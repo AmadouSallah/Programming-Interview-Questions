@@ -66,6 +66,28 @@ public class LengthOfLongestSubstring {
       return res;
     }
 
+    /* Solution 3: Sliding Window optimized
+     Time complexity : O(n). In the worst case each character will be visited twice by "left" and "right" indices.
+     Space complexity : O(min(m, n)). We need O(k) space for the sliding window, where k is the size of the Set.
+     The size of the Set is upper bounded by the size of the string n and the size of the charset/alphabet m
+   */
+    public static int lengthOfLongestSubstring3(String s) {
+      if (s == null || s.length() == 0) return 0;
+      int n = s.length(), res = 0, left = 0, right = 0;
+      Map<Character, Integer> map = new HashMap<>();
+      while (right < n) {
+        char c = s.charAt(right);
+        if (map.containsKey(c)) {
+          left = Math.max(left, map.get(c) + 1);
+        }
+        map.put(c, right);
+        right++;
+        res = Math.max(res, right - left);
+      }
+      return res;
+    }
+
+
   public static void main(String[] args) {
     System.out.println("\nSolution 1: Brute force - O(n^3) runtime, O(min(n, m)) space");
     System.out.println("lengthOfLongestSubstring(\"abcabcbb\") = " + lengthOfLongestSubstring("abcabcbb")); // 3, "abc"
@@ -76,6 +98,12 @@ public class LengthOfLongestSubstring {
     System.out.println("lengthOfLongestSubstring2(\"abcabcbb\") = " + lengthOfLongestSubstring2("abcabcbb")); // 3, "abc"
     System.out.println("lengthOfLongestSubstring2(\"bbbbb\") = " + lengthOfLongestSubstring2("bbbbb")); // 1. "b"
     System.out.println("lengthOfLongestSubstring2(\"pwwkew\") = " + lengthOfLongestSubstring2("pwwkew")); // 3, "pwke"
+
+    System.out.println("\nSolution 3: Sliding Window optimized - 1 pass - O(n) runtime and O(min(n, m)) space");
+    System.out.println("lengthOfLongestSubstring3(\"abcabcbb\") = " + lengthOfLongestSubstring3("abcabcbb")); // 3, "abc"
+    System.out.println("lengthOfLongestSubstring3(\"bbbbb\") = " + lengthOfLongestSubstring3("bbbbb")); // 1. "b"
+    System.out.println("lengthOfLongestSubstring3(\"pwwkew\") = " + lengthOfLongestSubstring3("pwwkew")); // 3, "pwke"
+
   }
 
 }
