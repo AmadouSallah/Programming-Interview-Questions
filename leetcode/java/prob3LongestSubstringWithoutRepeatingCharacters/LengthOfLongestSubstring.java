@@ -14,11 +14,11 @@ import java.util.HashMap;
 
 public class LengthOfLongestSubstring {
 
-  // Solution 1: Brute force - Time Limit Exceeded
-  // : O(n^3) runtime and O(min(n, m)) space complexities
-  // We need O(k) space for checking a substring has no duplicate characters, where k is
-  // the size of the Set. The size of the Set is upper bounded by the size of the string n and
-  // the size of the charset/alphabet m
+  /*
+  Solution 1: Brute force - Time Limit Exceeded: O(n^3) runtime and O(min(n, m)) space complexities
+  We need O(k) space for checking a substring has no duplicate characters, where k is the size of the Set.
+  The size of the Set is upper bounded by the size of the string n and the size of the charset/alphabet m .
+  */
   public static int lengthOfLongestSubstring(String s) {
     if (s == null || s.length() == 0) return 0;
 
@@ -43,11 +43,39 @@ public class LengthOfLongestSubstring {
     return true;
   }
 
+  /*Solution 2: Sliding Window
+   Time complexity : O(2n) = O(n). In the worst case each character will be visited twice by "left" and "right" indices.
+   Space complexity : O(min(m, n)). We need O(k) space for the sliding window, where k is the size of the Set.
+   The size of the Set is upper bounded by the size of the string n and the size of the charset/alphabet m
+   */
+
+    public static int lengthOfLongestSubstring2(String s) {
+      if (s == null || s.length() == 0) return 0;
+      int n = s.length(), res = 0, left = 0, right = 0;
+      Set<Character> set = new HashSet<>();
+      while (left < n && right < n) {
+        char c = s.charAt(right);
+        if (!set.contains(c)) {
+          set.add(c);
+          right++;
+          res = Math.max(res, right - left);
+        } else {
+          set.remove(s.charAt(left++));
+        }
+      }
+      return res;
+    }
+
   public static void main(String[] args) {
     System.out.println("\nSolution 1: Brute force - O(n^3) runtime, O(min(n, m)) space");
     System.out.println("lengthOfLongestSubstring(\"abcabcbb\") = " + lengthOfLongestSubstring("abcabcbb")); // 3, "abc"
     System.out.println("lengthOfLongestSubstring(\"bbbbb\") = " + lengthOfLongestSubstring("bbbbb")); // 1. "b"
     System.out.println("lengthOfLongestSubstring(\"pwwkew\") = " + lengthOfLongestSubstring("pwwkew")); // 3, "pwke"
+
+    System.out.println("\nSolution 2: Sliding Window with 2 passes - O(2n) = O(n) runtime and O(min(n, m)) space");
+    System.out.println("lengthOfLongestSubstring2(\"abcabcbb\") = " + lengthOfLongestSubstring2("abcabcbb")); // 3, "abc"
+    System.out.println("lengthOfLongestSubstring2(\"bbbbb\") = " + lengthOfLongestSubstring2("bbbbb")); // 1. "b"
+    System.out.println("lengthOfLongestSubstring2(\"pwwkew\") = " + lengthOfLongestSubstring2("pwwkew")); // 3, "pwke"
   }
 
 }
