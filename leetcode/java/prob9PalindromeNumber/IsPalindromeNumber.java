@@ -1,21 +1,16 @@
 /* Determine whether an integer is a palindrome. Do this without extra space. */
 
-public class IsPalindrome {
+public class IsPalindromeNumber {
 
   public static boolean isPalindrome(int x) {
-    if (x < 0) {
-      return false;
-    } else if (x < 10) { // case for numbers between 0 and 9
-      return true;
-    } else {
-      int xReversed = 0;
-      int tempValue = x;
-      while (tempValue > 0) {
-        xReversed = xReversed * 10 + tempValue % 10;
-        tempValue /= 10;
-      }
-      return (x == xReversed);
+    if (x < 0) return false;
+    if (x < 10) return true; // 0 <= x <= 9
+
+    int xRev = 0; // x reversed
+    for (int y = x; y > 0; y /= 10) {
+      xRev = xRev * 10 + y % 10;
     }
+    return x == xRev;
   }
 
   public static void main(String[] args) {
