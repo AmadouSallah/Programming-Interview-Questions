@@ -55,6 +55,7 @@ public class IsValidBST {
     }
   }
 
+  // O(n) runtime and O(n) space complexities
   public boolean isValidBST(TreeNode root) {
     Stack<TreeNode> stack = new Stack();
     TreeNode current = root;
@@ -79,5 +80,5 @@ public class IsValidBST {
     }
     return true;
   }
-  
+
 }
