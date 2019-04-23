@@ -28,6 +28,7 @@ import java.util.Collections;
 
 public class TopKFrequentElements {
 
+  // O(n log(k)) runtime and O(n) space (to store hash map)
   public static List<Integer> topKFrequent(int[] nums, int k) {
     List<Integer> result = new ArrayList<>();
     Map<Integer, Integer> map = new HashMap<>();
