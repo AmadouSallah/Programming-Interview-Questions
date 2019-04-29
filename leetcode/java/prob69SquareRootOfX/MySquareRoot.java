@@ -20,3 +20,19 @@ Output: 2
 Explanation: The square root of 8 is 2.82842..., and since
              the decimal part is truncated, 2 is returned.
 */
+
+public class MySquareRoot {
+  // O(square root of x) runtiime and O(1) space complexities
+  public static int mySqrt(int x) {
+    if (x == 0 || x == 1) return x;
+    long i = 2;
+    while (i * i <= x) i++;
+    return (int) i-1;
+  }
+
+  public static void main(String[] args) {
+    System.out.println("mySqrt(2) = " + mySqrt(2)); // 2
+    System.out.println("mySqrt(8) = " + mySqrt(8)); // 2
+    System.out.println("mySqrt(2147395600) = " + mySqrt(2147395600)); // 46340
+  }
+}
