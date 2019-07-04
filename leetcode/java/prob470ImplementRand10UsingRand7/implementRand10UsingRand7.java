@@ -36,6 +36,7 @@ import java.util.HashMap;
 class ImplementRand10UsingRand7 {
 
   // Returns an integer between 1 and 10 inclusives
+  // O(40/49) = O(1) runtime and O(1) space complexities (40 choices out of 49 total)
   public static int rand10() {
     int cellValue = 41, row, col;
     while (cellValue > 40) {
