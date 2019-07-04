@@ -22,9 +22,25 @@ Output: [8,1,10]
 Note:
 rand7 is predefined.
 Each testcase has one argument: n, the number of times that rand10 is called.
- 
+
 Follow up:
 
 What is the expected value for the number of calls to rand7() function?
 Could you minimize the number of calls to rand7()?
 */
+
+import java.util.Random;
+
+class ImplementRand10UsingRand7 {
+
+  public static int rand7() {
+    Random random = new Random();
+    return random.nextInt(7) + 1;
+  }
+
+  public static void main(String[] args) {
+    for (int i = 0; i < 10; i++) {
+      System.out.println(rand7());
+    }
+  }
+}
