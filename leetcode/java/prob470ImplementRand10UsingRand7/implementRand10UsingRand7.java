@@ -33,6 +33,18 @@ import java.util.Random;
 
 class ImplementRand10UsingRand7 {
 
+  // Returns an integer between 1 and 10 inclusives
+  public static int rand10() {
+    int cellValue = 41, row, col;
+    while (cellValue > 40) {
+      row = rand7();
+      col = rand7();
+      cellValue = 7 * (row - 1) + col;
+    }
+    return 1 + (cellValue - 1) % 10; // reverse engineer to get the corresponding probability value
+  }
+
+  // Returns an integer between 1 and 7 inclusives
   public static int rand7() {
     Random random = new Random();
     return random.nextInt(7) + 1;
@@ -40,7 +52,7 @@ class ImplementRand10UsingRand7 {
 
   public static void main(String[] args) {
     for (int i = 0; i < 10; i++) {
-      System.out.println(rand7());
+      System.out.println(rand10());
     }
   }
 }
