@@ -30,6 +30,8 @@ Could you minimize the number of calls to rand7()?
 */
 
 import java.util.Random;
+import java.util.Map;
+import java.util.HashMap;
 
 class ImplementRand10UsingRand7 {
 
@@ -50,9 +52,17 @@ class ImplementRand10UsingRand7 {
     return random.nextInt(7) + 1;
   }
 
-  public static void main(String[] args) {
-    for (int i = 0; i < 10; i++) {
-      System.out.println(rand10());
+  public static Map<Integer, Integer> testRand10(int n) {
+    Map<Integer, Integer> map = new HashMap<>();
+    while (n > 0) {
+      int res = rand10();
+      map.put(res, map.getOrDefault(res, 0)+1);
+      n--;
     }
+    return map;
+  }
+
+  public static void main(String[] args) {
+    System.out.println(testRand10(1000));
   }
 }
