@@ -18,3 +18,23 @@ Note:
 
 You can assume that you can always reach the last index.
 */
+
+public class JumpGameII {
+  public static int jump(int[] nums) {
+    int numberOfJumps = 0, right = 0, maxJump = 0;
+    for (int i = 0; i < nums.length-1; i++) {
+      maxJump = Math.max(maxJump, i + nums[i]);
+      if (i == right) {
+        right = maxJump;
+        numberOfJumps++;
+      }
+    }
+    return numberOfJumps;
+  }
+
+  public static void main(String[] args) {
+    System.out.println("jump([]) = " + jump(new int[] {}));
+    System.out.println("jump([1]) = " + jump(new int[] {1}));
+    System.out.println("jump([2,3,1,1,4]) = " + jump(new int[] {2,3,1,1,4}));
+  }
+}
