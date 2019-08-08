@@ -2,8 +2,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpiralMatrix {
-
   public static List<Integer> spiralOrder(int[][] matrix) {
+    List<Integer> res = new ArrayList<>();
+    if (matrix == null || matrix.length == 0) return res;
+    int minRow = 0, maxRow = matrix.length - 1, minColumn = 0, maxColumn = matrix[0].length - 1;
+
+    while (minRow <= maxRow && minColumn <= maxColumn) {
+      // traverse right
+      for (int col = minColumn; col <= maxColumn; col++) {
+        res.add(matrix[minRow][col]);
+      }
+      minRow++;
+
+      // traverse down
+      for (int row = minRow; row <= maxRow; row++) {
+        res.add(matrix[row][maxColumn]);
+      }
+      maxColumn--;
+
+      // traverse left only if row still exists
+      if (minRow <= maxRow) {
+        for (int col = maxColumn; col >= minColumn; col--) {
+          res.add(matrix[maxRow][col]);
+        }
+      }
+      maxRow--;
+
+      // traverse up only if column still exists
+      if (minColumn <= maxColumn) {
+        for (int row = maxRow; row >= minRow; row--) {
+          res.add(matrix[row][minColumn]);
+        }
+      }
+      minColumn++;
+
+    }
+    return res;
+  }
+
+  /*public static List<Integer> spiralOrder(int[][] matrix) {
 
     List<Integer> result = new ArrayList<Integer>();
 
@@ -17,10 +54,8 @@ public class SpiralMatrix {
     int rightColumn = matrix[0].length - 1;
     int direction = 0;
 
-    /*
-    if direction is 0 (respectively 1), we add the elements of topRow (respectively rightColumn) to result;
-    if direction is 2 (respectively 3), we add the elements of bottomRow (respectively leftColumn) to result;
-    */
+    // if direction is 0 (respectively 1), we add the elements of topRow (respectively rightColumn) to result;
+    // if direction is 2 (respectively 3), we add the elements of bottomRow (respectively leftColumn) to result;
 
     while ( (topRow <= bottomRow) && (leftColumn <= rightColumn) ) {
 
@@ -54,7 +89,7 @@ public class SpiralMatrix {
 
     return result;
 
-  }
+  } */
 
   public static void printArray(List<Integer> arr) {
     int n = arr.size();
