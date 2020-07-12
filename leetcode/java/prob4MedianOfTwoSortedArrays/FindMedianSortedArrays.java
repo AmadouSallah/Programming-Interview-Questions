@@ -6,8 +6,239 @@ should be O(log (m+n)).
 */
 
 /*
-PSEUDOCODE:
+Solution 1 - Brute force: O(n+m) runtime and O(n+m) space complexities
+We merge the 2 arrays in a single array of length n+m,and return the
+middle element element (if n+m is odd) or the average of the middle 2
+elements (if n+m is even)
 
+Solution 2 - O(log(min(m, n))) runtime and O(1) space
+
+Let's assume that the first array A has a smaller length than the second
+array B. We'll use binary search on A.
+Assume A.length = m and B.length = n
+
+1) Partitioning input arrays A and B
+Let's partition  the first input array A at a random position i. Let
+left_A be the left partition of A and right_A its right partition.
+
+      left_A             |        right_A
+A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
+
+Similarly, let's partition  the second input array B at a random position j. Let left_B be it's left partition and right_B it's right partition.
+
+      left_B             |        right_B
+B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
+
+2) Combine the parts
+Now let's combine left_A and left_B into one part called left_part.
+Similarly, we combine right_A and right_B into right_part.
+
+      left_part          |        right_part
+A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
+B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
+
+3) Total number of elements in left_part
+
+3-a) left_A has i elements (from A[0] to A[i-1]) and left_B has j
+elements (from B[0] to B[j-1]). Therefore left_part has i+j elements.
+
+3-b) If the total number of elements in both arrays (m+n) is even, there will
+be the same number of elements in left_part and right_part, i.e (m+n)/2.
+But if m+n is odd, we want the extra element to be on the left side.
+Therefore, in order to satisfy both even and odd cases of m+n, we say that
+the total number of elements in left_part is (m+n+1)/2. This formula
+satisfies both the even and odd cases.
+
+Example 1: if m+n=6, then (m+n+1)/2 = 3, thus 3 elements on left_part
+and 3 on right_part.
+Example 2: if m+n=7, then (m+n+1)/2 = 4, thus 4 elements on left_part
+and 3 on right_part.
+Therefore length of left_part = (m+n+1)/2.
+
+Combining (3a) and (3b) gives us the formula:
+
+          *****************************************
+          *                                       *
+          *  length(left_part) = i+j = (m+n+1)/2  *
+          *                                       *
+          *****************************************
+
+4) Finding i, the partition point for array A.
+Binary search will be performed on A to find i.
+Initially, we set iMin = 0, iMax = m. As long as iMin <= iMax, we set
+i = (iMin + iMax)/2. If we have not found the right partition, then we
+move either to the right (iMin = i+1) or to the left (iMax = i-1).
+We'll describe later on when to move left or right.
+
+5) Finding j, the partition point for array B.
+From the formula in (3), we have:
+i+j = (m+n+1)/2, therefore j = (m+n+1)/2 - i
+
+              ************************
+              *                      *
+              *  j = (m+n+1)/2 - i   *
+              *                      *
+              ************************
+This means that, if i increases then j will decrease and vice versa;
+this is because i+j is constant (i+j = (m+n+1)/2).
+
+6) Finding the perfect partitions.
+The perfect partitions are found when:
+  every element on left_part <= every element on right_part
+
+Since A and B are both sorted, we have:
+  every element in left_A <= every element in right_A, and
+  every element in left_B <= every element in right_B.
+
+So for the perfect partition, all we need to check is:
+  every element in left_A <= every element in right_B, and
+  every element in left_B <= every element in right_A
+
+Therefore for i, 0 <= i <= m, the perfect partition is found when
+A[i-1] <= B[j] and B[j-1] <= A[i] where j = (m+n+1)/2 - i.
+
+              ***************************
+              *  A[i-1] <= B[j] and     *
+              *  B[j-1] <= A[i]         *
+              *  where j=(m+n+1)/2 - i  *
+              *                         *
+              ***************************
+
+See (8c) for a more accurate formula where edge cases are taken
+into consideration.
+
+7) Edge cases:
+If i=0, A[i-1] is undefined. Similarly if i=m, A[i] is undefined.
+If j=0, B[j-1] is undefined. Similarly if j=n, B[j] is undefined.
+
+i=0 means left_A is empty; i=m means right_A is empty.
+j=0 means left_B is empty; j=n means right_B is empty.
+
+So if i=0 or j=n, no need to check the condition: A[i-1] <= B[j]
+Similarly, if j=0 or i=m, no need to check condition: B[j-1] <= A[i]
+See (8c) on how to deal with these cases.
+
+8) Finding the median
+From (6), we know that the right partition i is found when
+A[i-1] <= B[j] and B[j-1] <= A[i], where j = (m+n+1)/2 - i.
+
+8-a) If m+n is odd, then median = max(left_part) = max(A[i-1], B[j-1]).
+This is because the extra element is always on left_part.
+
+8-b) If m+n is even, median = ( max(left_part) + min(right_part) )/2
+                           = ( max(A[i-1], B[j-1]) + min(A[i], B[j]) )/2
+
+8-c) Taking edge cases into consideration.
+From (7), we know that the edge cases are i=0, i=m, j=0, and j=n
+
+Case 1: i == 0 or j == n
+In this case, we don't need to check A[i-1] <= B[j] since either A[i-1]
+is undefined (when i=0) or B[j] is undefinied (when j=n).
+Therefore, we only need to check if B[j-1] <= A[i].
+So in (6), instead of only checking for A[i-1] <= B[j], we should
+include the edge cases to have the below condition:
+   (i == 0 or j == n or A[i-1] <= B[j])
+
+Case 2: j == 0 or i == m
+In this case, we don't need to check B[j-1] <= A[i] since either B[j-1]
+is undefined (when j=0) or A[i] is undefinied (when i=m).
+Therefore, we only need to check if A[i-1] <= B[j].
+So in (6), instead of only checking for B[j-1] <= A[i], we should
+include the edge cases to have the below condition:
+    ( j == 0 or i == m or B[j-1] <= A[i] )
+
+From Case 1 and Case 2 above, we know that we have found the perfect
+partition with the condition below is satisfied:
+
+      ************************************************
+      *                                              *
+      *  ( i == 0 or j == n or A[i-1] <= B[j] ) and  *
+      *  ( j == 0 or i == m or B[j-1] <= A[i] )      *
+      *                                              *
+      ************************************************
+
+If the above condition is found, then we are at the perfect i and
+we stop searching.
+
+But if we haven't found the perfect i, that means i is either too big
+or too small. Then we need to either increase i (when i is too small)
+or decrease i (when i is too big)
+
+8-d) i is too big
+
+!(i == 0 or j == n or A[i-1] <= B[j]), i.e
+(i > 0 and j < n and A[i-1] > B[j]) where j = (m+n+1)/2 - i
+A[i-1] > B[j] means that A[i-1] is too big and therefore it should be
+part of the right partition of A (right_A). For this to happen, we need
+to decrease i. Since A[i-1] is too big, all the elements to its right
+(i.e. elements on right_A) are also to big and none of them can be
+part of the solution (the median). So we focus to the left of i. But
+what does this mean? To explain, let iMin and iMax be the respective
+elements in A that are the boundary elements that we focus on.
+Initially iMin = 0 and iMax = m. We always set i = (iMin + iMax)/2.
+So to focus to the left of i means setting iMax = i-1 (and to
+focus to the right would mean iMin = i+1).
+
+Before we go to the next case, let's prove that if i > 0 then that
+means j < n.
+Assume i > 0. Since m <= n, and j = (m+n+1)/2 - i, we have:
+Since i > 0, then j = (m+n+1)/2 - i < (m+n+1)/2
+Since m <= n, then (m+n+1)/2 <= (2n+1)/2, i.e j < (2n+1)/2
+But since we are dealing with integer division, (2n+1)/2 is the same
+as 2n/2 = n.
+Example, if n = 3, (2n+1)/2 = 7/2 = 3. If n=4, (2n+1)/2=9/2 = 4.
+So (2n+1)/2 = 2n/2 = n
+Therefore j < (2n+1)/2 = n.
+So if i > 0, then automatically j < n
+
+So our condition (i > 0 and j < n and A[i-1] > B[j]) becomes
+(i > 0 and A[i-1] > B[j])
+Thus if i > 0 and A[i-1] > B[j], we set iMax = i-1
+
+        ****************************************************
+        *                                                  *
+        *  if (i > 0 and A[i-1] > B[j]), then iMax = i-1   *
+        *                                                  *
+        ****************************************************
+
+8-e) i is too small
+
+!( j == 0 or i == m or B[j-1] <= A[i] ) i.e.
+(j > 0 and i < m and B[j-1] > A[i]) where j = (m+n+1)/2 - i
+B[j-1] > A[i] means that B[j-1] is too big and therefore it should be
+part of the right partition of B. For this to happen, we need to decrease j.
+But remeber i+j is constant, i.e i+j = (m+n+1)/2. So if j decreases,
+then i must increase and vice versa. Therefore since j should
+decrease, i is too small and should be increased. That is we set i
+to iMin = i+1;
+
+Let's prove that if i < m, then that automatically means j > 0
+Assume i < m. Since m <= n, we have:
+    m > i
+    n >= m
+Adding both sides gives: m+n > i+m ==> (m+n+1)/2 > (i+m+1)/2
+==> (m+n+1)/2 - i > (i+m+1)/2 - i = (m+1-i)/2
+Since j = (m+n+1)/2 - i then j > (m+1-i)/2 ==> j > (m-i)/2 + 1/2
+Since m > i, then (m-i) > 0 ==> (m-i)/2 > 0 ==> j > 0 (since 1/2 > 0)
+
+We just proved that if if i < m, then j > 0
+Therefore our condition: if (j > 0 and i < m and B[j-1] > A[i]) is
+the same as (if i < m and B[j-1] > A[i]). In which case we set iMin = i+1.
+
+        **************************************************
+        *                                                *
+        *  if (i < m and B[j-1] > A[i]), then iMin = i+1 *
+        *                                                *
+        **************************************************
+
+Resources:
+https://leetcode.com/articles/median-of-two-sorted-arrays/
+
+https://www.youtube.com/watch?time_continue=9&v=LPFhl65R7ww&feature=emb_logo
+
+/////////////////////////////////////////////////////////////////////////
+
+SOLUTION 3: RECURSION
 FindMedianSortedArrays takes 2 sorted arrays, nums1 and nums2, of lengths
 n and m respectively. Let nums be the sorted combined array of nums1 and
 nums2 and len=n+m be the length of nums.
@@ -109,6 +340,48 @@ import java.util.Arrays;
 public class FindMedianSortedArrays {
 
   public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+    // Make sure the first array's length is the smallest
+    if (nums1.length > nums2.length)
+      return findMedianSortedArrays(nums2, nums1);
+
+    int m = nums1.length, n = nums2.length;
+    int iMin = 0, iMax = m, halfLen = (m+n+1)/2;
+    while (iMin <= iMax) {
+      int i = (iMin + iMax)/2;
+      int j = halfLen - i;
+
+      // Case: i is too big
+      if (i > 0 && nums1[i-1] > nums2[j])
+        iMax = i-1;
+
+      // Case: i is too small
+      else if (i < m && nums2[j-1] > nums1[i])
+        iMin = i+1;
+
+      // Case: the perfect i is found
+      else {
+        int maxLeft = 0; // maxLeft = max(nums1[i-1], nums2[j-1])
+        if (i == 0) // nums1[i-1] is undefined => it cannot be part of maxleft
+          maxLeft = nums2[j-1];
+        else if (j == 0) maxLeft = nums1[i-1]; //nums2[j-1] is undefined
+        else maxLeft = Math.max(nums1[i-1], nums2[j-1]);
+        // if (m+n) is odd, the median is on left side, i.e maxLeft
+        if ( (m+n) % 2 == 1) return maxLeft;
+
+        int minRight = 0; // minRight = min(nums1[i], nums2[j])
+        if (i == m) minRight = nums2[j]; // nums1[i] is undefined
+        else if (j == n) minRight = nums1[i]; //nums2[j] undefined
+        else minRight = Math.min(nums1[i], nums2[j]);
+
+        return (maxLeft + minRight) / 2.0;
+      }
+
+    }
+    return 0.0;
+  }
+
+  // Recursive solution -
+  public static double findMedianSortedArraysRecursive(int[] nums1, int[] nums2) {
     int n1 = nums1.length, n2 = nums2.length, n = n1+n2;
 
     if (n % 2 == 1)
@@ -168,21 +441,21 @@ public class FindMedianSortedArrays {
     int[] a2 = new int[]{2,9};
     int[] b2 = new int[]{1,5};
     System.out.print("For a2 = " + printArray(a2) + ", b2 = " + printArray(b2) + ": median = ");
-    System.out.println(findMedianSortedArrays(a2, b2));
+    System.out.println(findMedianSortedArraysRecursive(a2, b2));
 
     int[] a3 = new int[]{1,1,3,4};
     int[] b3 = new int[]{2,4,6,10,11,12,13,14,17,19,20};
     System.out.print("For a3 = " + printArray(a3) + ", b3 = " + printArray(b3) + ": median = ");
-    System.out.println(findMedianSortedArrays(a3, b3));
+    System.out.println(findMedianSortedArraysRecursive(a3, b3));
 
     int[] a4 = new int[]{};
     int[] b4 = new int[]{1};
     System.out.print("For a4 = " + printArray(a4) + ", b4 = " + printArray(b4) + ": median = ");
-    System.out.println(findMedianSortedArrays(a4, b4));
+    System.out.println(findMedianSortedArraysRecursive(a4, b4));
 
     int[] a5 = new int[]{2};
     int[] b5 = new int[]{};
     System.out.print("For a5 = " + printArray(a5) + ", b5 = " + printArray(b5) + ": median = ");
-    System.out.println(findMedianSortedArrays(a5, b5));
+    System.out.println(findMedianSortedArraysRecursive(a5, b5));
   }
 }
