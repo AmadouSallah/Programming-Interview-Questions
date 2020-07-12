@@ -3,13 +3,13 @@ Median of Two Sorted Arrays
 There are two sorted arrays nums1 and nums2 of size m and n respectively.
 Find the median of the two sorted arrays. The overall run time complexity
 should be O(log (m+n)).
-*/
 
-/*
-Solution 1 - Brute force: O(n+m) runtime and O(n+m) space complexities
-We merge the 2 arrays in a single array of length n+m,and return the
+Solution 1 - BRUTE FORCE: O(n+m) runtime and O(n+m) space complexities
+We merge the 2 arrays in a single array of length n+m, and return the
 middle element element (if n+m is odd) or the average of the middle 2
 elements (if n+m is even)
+
+//////////////
 
 Solution 2 - O(log(min(m, n))) runtime and O(1) space
 
@@ -24,7 +24,8 @@ left_A be the left partition of A and right_A its right partition.
       left_A             |        right_A
 A[0], A[1], ..., A[i-1]  |  A[i], A[i+1], ..., A[m-1]
 
-Similarly, let's partition  the second input array B at a random position j. Let left_B be it's left partition and right_B it's right partition.
+Similarly, let's partition  the second input array B at a random position j.
+Let left_B be it's left partition and right_B it's right partition.
 
       left_B             |        right_B
 B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
