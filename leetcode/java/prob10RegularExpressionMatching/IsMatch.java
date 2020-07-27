@@ -23,8 +23,8 @@ isMatch("aab", "c*a*b") → true
 */
 
 /*
-DYNAMIC PROGRAMMING: O(nm) runtime and O(nm) space complexities, where n is the
-length of s, and m that of p.
+DYNAMIC PROGRAMMING: O(nm) runtime and O(nm) space complexities, where m is the
+length of s, and n that of p.
 
 Let dp = new boolean[n+1][m+1]
 dp[0][0] = true (s empty and p empty)
