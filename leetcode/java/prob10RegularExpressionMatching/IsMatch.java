@@ -74,6 +74,28 @@ s = "abc", p = "dbc*" or p = "db.*"
 The soulution would be the same as s2 = "ab", p2 = "dbcc" or p2 = "db.."
 Therefore, dp[i][j] = dp[i-1][j]
 
+Why do we only change s and not p? Actually, they both get changed but
+only that of s is visible and here is why. What is happening is that the
+count of * decreases each time we remove the last char of s. We keep on
+doing that until there is either a match or mismatch. Let's give a couple
+of examples, 1 with a mathch and another 1 with a mismatch.
+
+Example1: s = abccc, p = abc*
+For there to be a match * should count for 3
+If we remove the last char of s, we have: s1 = abcc, p1 = abc*
+Now * counts for 2. Remove the last char of s1 again to get:
+s2 = abc, p2 = abc* (now * counts for 1). At this point, we are
+taken to case (2-2-b) and we get a match.
+
+Example 2 (no match): s = abc, p = dec*
+Clearly, this is not a match, but let's prove it.
+If we remove the last char of s, we have: s1 = ab, p1 = dec*
+Since s1[i] != p1[j-1], we are taken to case (2-1) where * will count
+as 0 match. Thus the solution will be the same as s2 = ab, p2 = de
+This takes us to case (3) - no match.
+
+(3) For all other cases, there is no match
+
 NOTE: For s[i] ,p[j], the corresponding element of dp in our code will
 be dp[i+1][j+1]. This is because we don't want to go to negative indices
 when we go backward.
